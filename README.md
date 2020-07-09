@@ -210,7 +210,6 @@ WIP...
 
 1. PHP 7.0+
 
-
 ## Install
 
 ```shell
