@@ -8,7 +8,7 @@
     "autoload"
   ],
   "homepage": "https://github.com/wechaty/php-wechaty",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "authors": [
     {
       "name": "Chunsheng Zhang",
