@@ -1,0 +1,47 @@
+{
+  "name": "wechaty/php-wechaty",
+  "type": "library",
+  "description": "PHP Wechaty is a Conversational AI RPA SDK for Chatbot written in PHP.",
+  "keywords": [
+    "package",
+    "dependency",
+    "autoload"
+  ],
+  "homepage": "https://github.com/wechaty/php-wechaty",
+  "license": "Apache License 2.0",
+  "authors": [
+    {
+      "name": "Chunsheng Zhang",
+      "email": "zhangchunsheng423@gmail.com",
+      "homepage": "https://www.luomor.com/"
+    }
+  ],
+  "require": {
+    "php": "^7.0 || ^8.0"
+  },
+  "require-dev": {
+
+  },
+  "config": {
+
+  },
+  "extra": {
+
+  },
+  "autoload": {
+    "psr-4": {
+      "Composer\\": "wechaty"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+
+  },
+  "support": {
+    "issues": "https://github.com/wechaty/php-wechaty/issues"
+  }
+}
