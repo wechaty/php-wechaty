@@ -210,10 +210,13 @@ WIP...
 
 1. PHP 7.0+
 
+
 ## Install
 
 ```shell
+# https://packagist.org/packages/wechaty/php-wechaty
 
+composer require wechaty/php-wechaty
 ```
 
 ## Development
