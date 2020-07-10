@@ -43,6 +43,13 @@ Scan now, because other Wechaty PHP developers want to talk with you too! (secre
 
 ## The World's Shortest PHP ChatBot: 7 lines of Code
 
+### pecl安装
+
+```shell script
+pecl install grpc
+pecl install protobuf
+```
+
 ```php
 
 ```

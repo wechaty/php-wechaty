@@ -17,7 +17,10 @@
     }
   ],
   "require": {
-    "php": "^7.0 || ^8.0"
+    "php": "^7.0 || ^8.0",
+    "grpc/grpc": "^v1.3.0",
+    "google/protobuf": "^v3.3.0",
+    "wechaty/php-grpc": ""
   },
   "require-dev": {
 
@@ -30,7 +33,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Composer\\": "wechaty"
+      "GPBMetadata\\": "wechaty/GPBMetadata/",
+      "Wechaty\\": "wechaty/Wechaty/"
     }
   },
   "autoload-dev": {
