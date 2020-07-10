@@ -61,7 +61,7 @@ sudo yum install php72-php-pecl-protobuf
 
 ```
 composer config repo.packagist composer https://mirrors.aliyun.com/composer/
-composer install
+composer require wechaty/php-wechaty
 ```
 
 ### php
