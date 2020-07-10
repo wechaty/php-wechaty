@@ -50,6 +50,15 @@ pecl install grpc
 pecl install protobuf
 ```
 
+### CentOS yum安装
+
+```shell script
+sudo yum install php72-php-pecl-grpc
+sudo yum install php72-php-pecl-protobuf
+```
+
+### php
+
 ```php
 
 ```
