@@ -20,7 +20,7 @@
     "php": "^7.0 || ^8.0",
     "grpc/grpc": "^v1.3.0",
     "google/protobuf": "^v3.3.0",
-    "wechaty/php-grpc": ""
+    "wechaty/php-grpc": "^v0.16.2"
   },
   "require-dev": {
 
