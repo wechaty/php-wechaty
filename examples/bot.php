@@ -28,3 +28,11 @@ require ROOT . '/vendor/autoload.php';
 
 $wechaty = new \IO\Github\Wechaty\Wechaty();
 $wechaty->start(false);
+
+\IO\Github\Wechaty\Util\Logger::warn();
+\IO\Github\Wechaty\Puppet\Util\JsonUtil::get();
+\IO\Github\Wechaty\Puppet\StateEnum::PENDING;
+\IO\Github\Wechaty\PuppetHostie\Util\FutureUtil::get();
+\IO\Github\Wechaty\PuppetHostie\GrpcPuppet::get();
+\IO\Github\Wechaty\PuppetMock\MockData::get();
+\IO\Github\Wechaty\PuppetMock\Util\MockitoHelper::get();
