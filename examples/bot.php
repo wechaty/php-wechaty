@@ -25,3 +25,6 @@ function autoload($clazz) {
 spl_autoload_register("autoload");
 
 require ROOT . '/vendor/autoload.php';
+
+$wechaty = new \IO\Github\Wechaty\Wechaty();
+$wechaty->start(false);
