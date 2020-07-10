@@ -57,6 +57,13 @@ sudo yum install php72-php-pecl-grpc
 sudo yum install php72-php-pecl-protobuf
 ```
 
+### composer
+
+```
+composer config repo.packagist composer https://mirrors.aliyun.com/composer/
+composer install
+```
+
 ### php
 
 ```php
