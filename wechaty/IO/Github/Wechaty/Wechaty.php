@@ -57,14 +57,15 @@ class Wechaty extends EventEmitter {
             $call = $client->Event($eventRequest);
             $ret = $call->responses();//Generator Object
             while($ret->valid()) {
-                print_r($ret->key());//0 1 2
+                echo $ret->key() . " ";//0 1 2
                 $response = $ret->current();
-                print_r($response->getType());//2
-                print_r($response->getPayload());
+                echo $response->getType() . " ";//2
+                echo $response->getPayload() . " ";
                 //{"qrcode":"https://login.weixin.qq.com/l/IaysbZa04Q==","status":5}
                 //{"data":"heartbeat@browserbridge ding","timeout":60000}
                 //$client->DingSimple($dingRequest);
                 //3{"data":"dong"}
+                echo "\n";
                 $ret->next();
             }
             print_r($ret->getReturn());
