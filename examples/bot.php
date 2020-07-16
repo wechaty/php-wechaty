@@ -35,6 +35,6 @@ $wechaty->start();
 \IO\Github\Wechaty\Puppet\Util\JsonUtil::get();
 \IO\Github\Wechaty\Puppet\StateEnum::PENDING;
 \IO\Github\Wechaty\PuppetHostie\Util\FutureUtil::get();
-\IO\Github\Wechaty\PuppetHostie\GrpcPuppet::get();
+\IO\Github\Wechaty\PuppetHostie\PuppetHostie::get();
 \IO\Github\Wechaty\PuppetMock\MockData::get();
 \IO\Github\Wechaty\PuppetMock\Util\MockitoHelper::get();

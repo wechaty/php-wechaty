@@ -18,18 +18,19 @@ use LM\Exception;
 
 class Wechaty extends EventEmitter {
 
-    private $puppetOptions = null;
-    private $wechatyOptions = null;
+    private $_puppetOptions = null;
+    private $_wechatyOptions = null;
 
     private $status = StateEnum::OFF;
+    private $_puppet = null;
 
     /**
      * Wechaty constructor.
      * @param $wechatyOptions \IO\Github\Wechaty\Puppet\Schemas\WechatyOptions
      */
     public function __construct($wechatyOptions) {
-        $this->wechatyOptions = $wechatyOptions;
-        $this->puppetOptions = $wechatyOptions->puppetOptions;
+        $this->_wechatyOptions = $wechatyOptions;
+        $this->_puppetOptions = $wechatyOptions->puppetOptions;
     }
 
     public static function getInstance($token) {
@@ -42,7 +43,7 @@ class Wechaty extends EventEmitter {
 
     public function start() : Wechaty {
         $this->_initPuppet();
-        //puppet.start().get();
+        //$this->_puppet->start()->get();
         $status = StateEnum::ON;
         $this->emit(EventEnum::START, "");
 
@@ -80,6 +81,10 @@ class Wechaty extends EventEmitter {
     }
 
     private function _initPuppet() {
+        if($this->_puppet) {
+            return;
+        }
 
+        $this->_puppet = new PuppetHostie\PuppetHostie($this->_puppetOptions);
     }
 }
