@@ -6,6 +6,7 @@
  * Time: 5:11 PM
  */
 define("ROOT", dirname(__DIR__));
+define("DEBUG", 1);
 
 function autoload($clazz) {
     $file = str_replace('\\', '/', $clazz);

@@ -12,6 +12,8 @@ use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\WechatyOptions;
 use IO\Github\Wechaty\Puppet\StateEnum;
+use IO\Github\Wechaty\Util\Console;
+use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
 
 class Wechaty extends EventEmitter {
@@ -56,6 +58,8 @@ class Wechaty extends EventEmitter {
             $eventRequest = new \Wechaty\Puppet\EventRequest();
             $call = $client->Event($eventRequest);
             $ret = $call->responses();//Generator Object
+            Console::log("test");
+            Logger::INFO("test");
             while($ret->valid()) {
                 echo $ret->key() . " ";//0 1 2
                 $response = $ret->current();
@@ -68,10 +72,11 @@ class Wechaty extends EventEmitter {
                 echo "\n";
                 $ret->next();
             }
-            print_r($ret->getReturn());
+            echo "service stopped normally";
+            Console::log($ret->getReturn());
         } catch (\Exception $e) {
-            echo " service stopped, interrupted by other thread!";
-            print_r($e);
+            echo "service stopped with exception, " . $e->getMessage();
+            Logger::ERR(array("service stopped with exception"), $e);
         }
         return $this;
     }
