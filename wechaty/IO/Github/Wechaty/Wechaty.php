@@ -59,7 +59,7 @@ class Wechaty extends EventEmitter {
             $call = $client->Event($eventRequest);
             $ret = $call->responses();//Generator Object
             Console::log("test");
-            Logger::INFO(array("test"));
+            Logger::INFO("test");
             while($ret->valid()) {
                 echo $ret->key() . " ";//0 1 2
                 $response = $ret->current();
