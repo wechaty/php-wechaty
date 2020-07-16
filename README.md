@@ -43,27 +43,6 @@ Scan now, because other Wechaty PHP developers want to talk with you too! (secre
 
 ## The World's Shortest PHP ChatBot: 7 lines of Code
 
-### pecl安装
-
-```shell script
-pecl install grpc
-pecl install protobuf
-```
-
-### CentOS yum安装
-
-```shell script
-sudo yum install php72-php-pecl-grpc
-sudo yum install php72-php-pecl-protobuf
-```
-
-### composer
-
-```
-composer config repo.packagist composer https://mirrors.aliyun.com/composer/
-composer require wechaty/php-wechaty
-```
-
 ### php
 
 ```php
@@ -235,10 +214,40 @@ WIP...
 
 ## Install
 
-```shell
-# https://packagist.org/packages/wechaty/php-wechaty
+### pecl安装
 
+```shell script
+pecl install grpc
+pecl install protobuf
+```
+
+### CentOS yum安装
+
+```shell script
+# php
+sudo yum install php-pecl-grpc
+sudo yum install php-pecl-protobuf
+
+# php72
+sudo yum install php72-php-pecl-grpc
+sudo yum install php72-php-pecl-protobuf
+
+# php[x]
+sudo yum install php[x]-php-pecl-grpc
+sudo yum install php[x]-php-pecl-protobuf
+```
+
+### composer
+
+```shell
+composer config repo.packagist composer https://mirrors.aliyun.com/composer/
+# https://packagist.org/packages/wechaty/php-wechaty
 composer require wechaty/php-wechaty
+```
+
+### test
+```shell script
+php examples/bot.php
 ```
 
 ## Development
