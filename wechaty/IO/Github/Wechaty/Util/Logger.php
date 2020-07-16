@@ -62,7 +62,6 @@ class Logger {
     }
 
     private static function _log($logType = LOG_INFO, $logArgs = array()) {
-        array_shift($logArgs);
         //未定义debug模式时，当log的级别大于信息6（LOG_DEBUG => 'DEBUG', 7）
         if (!(defined('DEBUG') && DEBUG > 0) && $logType > LOG_INFO) {
             return;
@@ -71,7 +70,6 @@ class Logger {
         $logLevel = isset(self::$logLevel[$logType]) ? self::$logLevel[$logType] : '';
         $logs = ['time' => date("Y-m-d H:i:s"), 'LEVEL' => $logLevel];
 
-        print_r($logArgs);
         foreach ($logArgs as $logData) {
             foreach ((array) $logData as $key => $value) {
                 if ($key === 'DEBUG') {
