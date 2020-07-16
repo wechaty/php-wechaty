@@ -58,7 +58,6 @@ class Wechaty extends EventEmitter {
             $eventRequest = new \Wechaty\Puppet\EventRequest();
             $call = $client->Event($eventRequest);
             $ret = $call->responses();//Generator Object
-            Console::logs("test", "test");
             while($ret->valid()) {
                 Console::logStr($ret->key() . " ");//0 1 2
                 $response = $ret->current();
