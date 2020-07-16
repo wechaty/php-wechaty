@@ -47,7 +47,7 @@ class Wechaty extends EventEmitter {
         $this->emit(EventEnum::START, "");
 
         //addHook();
-        echo "start Wechaty";
+        echo "start Wechaty\n";
         try {
             $client = new \Wechaty\PuppetClient("localhost:8788", [
                 'credentials' => \Grpc\ChannelCredentials::createInsecure()
@@ -59,7 +59,7 @@ class Wechaty extends EventEmitter {
             $call = $client->Event($eventRequest);
             $ret = $call->responses();//Generator Object
             Console::log("test");
-            Logger::INFO("test");
+            Logger::INFO(array("test"));
             while($ret->valid()) {
                 echo $ret->key() . " ";//0 1 2
                 $response = $ret->current();
@@ -72,7 +72,7 @@ class Wechaty extends EventEmitter {
                 echo "\n";
                 $ret->next();
             }
-            echo "service stopped normally";
+            echo "service stopped normally\n";
             Console::log($ret->getReturn());
         } catch (\Exception $e) {
             echo "service stopped with exception, " . $e->getMessage();
