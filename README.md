@@ -219,6 +219,7 @@ WIP...
 ```shell script
 pecl install grpc
 pecl install protobuf
+pecl install yac
 ```
 
 ### CentOS yum安装
@@ -227,14 +228,17 @@ pecl install protobuf
 # php
 sudo yum install php-pecl-grpc
 sudo yum install php-pecl-protobuf
+sudo yum install php-pecl-yac
 
 # php72
 sudo yum install php72-php-pecl-grpc
 sudo yum install php72-php-pecl-protobuf
+sudo yum install php72-php-pecl-yac
 
 # php[x]
 sudo yum install php[x]-php-pecl-grpc
 sudo yum install php[x]-php-pecl-protobuf
+sudo yum install php[x]-php-pecl-yac
 ```
 
 ### composer

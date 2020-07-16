@@ -21,7 +21,7 @@ class Wechaty extends EventEmitter {
     private $_puppetOptions = null;
     private $_wechatyOptions = null;
 
-    private $status = StateEnum::OFF;
+    private $_status = StateEnum::OFF;
     private $_puppet = null;
 
     /**

@@ -11,11 +11,12 @@ use IO\Github\Wechaty\Puppet\Exceptions\InvalidArgumentException;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 
 class Puppet {
-    protected $puppetOptions = null;
+    protected $_puppetOptions = null;
 
     public function __construct(PuppetOptions $puppetOptions) {
         if(empty($puppetOptions->token)) {
             throw new InvalidArgumentException("token is null");
         }
+        $this->_puppetOptions = $puppetOptions;
     }
 }
