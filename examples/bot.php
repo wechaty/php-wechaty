@@ -26,8 +26,9 @@ spl_autoload_register("autoload");
 
 require ROOT . '/vendor/autoload.php';
 
-$wechaty = new \IO\Github\Wechaty\Wechaty();
-$wechaty->start(false);
+$token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
+$wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token);
+$wechaty->start();
 
 \IO\Github\Wechaty\Util\Logger::warn();
 \IO\Github\Wechaty\Puppet\Util\JsonUtil::get();
