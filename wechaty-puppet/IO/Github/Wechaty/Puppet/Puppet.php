@@ -26,8 +26,5 @@ class Puppet {
             throw new InvalidArgumentException("token is null");
         }
         $this->_puppetOptions = $puppetOptions;
-
-        CacheFactory::getCache()->set("test", "test");
-        print_r(CacheFactory::getCache()->get("test"));
     }
 }

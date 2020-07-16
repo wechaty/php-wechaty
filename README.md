@@ -240,6 +240,12 @@ sudo yum install php[x]-php-pecl-grpc
 sudo yum install php[x]-php-pecl-protobuf
 sudo yum install php[x]-php-pecl-yac
 ```
+### Yac enable 
+
+```shell script
+yac.enable=1
+yac.enable_cli=1
+```
 
 ### composer
 
