@@ -13,18 +13,28 @@ use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 
 class Puppet {
     protected $_puppetOptions = null;
+    /**
+     * @var Cache\Cache|Cache\Yac|null
+     */
+    protected $_cache = null;
 
     const CACHE_CONTACT_PAYLOAD_PREFIX = "ccp_";
-    const CACHE_FRIENDSHIP_PAYLOAD = "cfp_";
-    const CACHE_MESSAGE_PAYLOAD = "cmp_";
-    const CACHE_ROOM_PAYLOAD = "crp_";
-    const CACHE_ROOM_MEMBER_PAYLOAD = "crmp_";
-    const CACHE_ROOM_INVITATION_PAYLOAD = "crip_";
+    const CACHE_FRIENDSHIP_PAYLOAD_PREFIX = "cfp_";
+    const CACHE_MESSAGE_PAYLOAD_PREFIX = "cmp_";
+    const CACHE_ROOM_PAYLOAD_PREFIX = "crp_";
+    const CACHE_ROOM_MEMBER_PAYLOAD_PREFIX = "crmp_";
+    const CACHE_ROOM_INVITATION_PAYLOAD_PREFIX = "crip_";
 
     public function __construct(PuppetOptions $puppetOptions) {
         if(empty($puppetOptions->token)) {
             throw new InvalidArgumentException("token is null");
         }
         $this->_puppetOptions = $puppetOptions;
+
+        $this->_cache = $this->_initCache();
+    }
+
+    protected function _initCache() {
+        return CacheFactory::getCache();
     }
 }
