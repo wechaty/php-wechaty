@@ -58,11 +58,12 @@ class Wechaty extends EventEmitter {
             $eventRequest = new \Wechaty\Puppet\EventRequest();
             $call = $client->Event($eventRequest);
             $ret = $call->responses();//Generator Object
+            Console::logs("test", "test");
             while($ret->valid()) {
-                echo $ret->key() . " ";//0 1 2
+                Console::logStr($ret->key() . " ");//0 1 2
                 $response = $ret->current();
-                echo $response->getType() . " ";//2
-                echo $response->getPayload() . " ";
+                Console::logStr($response->getType() . " ");//2
+                Console::logStr($response->getPayload() . " ");
                 //{"qrcode":"https://login.weixin.qq.com/l/IaysbZa04Q==","status":5}
                 //{"data":"heartbeat@browserbridge ding","timeout":60000}
                 //$client->DingSimple($dingRequest);

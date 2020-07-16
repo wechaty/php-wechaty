@@ -8,7 +8,31 @@
 namespace IO\Github\Wechaty\Util;
 
 class Console {
+    public static function logs(...$data) {
+        $log = func_get_args();
+        $logStr = "";
+        foreach($log as $value) {
+            $logStr .= self::getStr($value) . " ";
+        }
+        echo $logStr . "\n";
+    }
+
     public static function log($data) {
+        $data = self::getStr($data);
+        echo $data . "\n";
+    }
+
+    public static function logStr($data, $ln = false) {
+        if(!is_string($data)) {
+            return;
+        }
+        echo $data;
+        if($ln) {
+            echo "\n";
+        }
+    }
+
+    private static function getStr($data) {
         /*
          * "boolean"
          * "integer"
@@ -27,6 +51,6 @@ class Console {
         } elseif(gettype($data) == "object") {
             $data = json_encode($data);
         }
-        echo $data . "\n";
+        return $data;
     }
 }
