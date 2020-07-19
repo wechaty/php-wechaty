@@ -109,6 +109,7 @@ class PuppetHostie extends Puppet {
 
         $ret = array();
         if($response->getStatusCode() == 200) {
+            Logger::DEBUG("$url with response " . $response->getBody());
             $ret = json_decode($response->getBody(), true);
             if(json_last_error()) {
                 Logger::ERR("_discoverHostieIp json_decode with error " . json_last_error_msg());
