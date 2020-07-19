@@ -16,6 +16,7 @@ use IO\Github\Wechaty\PuppetHostie\Exceptions\PuppetHostieException;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
 use Wechaty\Puppet\EventResponse;
+use Wechaty\Puppet\EventType;
 
 class PuppetHostie extends Puppet {
     private $_channel = null;
@@ -128,7 +129,7 @@ class PuppetHostie extends Puppet {
             Logger::DEBUG("PuppetHostie $type payload $payload");
 
             switch ($type) {
-                case EventEnum::SCAN:
+                case EventType::EVENT_TYPE_SCAN:
                     $eventScanPayload = json_decode($payload, EventScanPayload::class);
                     Logger::DEBUG("scan pay load is {}", $eventScanPayload);
                     $this->emit(EventEnum::SCAN, $eventScanPayload);
