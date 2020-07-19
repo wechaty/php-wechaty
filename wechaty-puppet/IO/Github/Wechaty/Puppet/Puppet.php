@@ -8,12 +8,13 @@
 namespace IO\Github\Wechaty\Puppet;
 
 use IO\Github\Wechaty\Puppet\Cache\CacheFactory;
+use IO\Github\Wechaty\Puppet\EventEmitter\EventEmitter;
 use IO\Github\Wechaty\Puppet\Exceptions\InvalidArgumentException;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
 
-abstract class Puppet {
+abstract class Puppet extends EventEmitter {
     protected static $_STATE = StateEnum::OFF;
 
     protected $_puppetOptions = null;
