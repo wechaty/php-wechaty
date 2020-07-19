@@ -6,7 +6,8 @@
  * Time: 5:11 PM
  */
 define("ROOT", dirname(__DIR__));
-define("DEBUG", 1);
+// DEBUG should create dir use command sudo mkdir /var/log/wechaty && sudo chmod 777 /var/log/wechaty
+//define("DEBUG", 1);
 
 function autoload($clazz) {
     $file = str_replace('\\', '/', $clazz);
