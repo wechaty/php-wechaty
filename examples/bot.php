@@ -7,7 +7,7 @@
  */
 define("ROOT", dirname(__DIR__));
 // DEBUG should create dir use command sudo mkdir /var/log/wechaty && sudo chmod 777 /var/log/wechaty
-//define("DEBUG", 1);
+// define("DEBUG", 1);
 
 function autoload($clazz) {
     $file = str_replace('\\', '/', $clazz);
@@ -38,7 +38,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 })->onMessage(function($data) {
 
 })->onHeartBeat(function($data) {
-    //{"data":"heartbeat@browserbridge ding","timeout":60000}
+    // {"data":"heartbeat@browserbridge ding","timeout":60000}
     echo $data["data"];
 })->start();
 

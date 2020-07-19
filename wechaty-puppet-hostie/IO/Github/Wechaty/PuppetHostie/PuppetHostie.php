@@ -90,7 +90,7 @@ class PuppetHostie extends Puppet {
         $call = $this->_grpcClient->Event($eventRequest);
         $ret = $call->responses();//Generator Object
         while($ret->valid()) {
-            Console::logStr($ret->key() . " ");//0 1 2
+            // Console::logStr($ret->key() . " ");//0 1 2
             $response = $ret->current();
             $this->_onGrpcStreamEvent($response);
             $ret->next();
