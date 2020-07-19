@@ -138,6 +138,43 @@ class PuppetHostie extends Puppet {
                     // array is easy
                     $this->emit(EventEnum::HEART_BEAT, json_decode($payload, true));
                     break;
+                case EventType::EVENT_TYPE_DONG:
+                    $this->emit(EventEnum::DONG, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_ERROR:
+                    $this->emit(EventEnum::ERROR, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_FRIENDSHIP:
+                    $this->emit(EventEnum::FRIENDSHIP, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_LOGIN:
+                    $this->emit(EventEnum::LOGIN, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_LOGOUT:
+                    $this->emit(EventEnum::LOGOUT, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_MESSAGE:
+                    $this->emit(EventEnum::MESSAGE, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_READY:
+                    $this->emit(EventEnum::READY, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_ROOM_INVITE:
+                    $this->emit(EventEnum::ROOM_INVITE, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_ROOM_JOIN:
+                    $this->emit(EventEnum::ROOM_JOIN, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_ROOM_LEAVE:
+                    $this->emit(EventEnum::ROOM_LEAVE, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_ROOM_TOPIC:
+                    $this->emit(EventEnum::ROOM_TOPIC, json_decode($payload, true));
+                    break;
+                case EventType::EVENT_TYPE_RESET:
+                    break;
+                case EventType::EVENT_TYPE_UNSPECIFIED:
+                    break;
                 default:
                     Console::logStr($event->getType() . " ");//2
                     Console::logStr($event->getPayload() . " ");
