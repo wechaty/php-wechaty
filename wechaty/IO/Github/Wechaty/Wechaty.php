@@ -37,9 +37,10 @@ class Wechaty extends EventEmitter {
         $this->_puppetOptions = $wechatyOptions->puppetOptions;
     }
 
-    public static function getInstance($token) {
+    public static function getInstance($token, $endPoint = "") {
         $puppetOptions = new PuppetOptions();
         $puppetOptions->token = $token;
+        $puppetOptions->endPoint = $endPoint;
         $wechatyOptions = new WechatyOptions();
         $wechatyOptions->puppetOptions = $puppetOptions;
         return new Wechaty($wechatyOptions);

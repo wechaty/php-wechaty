@@ -28,10 +28,11 @@ spl_autoload_register("autoload");
 require ROOT . '/vendor/autoload.php';
 
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
-$wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token);
+$endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
+$wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->start();
 
-\IO\Github\Wechaty\Util\Logger::warn();
+\IO\Github\Wechaty\Util\Logger::WARNING("test");
 \IO\Github\Wechaty\Puppet\Util\JsonUtil::get();
 \IO\Github\Wechaty\Puppet\StateEnum::PENDING;
 \IO\Github\Wechaty\PuppetHostie\Util\FutureUtil::get();
