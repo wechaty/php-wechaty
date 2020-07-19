@@ -8,6 +8,7 @@
 namespace IO\Github\Wechaty;
 
 use IO\Github\Wechaty\Puppet\EventEmitter\EventEmitter;
+use IO\Github\Wechaty\Puppet\Schemas\Event\EventScanPayload;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\WechatyOptions;
@@ -68,5 +69,23 @@ class Wechaty extends EventEmitter {
         }
 
         $this->_puppet = new PuppetHostie\PuppetHostie($this->_puppetOptions);
+
+        $this->_initPuppetEventBridge($this->_puppet);
+    }
+
+    function onScan($listener) : Wechaty {
+        return $this->_on(EventEnum::SCAN, $listener);
+    }
+
+    private function _on($event, \Closure $listener) : Wechaty {
+        $this->on($event, $listener);
+        return $this;
+    }
+
+    private function _initPuppetEventBridge(PuppetHostie\PuppetHostie $puppet) {
+        //{"qrcode":"https://login.weixin.qq.com/l/IaysbZa04Q==","status":5}
+        $puppet->on(EventEnum::SCAN, function(EventScanPayload $payload) {
+            $this->emit(EventEnum::SCAN, $payload->qrcode ?: "", $payload->status, $payload->data ?: "");
+        });
     }
 }

@@ -8,11 +8,14 @@
 namespace IO\Github\Wechaty\PuppetHostie;
 
 use IO\Github\Wechaty\Puppet\Puppet;
+use IO\Github\Wechaty\Puppet\Schemas\Event\EventScanPayload;
+use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\PuppetHostie\Exceptions\PuppetHostieException;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
+use Wechaty\Puppet\EventResponse;
 
 class PuppetHostie extends Puppet {
     private $_channel = null;
@@ -88,13 +91,7 @@ class PuppetHostie extends Puppet {
         while($ret->valid()) {
             Console::logStr($ret->key() . " ");//0 1 2
             $response = $ret->current();
-            Console::logStr($response->getType() . " ");//2
-            Console::logStr($response->getPayload() . " ");
-            //{"qrcode":"https://login.weixin.qq.com/l/IaysbZa04Q==","status":5}
-            //{"data":"heartbeat@browserbridge ding","timeout":60000}
-            //$client->DingSimple($dingRequest);
-            //3{"data":"dong"}
-            echo "\n";
+            $this->_onGrpcStreamEvent($response);
             $ret->next();
         }
         echo "service stopped normally\n";
@@ -121,5 +118,32 @@ class PuppetHostie extends Puppet {
         }
 
         return $ret;
+    }
+
+    private function _onGrpcStreamEvent(EventResponse $event) {
+        try {
+            $type = $event->getType();
+            $payload = $event->getPayload();
+
+            Logger::DEBUG("PuppetHostie $type payload $payload");
+
+            switch ($type) {
+                case EventEnum::SCAN:
+                    $eventScanPayload = json_decode($payload, EventScanPayload::class);
+                    Logger::DEBUG("scan pay load is {}", $eventScanPayload);
+                    $this->emit(EventEnum::SCAN, $eventScanPayload);
+                    break;
+                default:
+                    Console::logStr($event->getType() . " ");//2
+                    Console::logStr($event->getPayload() . " ");
+                    //{"qrcode":"https://login.weixin.qq.com/l/IaysbZa04Q==","status":5}
+                    //{"data":"heartbeat@browserbridge ding","timeout":60000}
+                    //$client->DingSimple($dingRequest);
+                    //3{"data":"dong"}
+                    echo "\n";
+            }
+        } catch (\Exception $e) {
+            Logger::ERR("_onGrpcStreamEvent error", $e);
+        }
     }
 }

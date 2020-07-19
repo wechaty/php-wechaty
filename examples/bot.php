@@ -30,7 +30,9 @@ require ROOT . '/vendor/autoload.php';
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
-$wechaty->start();
+$wechaty->onScan(function($qrcode, $status, $data) {
+    echo $qrcode . "\n" . $status . "\n";
+})->start();
 
 \IO\Github\Wechaty\Util\Logger::WARNING("test");
 \IO\Github\Wechaty\Puppet\Util\JsonUtil::get();
