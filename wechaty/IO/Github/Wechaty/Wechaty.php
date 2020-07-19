@@ -81,6 +81,10 @@ class Wechaty extends EventEmitter {
         return $this->_on(EventEnum::HEART_BEAT, $listener);
     }
 
+    function onLogin($listener) : Wechaty {
+        return $this->_on(EventEnum::LOGIN, $listener);
+    }
+
     function onRoomJoin($listener):Wechaty {
         return $this->_on(EventEnum::ROOM_JOIN, $listener);
     }

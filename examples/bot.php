@@ -32,6 +32,10 @@ $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->onScan(function($qrcode, $status, $data) {
     echo $qrcode . "\n" . $status . "\n";
+})->onLogin(function($data) {
+
+})->onMessage(function($data) {
+
 })->onHeartBeat(function($data) {
     //{"data":"heartbeat@browserbridge ding","timeout":60000}
     echo $data["data"];

@@ -46,7 +46,13 @@ Scan now, because other Wechaty PHP developers want to talk with you too! (secre
 ### php
 
 ```php
+$wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
+$wechaty->onScan(function($qrcode, $status, $data) {
+    echo $qrcode . "\n" . $status . "\n";
+})->onLogin(function($data) {
 
+})->onMessage(function($data) {
+})->start();
 ```
 
 ## PHP Wechaty Developing Plan
