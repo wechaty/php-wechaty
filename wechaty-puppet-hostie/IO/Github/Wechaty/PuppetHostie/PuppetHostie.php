@@ -130,7 +130,7 @@ class PuppetHostie extends Puppet {
 
             switch ($type) {
                 case EventType::EVENT_TYPE_SCAN:
-                    $eventScanPayload = json_decode($payload, EventScanPayload::class);
+                    $eventScanPayload = new EventScanPayload($payload);
                     Logger::DEBUG("scan pay load is {}", $eventScanPayload);
                     $this->emit(EventEnum::SCAN, $eventScanPayload);
                     break;
