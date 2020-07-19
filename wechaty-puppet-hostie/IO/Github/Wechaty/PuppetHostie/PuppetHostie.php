@@ -131,8 +131,12 @@ class PuppetHostie extends Puppet {
             switch ($type) {
                 case EventType::EVENT_TYPE_SCAN:
                     $eventScanPayload = new EventScanPayload($payload);
-                    Logger::DEBUG("scan pay load is {}", $eventScanPayload);
+                    Logger::DEBUG("scan event", array("payload" => $eventScanPayload));
                     $this->emit(EventEnum::SCAN, $eventScanPayload);
+                    break;
+                case EventType::EVENT_TYPE_HEARTBEAT:
+                    // array is easy
+                    $this->emit(EventEnum::HEART_BEAT, json_decode($payload, true));
                     break;
                 default:
                     Console::logStr($event->getType() . " ");//2

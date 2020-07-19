@@ -77,6 +77,10 @@ class Wechaty extends EventEmitter {
         return $this->_on(EventEnum::SCAN, $listener);
     }
 
+    function onHeartBeat($listener) : Wechaty {
+        return $this->_on(EventEnum::HEART_BEAT, $listener);
+    }
+
     private function _on($event, \Closure $listener) : Wechaty {
         $this->on($event, $listener);
         return $this;
@@ -86,6 +90,9 @@ class Wechaty extends EventEmitter {
         //{"qrcode":"https://login.weixin.qq.com/l/IaysbZa04Q==","status":5}
         $puppet->on(EventEnum::SCAN, function(EventScanPayload $payload) {
             $this->emit(EventEnum::SCAN, $payload->qrcode ?: "", $payload->status, $payload->data ?: "");
+        });
+        $puppet->on(EventEnum::HEART_BEAT, function($payload) {
+            $this->emit(EventEnum::HEART_BEAT, $payload);
         });
     }
 }
