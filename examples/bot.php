@@ -39,7 +39,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 
 })->onHeartBeat(function($data) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
-    echo $data["data"];
+    echo $data["data"] . "\n";
 })->start();
 
 \IO\Github\Wechaty\Util\Logger::WARNING("test");
