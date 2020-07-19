@@ -13,7 +13,7 @@ use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
 
-class Puppet {
+abstract class Puppet {
     protected static $_STATE = StateEnum::OFF;
 
     protected $_puppetOptions = null;
@@ -42,23 +42,6 @@ class Puppet {
         return CacheFactory::getCache();
     }
 
-    public function start() {
-        if(self::$_STATE == StateEnum::ON) {
-            Logger::WARNING("start() is called on a ON puppet. await ready(on) and return.");
-            self::$_STATE = StateEnum::ON;
-            return true;
-        }
-        self::$_STATE = StateEnum::PENDING;
-
-        try {
-            //startGrpcClient()
-            //startGrpcStream()
-            self::$_STATE = StateEnum::ON;
-        } catch (\Exception $e) {
-            Logger::ERR("start() rejection:", $e);
-            self::$_STATE = StateEnum::OFF;
-        }
-
-        return true;
-    }
+    abstract public function start();
+    abstract public function stop();
 }

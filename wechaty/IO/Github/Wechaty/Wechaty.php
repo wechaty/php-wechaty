@@ -22,6 +22,10 @@ class Wechaty extends EventEmitter {
     private $_wechatyOptions = null;
 
     private $_status = StateEnum::OFF;
+
+    /**
+     * @var null|PuppetHostie\PuppetHostie
+     */
     private $_puppet = null;
 
     /**
@@ -43,36 +47,13 @@ class Wechaty extends EventEmitter {
 
     public function start() : Wechaty {
         $this->_initPuppet();
-        //$this->_puppet->start()->get();
-        $status = StateEnum::ON;
-        $this->emit(EventEnum::START, "");
-
-        //addHook();
         echo "start Wechaty\n";
         try {
-            $client = new \Wechaty\PuppetClient("localhost:8788", [
-                'credentials' => \Grpc\ChannelCredentials::createInsecure()
-            ]);
-            $startRequest = new \Wechaty\Puppet\StartRequest();
-            $client->Start($startRequest);
+            $this->_puppet->start();
+            $status = StateEnum::ON;
+            $this->emit(EventEnum::START, "");
 
-            $eventRequest = new \Wechaty\Puppet\EventRequest();
-            $call = $client->Event($eventRequest);
-            $ret = $call->responses();//Generator Object
-            while($ret->valid()) {
-                Console::logStr($ret->key() . " ");//0 1 2
-                $response = $ret->current();
-                Console::logStr($response->getType() . " ");//2
-                Console::logStr($response->getPayload() . " ");
-                //{"qrcode":"https://login.weixin.qq.com/l/IaysbZa04Q==","status":5}
-                //{"data":"heartbeat@browserbridge ding","timeout":60000}
-                //$client->DingSimple($dingRequest);
-                //3{"data":"dong"}
-                echo "\n";
-                $ret->next();
-            }
-            echo "service stopped normally\n";
-            Console::log($ret->getReturn());
+            //addHook();
         } catch (\Exception $e) {
             echo "service stopped with exception, " . $e->getMessage();
             Logger::ERR(array("service stopped with exception"), $e);
