@@ -7,7 +7,9 @@
  */
 define("ROOT", dirname(__DIR__));
 // DEBUG should create dir use command sudo mkdir /var/log/wechaty && sudo chmod 777 /var/log/wechaty
-// define("DEBUG", 1);
+define("DEBUG", 1);
+// change dir
+\IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
 
 function autoload($clazz) {
     $file = str_replace('\\', '/', $clazz);
@@ -27,8 +29,6 @@ function autoload($clazz) {
 spl_autoload_register("autoload");
 
 require ROOT . '/vendor/autoload.php';
-
-\IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
 
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
