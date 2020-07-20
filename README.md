@@ -48,10 +48,10 @@ Scan now, because other Wechaty PHP developers want to talk with you too! (secre
 ```php
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->onScan(function($qrcode, $status, $data) {
-    echo $qrcode . "\n" . $status . "\n";
-})->onLogin(function($data) {
-
-})->onMessage(function($data) {
+    $qr = \IO\Github\Wechaty\Util\QrcodeUtils::getQr($qrcode);
+    echo "$qr\n\nOnline Image: https://wechaty.github.io/qrcode/$qrcode\n";
+})->onLogin(function($user) {
+})->onMessage(function($message) {
 })->start();
 ```
 

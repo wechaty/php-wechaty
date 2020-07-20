@@ -36,12 +36,11 @@ $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->onScan(function($qrcode, $status, $data) {
     $qr = \IO\Github\Wechaty\Util\QrcodeUtils::getQr($qrcode);
-    echo $qr . "\n\n";
-    echo "Online Image: https://wechaty.github.io/qrcode/$qrcode\n";
+    echo "$qr\n\nOnline Image: https://wechaty.github.io/qrcode/$qrcode\n";
 })->onLogin(function($user) {
     print_r($user);
-})->onMessage(function($data) {
-    print_r($data);
+})->onMessage(function($message) {
+    print_r($message);
 })->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
     echo $data["data"] . "\n";
