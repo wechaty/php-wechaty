@@ -45,11 +45,3 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     echo $data["data"] . "\n";
     $wechaty->stop();
 })->start();
-
-\IO\Github\Wechaty\Util\Logger::WARNING("test");
-\IO\Github\Wechaty\Puppet\Util\JsonUtil::get();
-\IO\Github\Wechaty\Puppet\StateEnum::PENDING;
-\IO\Github\Wechaty\PuppetHostie\Util\FutureUtil::get();
-\IO\Github\Wechaty\PuppetHostie\PuppetHostie::get();
-\IO\Github\Wechaty\PuppetMock\MockData::get();
-\IO\Github\Wechaty\PuppetMock\Util\MockitoHelper::get();
