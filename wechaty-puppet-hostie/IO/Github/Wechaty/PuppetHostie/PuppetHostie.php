@@ -56,7 +56,35 @@ class PuppetHostie extends Puppet {
     }
 
     public function stop() {
+        Logger::DEBUG("stop()");
+        if (self::$_STATE == StateEnum::OFF) {
+            Logger::WARNING("stop() is called on a OFF puppet. await ready(off) and return.");
+            return true;
+        }
 
+        try {
+            if ($this->logonoff()) {
+                $this->emit(EventEnum::LOGOUT, $this->_getId(), "logout");
+
+                $this->setId(null);
+            }
+
+            if (!empty($this->_grpcClient)) {
+                try {
+                    $stopRequest = new \Wechaty\Puppet\StopRequest();
+                    $this->_grpcClient->Stop($stopRequest);
+                } catch (\Exception $e) {
+                    Logger::ERR("stop() this._grpcClient.stop() rejection:", $e);
+                }
+            } else {
+                Logger::WARNING("stop() this._grpcClient not exist");
+            }
+            $this->_stopGrpcClient();
+
+        } catch (\Exception $e) {
+            Logger::WARNING("stop() rejection: ", $e);
+        }
+        self::$_STATE = StateEnum::OFF;
     }
 
     private function _startGrpcClient() {
@@ -84,6 +112,11 @@ class PuppetHostie extends Puppet {
             'credentials' => \Grpc\ChannelCredentials::createInsecure()
         ]);
         return $this->_grpcClient;
+    }
+
+    private function _stopGrpcClient() {
+        Logger::DEBUG("grpc is shutdown");
+        return true;
     }
 
     private function _startGrpcStream() {

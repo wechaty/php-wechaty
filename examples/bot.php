@@ -45,6 +45,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     echo $data["data"] . "\n";
 })->start();
 
+sleep(10);
+$wechaty->stop();
+
 \IO\Github\Wechaty\Util\Logger::WARNING("test");
 \IO\Github\Wechaty\Puppet\Util\JsonUtil::get();
 \IO\Github\Wechaty\Puppet\StateEnum::PENDING;

@@ -63,6 +63,10 @@ class Wechaty extends EventEmitter {
         return $this;
     }
 
+    public function stop() {
+        $this->_puppet->stop();
+    }
+
     private function _initPuppet() {
         if($this->_puppet) {
             return;

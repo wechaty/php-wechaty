@@ -17,6 +17,8 @@ use LM\Exception;
 abstract class Puppet extends EventEmitter {
     protected static $_STATE = StateEnum::OFF;
 
+    private $_id = null;
+
     protected $_puppetOptions = null;
     /**
      * @var Cache\Cache|Cache\Yac|null
@@ -45,4 +47,20 @@ abstract class Puppet extends EventEmitter {
 
     abstract public function start();
     abstract public function stop();
+
+    function selfId() : String {
+        return $this->_id;
+    }
+
+    public function logonoff() : bool {
+        return $this->_id != null;
+    }
+
+    protected function _getId() : string {
+        return $this->_id;
+    }
+
+    function setId($id) {
+        $this->_id = $id;
+    }
 }
