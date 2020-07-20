@@ -27,4 +27,9 @@ class ArrayCache extends Cache {
     public function set($key, $value) {
         return $this->_cacheInstance[$key] = $value;
     }
+
+    public function delete($key) {
+        unset($this->_cacheInstance[$key]);
+        return true;
+    }
 }

@@ -8,6 +8,7 @@
 namespace IO\Github\Wechaty\PuppetHostie;
 
 use IO\Github\Wechaty\Puppet\Puppet;
+use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
 use IO\Github\Wechaty\Puppet\Schemas\Event\EventScanPayload;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload;
@@ -16,6 +17,7 @@ use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\PuppetHostie\Exceptions\PuppetHostieException;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
+use Wechaty\Puppet\ContactPayloadResponse;
 use Wechaty\Puppet\EventResponse;
 use Wechaty\Puppet\EventType;
 
@@ -89,10 +91,10 @@ class PuppetHostie extends Puppet {
     }
 
     function friendshipRawPayload($friendshipId) {
-        $startRequest = new \Wechaty\Puppet\FriendshipPayloadRequest();
-        $startRequest->setId($friendshipId);
+        $request = new \Wechaty\Puppet\FriendshipPayloadRequest();
+        $request->setId($friendshipId);
 
-        list($response, $status) = $this->_grpcClient->FriendshipPayload($startRequest)->wait();
+        list($response, $status) = $this->_grpcClient->FriendshipPayload($request)->wait();
         $payload = new FriendshipPayload();
 
         $payload->scene = $response->getScene();
@@ -103,6 +105,34 @@ class PuppetHostie extends Puppet {
         $payload->id = $response->getId();
 
         return $payload;
+    }
+
+    function _contactRawPayload(String $contractId) : ContactPayload {
+        $request = new \Wechaty\Puppet\ContactPayloadRequest();
+        $request->setId($contractId);
+
+        list($response, $status) = $this->_grpcClient->ContactPayload($request)->wait();
+        $response = new ContactPayloadResponse();
+        $payload = new ContactPayload();
+        $payload->id = $response->getId();
+        $payload->address = $response->getAddress();
+        $payload->alias = $response->getAlias();
+        $payload->avatar = $response->getAvatar();
+        $payload->city = $response->getCity();
+        $payload->friend = $response->getFriend();
+        $payload->gender = $response->getGender();
+        $payload->name = $response->getName();
+        $payload->province = $response->getProvince();
+        $payload->signature = $response->getSignature();
+        $payload->star = $response->getStar();
+        $payload->type = $response->getType();
+        $payload->weixin = $response->getWeixin();
+
+        return $payload;
+    }
+
+    function _contactRawPayloadParser(ContactPayload $rawPayload) : ContactPayload {
+        return $rawPayload;
     }
 
     private function _startGrpcClient() {

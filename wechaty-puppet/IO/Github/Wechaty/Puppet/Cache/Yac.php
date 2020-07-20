@@ -19,4 +19,8 @@ class Yac extends Cache {
     public function set($key, $value) {
         return $this->_cacheInstance->set($key, $value);
     }
+
+    public function delete($key) {
+        return $this->_cacheInstance->delete($key);
+    }
 }

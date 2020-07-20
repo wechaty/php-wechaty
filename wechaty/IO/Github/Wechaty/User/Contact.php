@@ -9,6 +9,7 @@ namespace IO\Github\Wechaty\User;
 
 use IO\Github\Wechaty\Accessory;
 use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
+use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
 
 class Contact extends Accessory {
@@ -18,6 +19,9 @@ class Contact extends Accessory {
      * @var null|ContactPayload
      */
     protected $_payload = null;
+    /**
+     * @var null|PuppetHostie
+     */
     protected $_puppet = null;
 
     public function __construct($wechaty, $id = "") {

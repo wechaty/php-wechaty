@@ -10,6 +10,7 @@ namespace IO\Github\Wechaty\Puppet;
 use IO\Github\Wechaty\Puppet\Cache\CacheFactory;
 use IO\Github\Wechaty\Puppet\EventEmitter\EventEmitter;
 use IO\Github\Wechaty\Puppet\Exceptions\InvalidArgumentException;
+use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
@@ -49,6 +50,35 @@ abstract class Puppet extends EventEmitter {
     abstract public function stop();
 
     abstract function friendshipRawPayload($friendshipId);
+    protected abstract function _contactRawPayload(String $contractId) : ContactPayload;
+    protected abstract function _contactRawPayloadParser(ContactPayload $rawPayload) : ContactPayload;
+
+    function contactPayloadDirty(String $contactId) {
+        $this->_cache->delete(self::CACHE_ROOM_PAYLOAD_PREFIX . $contactId);
+        return true;
+    }
+
+    function contactPayload(String $contactId) : ContactPayload {
+        $contactPayload = $this->_contactPayloadCache($contactId);
+
+        if ($contactPayload != null) {
+            return $contactPayload;
+        }
+
+        $contactRawPayload = $this->_contactRawPayload($contactId);
+        $payload = $this->_contactRawPayloadParser($contactRawPayload);
+
+        $this->_cache->set(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId, $payload);
+        return $payload;
+    }
+
+    protected function _contactPayloadCache(String $contactId) : ContactPayload {
+        $contactPayload = $this->_cache->get(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
+
+        Logger::DEBUG(array("contactPayload" => $contactPayload, "contactId" => $contactId));
+
+        return $contactPayload;
+    }
 
     function selfId() : String {
         return $this->_id;

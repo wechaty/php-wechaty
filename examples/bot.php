@@ -38,8 +38,8 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     $qr = \IO\Github\Wechaty\Util\QrcodeUtils::getQr($qrcode);
     echo $qr . "\n\n";
     echo "Online Image: https://wechaty.github.io/qrcode/$qrcode\n";
-})->onLogin(function($data) {
-    print_r($data);
+})->onLogin(function($user) {
+    print_r($user);
 })->onMessage(function($data) {
     print_r($data);
 })->onHeartBeat(function($data) use ($wechaty) {

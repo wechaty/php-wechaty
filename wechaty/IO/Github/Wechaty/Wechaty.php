@@ -148,7 +148,9 @@ class Wechaty extends EventEmitter {
             $this->emit(EventEnum::FRIENDSHIP, $friendship);
         });
         $puppet->on(EventEnum::LOGIN, function($payload) {
-            $this->emit(EventEnum::LOGIN, $payload);
+            $contact = $this->contactManager->loadSelf($payload["contactId"]);
+            $contact->ready();
+            $this->emit(EventEnum::LOGIN, $contact);
         });
         $puppet->on(EventEnum::LOGOUT, function($payload) {
             $this->emit(EventEnum::LOGOUT, $payload);
