@@ -9,7 +9,9 @@ namespace IO\Github\Wechaty\Util;
 
 class Logger {
     // sudo mkdir /var/log/wechaty && sudo chmod 777 /var/log/wechaty
-    const LOGERPREFIX = '/var/log/wechaty/';
+    const LOGGER_PREFIX = '/var/log/wechaty/';
+
+    public static $_LOGGER_DIR = "";
 
     private static $_logs = [];
     private static $logLevel = [
@@ -96,7 +98,15 @@ class Logger {
     }
 
     private static function _getFilePath() {
-        return self::LOGERPREFIX . "wechaty_log-" . date("Ymd");
+        if(!empty(self::$_LOGGER_DIR)) {
+            $dir = self::$_LOGGER_DIR;
+            if($dir[strlen($dir) - 1] != "/") {
+                $dir .= "/";
+            }
+            return $dir . "wechaty_log-" . date("Ymd");
+        } else {
+            return self::LOGGER_PREFIX . "wechaty_log-" . date("Ymd");
+        }
     }
 
     private static function _writeLog($logLevel, $logStr) {
