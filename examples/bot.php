@@ -35,7 +35,9 @@ $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->onScan(function($qrcode, $status, $data) {
-    echo $qrcode . "\n" . $status . "\n";
+    $qrcode = \IO\Github\Wechaty\Util\QrcodeUtils::getQr($qrcode);
+    echo $qrcode . "\n";
+    echo "Online Image: https://wechaty.github.io/qrcode/$qrcode\n";
 })->onLogin(function($data) {
 
 })->onMessage(function($data) {

@@ -7,8 +7,13 @@
  */
 namespace IO\Github\Wechaty\Util;
 
-class QrcodeUtils {
-    function getQr(String $text) : String {
+use Coco\QRCode\QRCode;
 
+class QrcodeUtils {
+    public static function getQr(String $text) : String {
+        $QRCode = new QRCode(['level' => "L", 'size' => 6, 'margin' => 2]);
+        $ret = $QRCode->encode($text)->toASCII();
+
+        return $ret;
     }
 }
