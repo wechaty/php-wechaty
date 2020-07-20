@@ -10,6 +10,7 @@ namespace IO\Github\Wechaty\PuppetHostie;
 use IO\Github\Wechaty\Puppet\Puppet;
 use IO\Github\Wechaty\Puppet\Schemas\Event\EventScanPayload;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
+use IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\PuppetHostie\Exceptions\PuppetHostieException;
@@ -85,6 +86,23 @@ class PuppetHostie extends Puppet {
             Logger::WARNING("stop() rejection: ", $e);
         }
         self::$_STATE = StateEnum::OFF;
+    }
+
+    function friendshipRawPayload($friendshipId) {
+        $startRequest = new \Wechaty\Puppet\FriendshipPayloadRequest();
+        $startRequest->setId($friendshipId);
+
+        list($response, $status) = $this->_grpcClient->FriendshipPayload($startRequest)->wait();
+        $payload = new FriendshipPayload();
+
+        $payload->scene = $response->getScene();
+        $payload->stranger = $response->getStranger();
+        $payload->ticket = $response->getTicket();
+        $payload->type = $response->getType();
+        $payload->contactId = $response->getContactId();
+        $payload->id = $response->getId();
+
+        return $payload;
     }
 
     private function _startGrpcClient() {

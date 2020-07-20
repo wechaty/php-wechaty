@@ -9,6 +9,7 @@ namespace IO\Github\Wechaty\Puppet\Cache;
 
 class Cache {
     protected $_cacheInstance;
+    protected static $_INSTANCES = array();
 
     public static function getInstance() {
         static $_instance = NULL;

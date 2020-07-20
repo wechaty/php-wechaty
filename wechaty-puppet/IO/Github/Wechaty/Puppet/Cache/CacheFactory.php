@@ -10,6 +10,7 @@ namespace IO\Github\Wechaty\Puppet\Cache;
 class CacheFactory {
     const DEFAULT_CACHE = "YAC";
     const CACHE_YAC = "yac";
+    const CACHE_ARRAY = "array";
     const CACHE_LIBSHMCACHE = "libshmcache";
 
     /**
@@ -19,6 +20,8 @@ class CacheFactory {
     public static function getCache($type = self::CACHE_YAC) {
         if($type == self::CACHE_YAC) {
             return Yac::getInstance();
+        } elseif($type == self::CACHE_ARRAY) {
+            return ArrayCache::getInstance();
         }
 
         return Cache::getInstance();

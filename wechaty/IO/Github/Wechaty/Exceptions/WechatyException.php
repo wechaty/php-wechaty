@@ -7,6 +7,6 @@
  */
 namespace IO\Github\Wechaty\Exceptions;
 
-class WechatyException {
+class WechatyException extends \Exception {
 
 }

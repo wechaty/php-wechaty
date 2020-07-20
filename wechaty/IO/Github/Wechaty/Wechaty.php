@@ -8,11 +8,14 @@
 namespace IO\Github\Wechaty;
 
 use IO\Github\Wechaty\Puppet\EventEmitter\EventEmitter;
+use IO\Github\Wechaty\Puppet\Puppet;
 use IO\Github\Wechaty\Puppet\Schemas\Event\EventScanPayload;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\WechatyOptions;
 use IO\Github\Wechaty\Puppet\StateEnum;
+use IO\Github\Wechaty\User\Friendship;
+use IO\Github\Wechaty\User\Manager\ContactManager;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
@@ -23,6 +26,11 @@ class Wechaty extends EventEmitter {
     private $_wechatyOptions = null;
 
     private $_status = StateEnum::OFF;
+
+    /**
+     * @var null|ContactManager
+     */
+    public $contactManager = null;
 
     /**
      * @var null|PuppetHostie\PuppetHostie
@@ -75,6 +83,7 @@ class Wechaty extends EventEmitter {
         $this->_puppet = new PuppetHostie\PuppetHostie($this->_puppetOptions);
 
         $this->_initPuppetEventBridge($this->_puppet);
+        $this->_initPuppetAccessory($this->_puppet);
     }
 
     function onScan($listener) : Wechaty {
@@ -105,6 +114,14 @@ class Wechaty extends EventEmitter {
         return $this->_on(EventEnum::MESSAGE, $listener);
     }
 
+    function getPuppet() : Puppet {
+        return $this->_puppet;
+    }
+
+    function friendship() : Friendship {
+        return new Friendship($this);
+    }
+
     private function _on($event, \Closure $listener) : Wechaty {
         $this->on($event, $listener);
         return $this;
@@ -125,7 +142,10 @@ class Wechaty extends EventEmitter {
             $this->emit(EventEnum::ERROR, $payload);
         });
         $puppet->on(EventEnum::FRIENDSHIP, function($payload) {
-            $this->emit(EventEnum::FRIENDSHIP, $payload);
+            $friendship = $this->friendship();
+            $friendship->load($payload["friendshipId"]);
+            $friendship->ready();
+            $this->emit(EventEnum::FRIENDSHIP, $friendship);
         });
         $puppet->on(EventEnum::LOGIN, function($payload) {
             $this->emit(EventEnum::LOGIN, $payload);
@@ -151,5 +171,9 @@ class Wechaty extends EventEmitter {
         $puppet->on(EventEnum::ROOM_TOPIC, function($payload) {
             $this->emit(EventEnum::ROOM_TOPIC, $payload);
         });
+    }
+
+    private function _initPuppetAccessory(PuppetHostie\PuppetHostie $puppet) {
+        $this->contactManager = new ContactManager($this);
     }
 }

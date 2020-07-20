@@ -8,6 +8,13 @@
 namespace IO\Github\Wechaty\Puppet\Schemas\Event;
 
 class EventScanPayload {
+    const SCAN_STATUS_UNKNOWN = -1;
+    const SCAN_STATUS_CANCEL = 0;
+    const SCAN_STATUS_WAITING = 1;
+    const SCAN_STATUS_SCANNED = 2;
+    const SCAN_STATUS_CONFIRMED = 3;
+    const SCAN_STATUS_TIMEOUT = 4;
+
     public $status = null;
     public $qrcode = null;
     public $data = null;

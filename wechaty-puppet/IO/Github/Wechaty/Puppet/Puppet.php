@@ -48,6 +48,8 @@ abstract class Puppet extends EventEmitter {
     abstract public function start();
     abstract public function stop();
 
+    abstract function friendshipRawPayload($friendshipId);
+
     function selfId() : String {
         return $this->_id;
     }
