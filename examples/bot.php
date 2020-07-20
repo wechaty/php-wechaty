@@ -29,7 +29,7 @@ spl_autoload_register("autoload");
 require ROOT . '/vendor/autoload.php';
 
 // change dir
-\IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
+// \IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
 
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
