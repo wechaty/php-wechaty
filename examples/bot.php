@@ -39,9 +39,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     echo $qrcode . "\n\n";
     echo "Online Image: https://wechaty.github.io/qrcode/$qrcode\n\n";
 })->onLogin(function($data) {
-
+    print_r($data);
 })->onMessage(function($data) {
-
+    print_r($data);
 })->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
     echo $data["data"] . "\n";
