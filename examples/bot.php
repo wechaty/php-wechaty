@@ -40,13 +40,11 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 
 })->onMessage(function($data) {
 
-})->onHeartBeat(function($data) {
+})->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
     echo $data["data"] . "\n";
+    $wechaty->stop();
 })->start();
-
-sleep(10);
-$wechaty->stop();
 
 \IO\Github\Wechaty\Util\Logger::WARNING("test");
 \IO\Github\Wechaty\Puppet\Util\JsonUtil::get();
