@@ -37,7 +37,8 @@ $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->onScan(function($qrcode, $status, $data) {
     $qrcode = \IO\Github\Wechaty\Util\QrcodeUtils::getQr($qrcode);
     echo $qrcode . "\n\n";
-    echo "Online Image: https://wechaty.github.io/qrcode/$qrcode\n\n";
+    echo "Online Image: https://wechaty.github.io/qrcode/$qrcode";
+    echo "\n";
 })->onLogin(function($data) {
     print_r($data);
 })->onMessage(function($data) {
