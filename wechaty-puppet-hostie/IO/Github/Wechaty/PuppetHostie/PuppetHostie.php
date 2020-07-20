@@ -182,9 +182,12 @@ class PuppetHostie extends Puppet {
                     $this->emit(EventEnum::FRIENDSHIP, json_decode($payload, true));
                     break;
                 case EventType::EVENT_TYPE_LOGIN:
-                    $this->emit(EventEnum::LOGIN, json_decode($payload, true));
+                    $payload = json_decode($payload, true);
+                    $this->setId($payload["contactId"]);
+                    $this->emit(EventEnum::LOGIN, $payload);
                     break;
                 case EventType::EVENT_TYPE_LOGOUT:
+                    $this->setId("");
                     $this->emit(EventEnum::LOGOUT, json_decode($payload, true));
                     break;
                 case EventType::EVENT_TYPE_MESSAGE:
