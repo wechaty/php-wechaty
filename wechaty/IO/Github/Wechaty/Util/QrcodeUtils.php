@@ -8,5 +8,7 @@
 namespace IO\Github\Wechaty\Util;
 
 class QrcodeUtils {
+    function getQr(String $text) : String {
 
+    }
 }
