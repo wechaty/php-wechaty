@@ -41,6 +41,10 @@ class PuppetHostie extends Puppet {
 
         try {
             $this->_startGrpcClient();
+
+            $startRequest = new \Wechaty\Puppet\StartRequest();
+            $this->_grpcClient->Start($startRequest);
+
             $this->_startGrpcStream();
             self::$_STATE = StateEnum::ON;
         } catch (\Exception $e) {
@@ -83,9 +87,6 @@ class PuppetHostie extends Puppet {
     }
 
     private function _startGrpcStream() {
-        $startRequest = new \Wechaty\Puppet\StartRequest();
-        $this->_grpcClient->Start($startRequest);
-
         $eventRequest = new \Wechaty\Puppet\EventRequest();
         $call = $this->_grpcClient->Event($eventRequest);
         $ret = $call->responses();//Generator Object
