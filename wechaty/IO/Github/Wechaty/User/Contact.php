@@ -13,8 +13,6 @@ use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
 
 class Contact extends Accessory {
-    protected $_id = null;
-
     /**
      * @var null|ContactPayload
      */

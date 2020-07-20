@@ -23,10 +23,6 @@ class ContactManager extends Accessory {
         $this->_contactCache = $this->_initCache();
     }
 
-    protected function _initCache() {
-        return CacheFactory::getCache();
-    }
-
     function load(String $id) : Contact {
         $contact = $this->_contactCache->get(self::CACHE_CONTACT_PREFIX . $id);
         if(empty($contact)) {

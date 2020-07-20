@@ -16,6 +16,7 @@ use IO\Github\Wechaty\Puppet\Schemas\WechatyOptions;
 use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\User\Friendship;
 use IO\Github\Wechaty\User\Manager\ContactManager;
+use IO\Github\Wechaty\User\Manager\MessageManager;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
@@ -31,6 +32,11 @@ class Wechaty extends EventEmitter {
      * @var null|ContactManager
      */
     public $contactManager = null;
+
+    /**
+     * @var null | MessageManager
+     */
+    public $messageManager = null;
 
     /**
      * @var null|PuppetHostie\PuppetHostie
@@ -153,10 +159,19 @@ class Wechaty extends EventEmitter {
             $this->emit(EventEnum::LOGIN, $contact);
         });
         $puppet->on(EventEnum::LOGOUT, function($payload) {
-            $this->emit(EventEnum::LOGOUT, $payload);
+            $contact = $this->contactManager->loadSelf($payload["contactId"]);
+            $contact->ready();
+            $this->emit(EventEnum::LOGOUT, $contact, $payload["data"]);
         });
         $puppet->on(EventEnum::MESSAGE, function($payload) {
-            $this->emit(EventEnum::MESSAGE, $payload);
+            $msg = $this->messageManager->load($payload["messageId"]);
+            $msg->ready();
+            $this->emit(EventEnum::MESSAGE, $msg);
+
+            $room = $msg->room();
+            if($room) {
+                $room->emit(EventEnum::MESSAGE, $msg);
+            }
         });
         $puppet->on(EventEnum::READY, function($payload) {
             $this->emit(EventEnum::READY, $payload);
@@ -177,5 +192,6 @@ class Wechaty extends EventEmitter {
 
     private function _initPuppetAccessory(PuppetHostie\PuppetHostie $puppet) {
         $this->contactManager = new ContactManager($this);
+        $this->messageManager = new MessageManager($this);
     }
 }

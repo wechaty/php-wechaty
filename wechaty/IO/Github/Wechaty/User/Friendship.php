@@ -12,8 +12,6 @@ use IO\Github\Wechaty\Exceptions\WechatyException;
 use IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload;
 
 class Friendship extends Accessory {
-    private $_id = null;
-
     /**
      * @var null|FriendshipPayload
      */

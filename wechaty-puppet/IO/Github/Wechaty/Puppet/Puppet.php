@@ -11,6 +11,7 @@ use IO\Github\Wechaty\Puppet\Cache\CacheFactory;
 use IO\Github\Wechaty\Puppet\EventEmitter\EventEmitter;
 use IO\Github\Wechaty\Puppet\Exceptions\InvalidArgumentException;
 use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
+use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
@@ -52,6 +53,8 @@ abstract class Puppet extends EventEmitter {
     abstract function friendshipRawPayload($friendshipId);
     protected abstract function _contactRawPayload(String $contractId) : ContactPayload;
     protected abstract function _contactRawPayloadParser(ContactPayload $rawPayload) : ContactPayload;
+    abstract function _messageRawPayload(String $messageId) : MessagePayload;
+    abstract function _messageRawPayloadParser(MessagePayload $rawPayload) : MessagePayload;
 
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_ROOM_PAYLOAD_PREFIX . $contactId);
@@ -78,6 +81,18 @@ abstract class Puppet extends EventEmitter {
         Logger::DEBUG(array("contactPayload" => $contactPayload, "contactId" => $contactId));
 
         return $contactPayload;
+    }
+
+    function messagePayload(String $messageId): MessagePayload {
+        $messagePayload = $this->_cache->get(self::CACHE_MESSAGE_PAYLOAD_PREFIX . $messageId);
+
+        if($messagePayload != null) {
+            return $messagePayload;
+        }
+        $messageRawPayload = $this->_messageRawPayload($messageId);
+        $payload = $this->_messageRawPayloadParser($messageRawPayload);
+
+        return $payload;
     }
 
     function selfId() : String {

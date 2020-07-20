@@ -12,6 +12,7 @@ use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
 use IO\Github\Wechaty\Puppet\Schemas\Event\EventScanPayload;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload;
+use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\PuppetHostie\Exceptions\PuppetHostieException;
@@ -20,6 +21,7 @@ use IO\Github\Wechaty\Util\Logger;
 use Wechaty\Puppet\ContactPayloadResponse;
 use Wechaty\Puppet\EventResponse;
 use Wechaty\Puppet\EventType;
+use Wechaty\Puppet\MessagePayloadResponse;
 
 class PuppetHostie extends Puppet {
     private $_channel = null;
@@ -112,7 +114,6 @@ class PuppetHostie extends Puppet {
         $request->setId($contractId);
 
         list($response, $status) = $this->_grpcClient->ContactPayload($request)->wait();
-        $response = new ContactPayloadResponse();
         $payload = new ContactPayload();
         $payload->id = $response->getId();
         $payload->address = $response->getAddress();
@@ -133,6 +134,29 @@ class PuppetHostie extends Puppet {
 
     function _contactRawPayloadParser(ContactPayload $rawPayload) : ContactPayload {
         return $rawPayload;
+    }
+
+    function _messageRawPayload(String $messageId) : MessagePayload {
+        $request = new \Wechaty\Puppet\MessagePayloadRequest();
+        $request->setId($messageId);
+
+        list($response, $status) = $this->_grpcClient->MessagePayload($request)->wait();
+        $payload = new MessagePayload();
+        $payload->id = $messageId;
+        $payload->filename = $response->getFilename();
+        $payload->fromId = $response->getFromId();
+        $payload->text = $response->getText();
+        $payload->mentionIdList = $response->getMentionIds();
+        $payload->roomId = $response->getRoomId();
+        $payload->timestamp = $response->getTimestamp();
+        $payload->type = $response->getType();
+        $payload->toId = $response->getToId();
+
+        return $payload;
+    }
+
+    function _messageRawPayloadParser(MessagePayload $rawPayload) : MessagePayload {
+        return $$rawPayload;
     }
 
     private function _startGrpcClient() {
