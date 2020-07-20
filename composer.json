@@ -22,7 +22,8 @@
     "grpc/grpc": "^v1.3.0",
     "google/protobuf": "^v3.3.0",
     "wechaty/php-grpc": "^v0.16.2",
-    "guzzlehttp/guzzle": "^7.0"
+    "guzzlehttp/guzzle": "^7.0",
+    "zhangchunsheng/php-qrcode": "^v0.0.1"
   },
   "require-dev": {
 
