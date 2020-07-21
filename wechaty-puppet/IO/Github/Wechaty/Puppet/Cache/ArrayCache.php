@@ -24,7 +24,7 @@ class ArrayCache extends Cache {
         if(isset($this->_cacheInstance[$key])) {
             return $this->_cacheInstance[$key];
         } else {
-            return false;
+            return null;
         }
     }
 
