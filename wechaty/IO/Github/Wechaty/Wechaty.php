@@ -28,6 +28,7 @@ class Wechaty extends EventEmitter {
     private $_wechatyOptions = null;
 
     private $_status = StateEnum::OFF;
+    private $_readyState = StateEnum::OFF;
 
     /**
      * @var null|ContactManager
@@ -181,6 +182,8 @@ class Wechaty extends EventEmitter {
         });
         $puppet->on(EventEnum::READY, function($payload) {
             $this->emit(EventEnum::READY, $payload);
+
+            $this->_readyState = StateEnum::ON;
         });
         $puppet->on(EventEnum::ROOM_INVITE, function($payload) {
             $this->emit(EventEnum::ROOM_INVITE, $payload);
