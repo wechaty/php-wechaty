@@ -30,6 +30,10 @@ class Room extends Accessory {
         parent::__construct($wechaty);
     }
 
+    function getPayload() {
+        return $this->_payload;
+    }
+
     function isReady() : bool {
         return $this->_payload != null;
     }

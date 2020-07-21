@@ -32,6 +32,10 @@ class Contact extends Accessory {
         return $this->ready(true);
     }
 
+    function getPayload() {
+        return $this->_payload;
+    }
+
     function ready(bool $forceSyn = false) {
         if (!$forceSyn && $this->isReady()) {
             return true;
@@ -45,8 +49,6 @@ class Contact extends Accessory {
             Logger::ERR("ready() contactPayload {} error ", $this->_id, $e);
             throw $e;
         }
-
-
     }
 
     function isReady() : bool {

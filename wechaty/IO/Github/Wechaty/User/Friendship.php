@@ -22,6 +22,10 @@ class Friendship extends Accessory {
         parent::__construct($wechaty);
     }
 
+    function getPayload() {
+        return $this->_payload;
+    }
+
     function load(String $id) : Friendship {
         $this->_id = $id;
         return $this;

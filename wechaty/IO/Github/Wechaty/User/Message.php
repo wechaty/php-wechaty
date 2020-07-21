@@ -33,6 +33,10 @@ class Message extends Accessory {
         parent::__construct($wechaty);
     }
 
+    function getPayload() {
+        return $this->_payload;
+    }
+
     function room() : ?Room {
         if($this->_payload == null){
             throw new WechatyException("no payload");
