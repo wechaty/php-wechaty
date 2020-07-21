@@ -195,6 +195,7 @@ class PuppetHostie extends Puppet {
         Logger::DEBUG(var_dump($memberIds, true));
         //Google\Protobuf\Internal\RepeatedField Object
         $memberList = array();
+        // TODO
         if(is_object($memberIds)) {
             return $memberList;
         }
@@ -222,7 +223,8 @@ class PuppetHostie extends Puppet {
         $request->setText($text);
 
         list($response, $status) = $this->_grpcClient->MessageSendText($request)->wait();
-        return $response->getId();
+        print_r($response->getId());
+        return $response->getId()->value;
     }
 
     function messageSendUrl(string $conversationId, UrlLinkPayload $urlLinkPayload): string {
