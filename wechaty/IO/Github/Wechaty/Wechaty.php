@@ -9,6 +9,7 @@ namespace IO\Github\Wechaty;
 
 use IO\Github\Wechaty\Puppet\EventEmitter\EventEmitter;
 use IO\Github\Wechaty\Puppet\Puppet;
+use IO\Github\Wechaty\Puppet\Schemas\Date;
 use IO\Github\Wechaty\Puppet\Schemas\Event\EventScanPayload;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
@@ -209,9 +210,9 @@ class Wechaty extends EventEmitter {
             $inviter = $this->contactManager->loadSelf($payload["inviterId"]);
             $inviter->ready();
 
-            $time = $payload["timestamp"];
-            $this->emit(EventEnum::ROOM_JOIN, $room, $inviteeList, $inviter, $time);
-            $room->emit(EventEnum::JOIN, $inviteeList, $inviter, $time);
+            $date = new Date($payload["timestamp"]);
+            $this->emit(EventEnum::ROOM_JOIN, $room, $inviteeList, $inviter, $date);
+            $room->emit(EventEnum::JOIN, $inviteeList, $inviter, $date);
         });
         $puppet->on(EventEnum::ROOM_LEAVE, function($payload) {
             $this->emit(EventEnum::ROOM_LEAVE, $payload);
