@@ -8,5 +8,5 @@
 namespace IO\Github\Wechaty\User;
 
 class UrlLink {
-
+    public $payload;
 }
