@@ -32,6 +32,19 @@ class Message extends Accessory {
         parent::__construct($wechaty);
     }
 
+    function room() : Room {
+        if($this->_payload == null){
+        throw new WechatyException("no payload");
+        }
+
+        $roomId = $this->_payload->roomId;
+
+        if (empty($roomId)) {
+            return false;
+        }
+        return $this->wechaty->roomManager->load($roomId);
+    }
+
     function ready() : void {
         if ($this->isReady()) {
             return;
