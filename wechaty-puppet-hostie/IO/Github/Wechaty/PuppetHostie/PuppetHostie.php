@@ -223,8 +223,8 @@ class PuppetHostie extends Puppet {
         $request->setText($text);
 
         list($response, $status) = $this->_grpcClient->MessageSendText($request)->wait();
-        print_r($response->getId());
-        return $response->getId()->value;
+        //Google\Protobuf\StringValue Object
+        return $response->getId()->getValue();
     }
 
     function messageSendUrl(string $conversationId, UrlLinkPayload $urlLinkPayload): string {
