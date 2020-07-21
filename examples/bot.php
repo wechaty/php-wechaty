@@ -7,6 +7,7 @@
  */
 
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
+use IO\Github\Wechaty\User\ContactSelf;
 use IO\Github\Wechaty\User\MiniProgram;
 use IO\Github\Wechaty\User\UrlLink;
 
@@ -48,10 +49,10 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $qr = \IO\Github\Wechaty\Util\QrcodeUtils::getQr($qrcode);
         echo "$qr\n\nOnline Image: https://wechaty.github.io/qrcode/$qrcode\n";
     }
-})->onLogin(function($user) {
-    print_r($user);
+})->onLogin(function(ContactSelf $user) {
+    echo "login user id " . $user->getId() . "\n";
 })->onMessage(function(\IO\Github\Wechaty\User\Message $message) {
-    print_r($message);
+    echo "message from user id " . $message->from()->getId() . "\n";
     $message->say("hello from PHP7.4");
     $file = new FileBox();
     $message->say($file);
