@@ -9,7 +9,7 @@ namespace IO\Github\Wechaty\Puppet\Schemas;
 
 class WechatyOptions {
     public $name = "Wechaty";
-    public $puppet = "io.github.wechaty.grpc.GrpcPuppet";
+    public $puppet = "\\IO\\Github\\Wechaty\\PuppetHostie\\PuppetHostie";
     public $puppetOptions = null;
     public $ioToken = null;
 }

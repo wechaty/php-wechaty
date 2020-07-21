@@ -15,11 +15,14 @@ use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\WechatyOptions;
 use IO\Github\Wechaty\Puppet\StateEnum;
+use IO\Github\Wechaty\Puppet\MemoryCard\MemoryCard;
 use IO\Github\Wechaty\User\Friendship;
 use IO\Github\Wechaty\User\Manager\ContactManager;
+use IO\Github\Wechaty\User\Manager\ImageManager;
 use IO\Github\Wechaty\User\Manager\MessageManager;
 use IO\Github\Wechaty\User\Manager\RoomInvitationManager;
 use IO\Github\Wechaty\User\Manager\RoomManager;
+use IO\Github\Wechaty\User\Manager\TagManager;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
@@ -53,9 +56,21 @@ class Wechaty extends EventEmitter {
     public $roomInvitationManager = null;
 
     /**
+     * @var null | TagManager
+     */
+    public $tagManager = null;
+
+    /**
+     * @var null | ImageManager
+     */
+    public $imageManager = null;
+
+    /**
      * @var null|PuppetHostie\PuppetHostie
      */
     private $_puppet = null;
+
+    private $_memoryCard = null;
 
     /**
      * Wechaty constructor.
@@ -76,6 +91,7 @@ class Wechaty extends EventEmitter {
     }
 
     public function start() : Wechaty {
+        $this->_memoryCard = new MemoryCard();
         $this->_initPuppet();
         echo "start Wechaty\n";
         try {
@@ -254,5 +270,7 @@ class Wechaty extends EventEmitter {
         $this->messageManager = new MessageManager($this);
         $this->roomManager = new RoomManager($this);
         $this->roomInvitationManager = new RoomInvitationManager($this);
+        $this->imageManager = new ImageManager($this);
+        $this->tagManager = new TagManager($this);
     }
 }
