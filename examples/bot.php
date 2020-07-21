@@ -35,8 +35,14 @@ $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->onScan(function($qrcode, $status, $data) {
-    $qr = \IO\Github\Wechaty\Util\QrcodeUtils::getQr($qrcode);
-    echo "$qr\n\nOnline Image: https://wechaty.github.io/qrcode/$qrcode\n";
+    //{"qrcode":"http://weixin.qq.com/x/IcPycVXZP4RV8WZ9MXF-","status":2}
+    //[0] => PuppetHostie 22 payload {"qrcode":"","status":3}
+    if($status == 3) {
+        echo "SCAN_STATUS_SCANNED\n";
+    } else {
+        $qr = \IO\Github\Wechaty\Util\QrcodeUtils::getQr($qrcode);
+        echo "$qr\n\nOnline Image: https://wechaty.github.io/qrcode/$qrcode\n";
+    }
 })->onLogin(function($user) {
     print_r($user);
 })->onMessage(function(\IO\Github\Wechaty\User\Message $message) {

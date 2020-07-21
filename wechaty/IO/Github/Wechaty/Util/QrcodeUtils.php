@@ -11,6 +11,9 @@ use Coco\QRCode\QRCode;
 
 class QrcodeUtils {
     public static function getQr(String $text) : String {
+        if(empty($text)) {
+            return "empty text";
+        }
         $QRCode = new QRCode(['level' => "L", 'size' => 6, 'margin' => 2]);
         $ret = $QRCode->encode($text)->toASCII();
 
