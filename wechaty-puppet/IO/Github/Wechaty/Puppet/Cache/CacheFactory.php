@@ -15,13 +15,18 @@ class CacheFactory {
 
     /**
      * @param string $type
+     * @param string $name
      * @return Cache|Yac
      */
-    public static function getCache($type = self::CACHE_ARRAY) {
+    public static function getCache($type = self::CACHE_ARRAY, $name = "") {
         if($type == self::CACHE_YAC) {
             return Yac::getInstance();
         } elseif($type == self::CACHE_ARRAY) {
-            return ArrayCache::getInstance();
+            if(!empty($name)) {
+                return ArrayCache::getInstanceWithName($name);
+            } else {
+                return ArrayCache::getInstance();
+            }
         }
 
         return Cache::getInstance();
