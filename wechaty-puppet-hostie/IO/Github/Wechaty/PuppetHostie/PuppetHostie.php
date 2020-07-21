@@ -203,17 +203,17 @@ class PuppetHostie extends Puppet {
 
     function messageSendContact(string $conversationId, string $contactId): string {
         // TODO: Implement messageSendContact() method.
-        return $this->messageSendText($conversationId, "not implement");
+        return $this->messageSendText($conversationId, "messageSendContact not implement");
     }
 
     function messageSendFile(string $conversationId, FileBox $file): string {
         // TODO: Implement messageSendFile() method.
-        return $this->messageSendText($conversationId, "not implement");
+        return $this->messageSendText($conversationId, "messageSendFile not implement");
     }
 
     function messageSendMiniProgram(string $conversationId, MiniProgramPayload $miniProgramPayload): string {
         // TODO: Implement messageSendMiniProgram() method.
-        return $this->messageSendText($conversationId, "not implement");
+        return $this->messageSendText($conversationId, "messageSendMiniProgram not implement");
     }
 
     function messageSendText(string $conversationId, string $text, array $mentionList = array()): string {
@@ -228,7 +228,7 @@ class PuppetHostie extends Puppet {
 
     function messageSendUrl(string $conversationId, UrlLinkPayload $urlLinkPayload): string {
         // TODO: Implement messageSendUrl() method.
-        return $this->messageSendText($conversationId, "not implement");
+        return $this->messageSendText($conversationId, "messageSendUrl not implement");
     }
 
     private function _startGrpcClient() {

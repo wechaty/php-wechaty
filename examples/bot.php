@@ -5,6 +5,11 @@
  * Date: 2020/7/10
  * Time: 5:11 PM
  */
+
+use IO\Github\Wechaty\Puppet\FileBox\FileBox;
+use IO\Github\Wechaty\User\MiniProgram;
+use IO\Github\Wechaty\User\UrlLink;
+
 define("ROOT", dirname(__DIR__));
 // DEBUG should create dir use command sudo mkdir /var/log/wechaty && sudo chmod 777 /var/log/wechaty
 define("DEBUG", 1);
@@ -48,6 +53,12 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 })->onMessage(function(\IO\Github\Wechaty\User\Message $message) {
     print_r($message);
     $message->say("hello from PHP");
+    $file = new FileBox();
+    $message->say($file);
+    $file = new UrlLink();
+    $message->say($file);
+    $file = new MiniProgram();
+    $message->say($file);
 })->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
     echo $data . "\n";
