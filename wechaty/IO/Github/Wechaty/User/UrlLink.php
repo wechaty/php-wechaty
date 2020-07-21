@@ -10,7 +10,7 @@ namespace IO\Github\Wechaty\User;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 
 class UrlLink {
-    public $payload;
+    public UrlLinkPayload $payload;
 
     public function __construct() {
         $this->payload = new UrlLinkPayload();

@@ -217,7 +217,7 @@ WIP...
 
 ## Requirements
 
-1. PHP 7.2+
+1. PHP 7.4+
 
 ## Install
 
