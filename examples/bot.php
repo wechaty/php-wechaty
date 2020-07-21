@@ -38,7 +38,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     //{"qrcode":"http://weixin.qq.com/x/IcPycVXZP4RV8WZ9MXF-","status":2}
     //[0] => PuppetHostie 22 payload {"qrcode":"","status":3}
     if($status == 3) {
-        echo "SCAN_STATUS_SCANNED\n";
+        echo "SCAN_STATUS_CONFIRMED\n";
     } else {
         $qr = \IO\Github\Wechaty\Util\QrcodeUtils::getQr($qrcode);
         echo "$qr\n\nOnline Image: https://wechaty.github.io/qrcode/$qrcode\n";
