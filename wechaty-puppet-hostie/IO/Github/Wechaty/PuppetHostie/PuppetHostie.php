@@ -190,8 +190,11 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->RoomMemberList($request)->wait();
 
         $memberIds = $response->getMemberIds();
+        print_r($memberIds);
+        //Google\Protobuf\Internal\RepeatedField Object
+        $memberList = array();
         if(is_object($memberIds)) {
-            $memberIds = (array) $memberIds;
+            return $memberList;
         }
         return $memberIds;
     }
