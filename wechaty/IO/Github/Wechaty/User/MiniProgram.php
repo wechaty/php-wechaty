@@ -10,9 +10,13 @@ namespace IO\Github\Wechaty\User;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
 
 class MiniProgram {
-    public MiniProgramPayload $payload;
+    public MiniProgramPayload $_payload;
 
     public function __construct() {
-        $this->payload = new MiniProgramPayload();
+        $this->_payload = new MiniProgramPayload();
+    }
+
+    function getPayload() : MiniProgramPayload {
+        return $this->_payload;
     }
 }

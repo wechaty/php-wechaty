@@ -70,9 +70,9 @@ class Message extends Accessory {
         } else if($something instanceof FileBox) {
             $msgId = $this->_puppet->messageSendFile($conversationId, $something);
         } else if($something instanceof UrlLink) {
-            $msgId = $this->_puppet->messageSendUrl($conversationId, $something->payload);
+            $msgId = $this->_puppet->messageSendUrl($conversationId, $something->getPayload());
         } else if($something instanceof MiniProgram) {
-            $msgId = $this->_puppet->messageSendMiniProgram($conversationId, $something->payload);
+            $msgId = $this->_puppet->messageSendMiniProgram($conversationId, $something->getPayload());
         } else {
             throw new WechatyException("unknow message");
         }
