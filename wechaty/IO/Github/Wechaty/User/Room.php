@@ -9,6 +9,7 @@ namespace IO\Github\Wechaty\User;
 
 use IO\Github\Wechaty\Accessory;
 use IO\Github\Wechaty\Exceptions\WechatyException;
+use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
@@ -52,5 +53,38 @@ class Room extends Accessory {
         foreach($memberIdList as $value) {
             $this->wechaty->contactManager->load($value)->ready();
         }
+    }
+
+    function onInvite($listener) : Room {
+        // $contact $roomInvitation
+        return $this->_on(EventEnum::INVITE, $listener);
+    }
+
+    function onLeave($listener) : Room {
+        // $contact_array $contact $date
+        return $this->_on(EventEnum::LEAVE, $listener);
+    }
+
+    function onInnerMessage($listener) : Room {
+        // $message $date
+        return $this->_on(EventEnum::MESSAGE, $listener);
+    }
+
+    function onJoin($listener) : Room {
+        // $contact_array $contact $date
+        return $this->_on(EventEnum::JOIN, $listener);
+    }
+
+    function onTopic($listener) : Room {
+        // $string $string $contact $date
+        return $this->_on(EventEnum::TOPIC, $listener);
+    }
+
+    private function _on($eventName, $listener) : Room {
+        /*parent::on($eventName, function($contact, $roomInvitation) use ($listener) {
+            call_user_func($listener, $contact, $roomInvitation);
+        });*/
+        parent::on($eventName, $listener);
+        return $this;
     }
 }

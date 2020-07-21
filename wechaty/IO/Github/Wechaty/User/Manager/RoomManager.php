@@ -25,6 +25,7 @@ class RoomManager extends Accessory {
         if(empty($room)) {
             $room = new Room($this->wechaty, $id);
         }
+        $this->_cache->set(self::CACHE_ROOM_PREFIX . $id, $room);
         return $room;
     }
 }

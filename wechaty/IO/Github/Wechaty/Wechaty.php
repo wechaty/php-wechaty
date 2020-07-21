@@ -196,7 +196,22 @@ class Wechaty extends EventEmitter {
             $this->emit(EventEnum::ROOM_INVITE, $roomInvitation);
         });
         $puppet->on(EventEnum::ROOM_JOIN, function($payload) {
-            $this->emit(EventEnum::ROOM_JOIN, $payload);
+            $room = $this->roomManager->load($payload["roomId"]);
+
+            $inviteeList = array();
+            $inviteeListId = $payload["inviteeIdList"];
+            foreach($inviteeListId as $value) {
+                $contact = $this->contactManager->loadSelf($value);
+                $contact->ready();
+                $inviteeList[] = $contact;
+            }
+
+            $inviter = $this->contactManager->loadSelf($payload["inviterId"]);
+            $inviter->ready();
+
+            $time = $payload["timestamp"];
+            $this->emit(EventEnum::ROOM_JOIN, $room, $inviteeList, $inviter, $time);
+            $room->emit(EventEnum::JOIN, $inviteeList, $inviter, $time);
         });
         $puppet->on(EventEnum::ROOM_LEAVE, function($payload) {
             $this->emit(EventEnum::ROOM_LEAVE, $payload);
