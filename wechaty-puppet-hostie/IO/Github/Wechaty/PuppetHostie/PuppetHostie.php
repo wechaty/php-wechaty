@@ -26,6 +26,7 @@ use Wechaty\Puppet\ContactPayloadResponse;
 use Wechaty\Puppet\EventResponse;
 use Wechaty\Puppet\EventType;
 use Wechaty\Puppet\MessagePayloadResponse;
+use Wechaty\Puppet\MessageSendTextResponse;
 use Wechaty\Puppet\RoomPayloadResponse;
 
 class PuppetHostie extends Puppet {
@@ -201,22 +202,31 @@ class PuppetHostie extends Puppet {
 
     function messageSendContact(string $conversationId, string $contactId): string {
         // TODO: Implement messageSendContact() method.
+        $this->messageSendText($conversationId, "not implement");
     }
 
     function messageSendFile(string $conversationId, FileBox $file): string {
         // TODO: Implement messageSendFile() method.
+        $this->messageSendText($conversationId, "not implement");
     }
 
     function messageSendMiniProgram(string $conversationId, MiniProgramPayload $miniProgramPayload): string {
         // TODO: Implement messageSendMiniProgram() method.
+        $this->messageSendText($conversationId, "not implement");
     }
 
     function messageSendText(string $conversationId, string $text, array $mentionList = array()): string {
-        // TODO: Implement messageSendText() method.
+        $request = new \Wechaty\Puppet\MessageSendTextRequest();
+        $request->setConversationId($conversationId);
+        $request->setText($text);
+
+        list($response, $status) = $this->_grpcClient->MessageSendText($request)->wait();
+        return $response->getId();
     }
 
     function messageSendUrl(string $conversationId, UrlLinkPayload $urlLinkPayload): string {
         // TODO: Implement messageSendUrl() method.
+        $this->messageSendText($conversationId, "not implement");
     }
 
     private function _startGrpcClient() {
