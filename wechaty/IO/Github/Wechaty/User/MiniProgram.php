@@ -7,6 +7,12 @@
  */
 namespace IO\Github\Wechaty\User;
 
+use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
+
 class MiniProgram {
     public $payload;
+
+    public function __construct() {
+        $this->payload = new MiniProgramPayload();
+    }
 }
