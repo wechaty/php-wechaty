@@ -232,15 +232,15 @@ pecl install yac
 ### CentOS yum安装
 
 ```shell script
-# php
+# php make sure is 7.4+
 sudo yum install php-pecl-grpc
 sudo yum install php-pecl-protobuf
 sudo yum install php-pecl-yac
 
-# php72
-sudo yum install php72-php-pecl-grpc
-sudo yum install php72-php-pecl-protobuf
-sudo yum install php72-php-pecl-yac
+# php74
+sudo yum install php74-php-pecl-grpc
+sudo yum install php74-php-pecl-protobuf
+sudo yum install php74-php-pecl-yac
 
 # php[x]
 sudo yum install php[x]-php-pecl-grpc
