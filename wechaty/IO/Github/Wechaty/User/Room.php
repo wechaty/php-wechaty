@@ -34,6 +34,10 @@ class Room extends Accessory {
         return $this->_payload != null;
     }
 
+    function sync() : void {
+        $this->ready(true);
+    }
+
     function ready(bool $forceSync = false) : void {
         if(!$forceSync && $this->isReady()) {
             return;

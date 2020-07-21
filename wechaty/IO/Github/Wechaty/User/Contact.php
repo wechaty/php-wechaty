@@ -28,6 +28,10 @@ class Contact extends Accessory {
         parent::__construct($wechaty);
     }
 
+    function sync() {
+        return $this->ready(true);
+    }
+
     function ready(bool $forceSyn = false) {
         if (!$forceSyn && $this->isReady()) {
             return true;

@@ -198,9 +198,10 @@ class Wechaty extends EventEmitter {
         });
         $puppet->on(EventEnum::ROOM_JOIN, function($payload) {
             $room = $this->roomManager->load($payload["roomId"]);
+            $room->sync();
 
             $inviteeList = array();
-            $inviteeListId = $payload["inviteeIdList"];
+            $inviteeListId = $payload["inviteeIdList"];//inviteeIdList
             foreach($inviteeListId as $value) {
                 $contact = $this->contactManager->loadSelf($value);
                 $contact->ready();
@@ -215,7 +216,23 @@ class Wechaty extends EventEmitter {
             $room->emit(EventEnum::JOIN, $inviteeList, $inviter, $date);
         });
         $puppet->on(EventEnum::ROOM_LEAVE, function($payload) {
-            $this->emit(EventEnum::ROOM_LEAVE, $payload);
+            $room = $this->roomManager->load($payload["roomId"]);
+            $room->sync();
+
+            $leaverList = array();
+            $removeeIdList = $payload["removeeIdList"];//removeeIdList
+            foreach($removeeIdList as $value) {
+                $contact = $this->contactManager->loadSelf($value);
+                $contact->ready();
+                $leaverList[] = $contact;
+            }
+            $remover = $this->contactManager->loadSelf($payload["removerId"]);
+            $remover->ready();
+
+            $date = new Date($payload["timestamp"]);
+
+            $this->emit(EventEnum::ROOM_LEAVE, $room, $leaverList, $remover, $date);
+            $room->emit(EventEnum::LEAVE, $leaverList, $remover, $date);
         });
         $puppet->on(EventEnum::ROOM_TOPIC, function($payload) {
             $this->emit(EventEnum::ROOM_TOPIC, $payload);

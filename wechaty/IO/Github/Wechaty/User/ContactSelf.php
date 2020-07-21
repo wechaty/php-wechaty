@@ -13,6 +13,7 @@ class ContactSelf extends Contact {
     }
 
     function setAvatar($fileBox) {
+        // TODO
         return $this->_puppet->setContactAvatar($this->_id, $fileBox);
     }
 }
