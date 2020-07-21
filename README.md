@@ -52,7 +52,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     echo "$qr\n\nOnline Image: https://wechaty.github.io/qrcode/$qrcode\n";
 })->onLogin(function($user) {
 })->onMessage(function($message) {
-    $message->say("hello from PHP");
+    $message->say("hello from PHP7.4");
 })->start();
 ```
 

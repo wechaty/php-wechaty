@@ -52,7 +52,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     print_r($user);
 })->onMessage(function(\IO\Github\Wechaty\User\Message $message) {
     print_r($message);
-    $message->say("hello from PHP");
+    $message->say("hello from PHP7.4");
     $file = new FileBox();
     $message->say($file);
     $file = new UrlLink();
