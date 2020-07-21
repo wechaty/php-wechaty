@@ -181,7 +181,12 @@ class PuppetHostie extends Puppet {
     }
 
     function roomMemberList(string $roomId): array {
-        // TODO: Implement roomMemberList() method.
+        $request = new \Wechaty\Puppet\RoomMemberListRequest();
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomMemberList($request)->wait();
+
+        return $response->getMemberIds();
     }
 
     private function _startGrpcClient() {
