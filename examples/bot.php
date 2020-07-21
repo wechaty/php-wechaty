@@ -53,15 +53,19 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     echo "login user id " . $user->getId() . "\n";
     echo "login user name " . $user->getPayload()->name . "\n";
 })->onMessage(function(\IO\Github\Wechaty\User\Message $message) {
-    echo "message from user name " . $message->from()->getPayload()->name . "\n";
     $name = $message->from()->getPayload()->name;
-    $message->say("hello $name from PHP7.4");
-    $file = new FileBox();
-    $message->say($file);
-    $file = new UrlLink();
-    $message->say($file);
-    $file = new MiniProgram();
-    $message->say($file);
+    echo "message from user name $name\n";
+    if($message->getPayload()->text == "ding") {
+        $message->say("dong");
+    } else {
+        $message->say("hello $name from PHP7.4");
+        /*$file = new FileBox();
+        $message->say($file);
+        $file = new UrlLink();
+        $message->say($file);
+        $file = new MiniProgram();
+        $message->say($file);*/
+    }
 })->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
     echo $data . "\n";
