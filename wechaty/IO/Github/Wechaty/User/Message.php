@@ -21,7 +21,7 @@ class Message extends Accessory {
     /**
      * @var null|MessagePayload
      */
-    protected $_payload = null;
+    protected ?MessagePayload $_payload = null;
     /**
      * @var null|PuppetHostie
      */
@@ -33,7 +33,7 @@ class Message extends Accessory {
         parent::__construct($wechaty);
     }
 
-    function getPayload() {
+    function getPayload() : MessagePayload {
         return $this->_payload;
     }
 

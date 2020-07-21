@@ -18,7 +18,7 @@ class Room extends Accessory {
     /**
      * @var null|RoomPayload
      */
-    protected $_payload = null;
+    protected ?RoomPayload $_payload = null;
     /**
      * @var null|PuppetHostie
      */
@@ -30,7 +30,7 @@ class Room extends Accessory {
         parent::__construct($wechaty);
     }
 
-    function getPayload() {
+    function getPayload() : RoomPayload {
         return $this->_payload;
     }
 

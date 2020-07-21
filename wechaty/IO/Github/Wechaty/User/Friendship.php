@@ -15,14 +15,14 @@ class Friendship extends Accessory {
     /**
      * @var null|FriendshipPayload
      */
-    private $_payload = null;
+    private ?FriendshipPayload $_payload = null;
 
     public function __construct($wechaty, $id = "") {
         $this->_id = $id;
         parent::__construct($wechaty);
     }
 
-    function getPayload() {
+    function getPayload() : FriendshipPayload {
         return $this->_payload;
     }
 

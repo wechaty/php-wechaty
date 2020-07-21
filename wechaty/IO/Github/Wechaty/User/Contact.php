@@ -16,7 +16,7 @@ class Contact extends Accessory {
     /**
      * @var null|ContactPayload
      */
-    protected $_payload = null;
+    protected ?ContactPayload $_payload = null;
     /**
      * @var null|PuppetHostie
      */
@@ -32,7 +32,7 @@ class Contact extends Accessory {
         return $this->ready(true);
     }
 
-    function getPayload() {
+    function getPayload() : ContactPayload {
         return $this->_payload;
     }
 
