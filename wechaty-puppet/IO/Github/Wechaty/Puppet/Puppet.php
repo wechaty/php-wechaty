@@ -13,6 +13,7 @@ use IO\Github\Wechaty\Puppet\Exceptions\InvalidArgumentException;
 use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
+use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
 
@@ -55,9 +56,12 @@ abstract class Puppet extends EventEmitter {
     protected abstract function _contactRawPayloadParser(ContactPayload $rawPayload) : ContactPayload;
     abstract function _messageRawPayload(String $messageId) : MessagePayload;
     abstract function _messageRawPayloadParser(MessagePayload $rawPayload) : MessagePayload;
+    abstract function _roomRawPayload(String $roomId) : RoomPayload;
+    abstract function _roomRawPayloadParser(RoomPayload $roomPayload) : RoomPayload;
+    abstract function roomMemberList(String $roomId) : array;
 
     function contactPayloadDirty(String $contactId) {
-        $this->_cache->delete(self::CACHE_ROOM_PAYLOAD_PREFIX . $contactId);
+        $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
         return true;
     }
 
@@ -91,6 +95,31 @@ abstract class Puppet extends EventEmitter {
         }
         $messageRawPayload = $this->_messageRawPayload($messageId);
         $payload = $this->_messageRawPayloadParser($messageRawPayload);
+
+        return $payload;
+    }
+
+    function roomPayloadDirty(String $roomId) : void {
+        $this->_cache->delete(self::CACHE_ROOM_PAYLOAD_PREFIX . $roomId);
+        return;
+    }
+
+    function roomMemberPayloadDirty(String $roomId) : void {
+        $contactIdList = $this->roomMemberList($roomId);
+
+        foreach($contactIdList as $value) {
+            $this->_cache->delete(self::CACHE_ROOM_MEMBER_PAYLOAD_PREFIX . $roomId . $value);
+        }
+    }
+
+    function roomPayload(String $roomId) : RoomPayload {
+        $roomPayload = $this->_cache->get(self::CACHE_ROOM_PAYLOAD_PREFIX . $roomId);
+
+        if($roomPayload != null) {
+            return $roomPayload;
+        }
+        $roomRawPayload = $this->_roomRawPayload($roomId);
+        $payload = $this->_roomRawPayloadParser($roomRawPayload);
 
         return $payload;
     }

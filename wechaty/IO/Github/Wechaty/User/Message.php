@@ -39,27 +39,27 @@ class Message extends Accessory {
 
         $this->_payload = $this->_puppet->messagePayload($this->_id);
 
-            Logger::DEBUG("message payload is {}",$this->_payload);
+        Logger::DEBUG("message payload is {}",$this->_payload);
 
-            if ($this->_payload == null) {
-                throw new WechatyException("no playload");
-            }
+        if ($this->_payload == null) {
+            throw new WechatyException("no playload");
+        }
 
-            $fromId = $this->_payload->fromId;
-            $roomId = $this->_payload->roomId;
-            $toId = $this->_payload->toId;
+        $fromId = $this->_payload->fromId;
+        $roomId = $this->_payload->roomId;
+        $toId = $this->_payload->toId;
 
-            if (!empty($roomId)) {
-                $this->wechaty->roomManager->load($roomId)->ready();
-            }
+        if (!empty($roomId)) {
+            $this->wechaty->roomManager->load($roomId)->ready();
+        }
 
-            if (!empty($fromId)) {
-                $this->wechaty->contactManager->load($fromId)->ready();
-            }
+        if (!empty($fromId)) {
+            $this->wechaty->contactManager->load($fromId)->ready();
+        }
 
-            if (!empty($toId)) {
-                $this->wechaty->contactManager->load($toId)->ready();
-            }
+        if (!empty($toId)) {
+            $this->wechaty->contactManager->load($toId)->ready();
+        }
     }
 
     function isReady() : bool {

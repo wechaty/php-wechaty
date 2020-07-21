@@ -14,6 +14,7 @@ use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
+use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\PuppetHostie\Exceptions\PuppetHostieException;
 use IO\Github\Wechaty\Util\Console;
@@ -157,6 +158,18 @@ class PuppetHostie extends Puppet {
 
     function _messageRawPayloadParser(MessagePayload $rawPayload) : MessagePayload {
         return $$rawPayload;
+    }
+
+    function _roomRawPayload(string $roomId): RoomPayload {
+        // TODO: Implement _roomRawPayload() method.
+    }
+
+    function _roomRawPayloadParser(RoomPayload $roomPayload): RoomPayload {
+        // TODO: Implement _roomRawPayloadParser() method.
+    }
+
+    function roomMemberList(string $roomId): array {
+        // TODO: Implement roomMemberList() method.
     }
 
     private function _startGrpcClient() {

@@ -17,6 +17,7 @@ use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\User\Friendship;
 use IO\Github\Wechaty\User\Manager\ContactManager;
 use IO\Github\Wechaty\User\Manager\MessageManager;
+use IO\Github\Wechaty\User\Manager\RoomManager;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
@@ -37,6 +38,11 @@ class Wechaty extends EventEmitter {
      * @var null | MessageManager
      */
     public $messageManager = null;
+
+    /**
+     * @var null | RoomManager
+     */
+    public $roomManager = null;
 
     /**
      * @var null|PuppetHostie\PuppetHostie
@@ -193,5 +199,6 @@ class Wechaty extends EventEmitter {
     private function _initPuppetAccessory(PuppetHostie\PuppetHostie $puppet) {
         $this->contactManager = new ContactManager($this);
         $this->messageManager = new MessageManager($this);
+        $this->roomManager = new RoomManager($this);
     }
 }
