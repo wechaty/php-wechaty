@@ -21,7 +21,11 @@ class ArrayCache extends Cache {
     }
 
     public function get($key) {
-        return $this->_cacheInstance[$key];
+        if(isset($this->_cacheInstance[$key])) {
+            return $this->_cacheInstance[$key];
+        } else {
+            return false;
+        }
     }
 
     public function set($key, $value) {
