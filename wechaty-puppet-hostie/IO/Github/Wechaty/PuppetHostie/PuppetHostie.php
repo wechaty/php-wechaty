@@ -191,7 +191,7 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->RoomMemberList($request)->wait();
 
         $memberIds = $response->getMemberIds();
-        Logger::DEBUG(array("method" => "roomMemberList", "count" => $memberIds->getCount(), "memberIds" => $memberIds));
+        Logger::DEBUG(array("method" => "roomMemberList", "memberIds" => $memberIds));
         //Google\Protobuf\Internal\RepeatedField Object
         $memberList = array();
         // TODO
