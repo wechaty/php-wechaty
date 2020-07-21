@@ -17,6 +17,7 @@ use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\User\Friendship;
 use IO\Github\Wechaty\User\Manager\ContactManager;
 use IO\Github\Wechaty\User\Manager\MessageManager;
+use IO\Github\Wechaty\User\Manager\RoomInvitationManager;
 use IO\Github\Wechaty\User\Manager\RoomManager;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
@@ -44,6 +45,11 @@ class Wechaty extends EventEmitter {
      * @var null | RoomManager
      */
     public $roomManager = null;
+
+    /**
+     * @var null | RoomInvitationManager
+     */
+    public $roomInvitationManager = null;
 
     /**
      * @var null|PuppetHostie\PuppetHostie
@@ -146,13 +152,13 @@ class Wechaty extends EventEmitter {
             $this->emit(EventEnum::SCAN, $payload->qrcode ?: "", $payload->status, $payload->data ?: "");
         });
         $puppet->on(EventEnum::HEART_BEAT, function($payload) {
-            $this->emit(EventEnum::HEART_BEAT, $payload);
+            $this->emit(EventEnum::HEART_BEAT, $payload["data"]);
         });
         $puppet->on(EventEnum::DONG, function($payload) {
-            $this->emit(EventEnum::DONG, $payload);
+            $this->emit(EventEnum::DONG, $payload["data"]);
         });
         $puppet->on(EventEnum::ERROR, function($payload) {
-            $this->emit(EventEnum::ERROR, $payload);
+            $this->emit(EventEnum::ERROR, $payload["data"]);
         });
         $puppet->on(EventEnum::FRIENDSHIP, function($payload) {
             $friendship = $this->friendship();
@@ -186,7 +192,8 @@ class Wechaty extends EventEmitter {
             $this->_readyState = StateEnum::ON;
         });
         $puppet->on(EventEnum::ROOM_INVITE, function($payload) {
-            $this->emit(EventEnum::ROOM_INVITE, $payload);
+            $roomInvitation = $this->roomInvitationManager->load($payload["roomInvitationId"]);
+            $this->emit(EventEnum::ROOM_INVITE, $roomInvitation);
         });
         $puppet->on(EventEnum::ROOM_JOIN, function($payload) {
             $this->emit(EventEnum::ROOM_JOIN, $payload);
@@ -203,5 +210,6 @@ class Wechaty extends EventEmitter {
         $this->contactManager = new ContactManager($this);
         $this->messageManager = new MessageManager($this);
         $this->roomManager = new RoomManager($this);
+        $this->roomInvitationManager = new RoomInvitationManager($this);
     }
 }

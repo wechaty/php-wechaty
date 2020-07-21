@@ -43,6 +43,6 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     print_r($message);
 })->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
-    echo $data["data"] . "\n";
+    echo $data . "\n";
     // $wechaty->stop();
 })->start();
