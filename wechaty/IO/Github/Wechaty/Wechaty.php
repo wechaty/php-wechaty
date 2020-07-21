@@ -235,6 +235,16 @@ class Wechaty extends EventEmitter {
             $room->emit(EventEnum::LEAVE, $leaverList, $remover, $date);
         });
         $puppet->on(EventEnum::ROOM_TOPIC, function($payload) {
+            $room = $this->roomManager->load($payload["roomId"]);
+            $room->sync();
+
+            $changer = $this->contactManager->loadSelf($payload["changerId"]);
+            $changer->ready();
+
+            $date = new Date($payload["timestamp"]);
+
+            $this->emit(EventEnum::ROOM_TOPIC, $room, $payload["newTopic"], $payload["oldTopic"], $changer, $date);
+            $room->emit(EventEnum::TOPIC, $payload["newTopic"], $payload["oldTopic"], $changer, $date);
             $this->emit(EventEnum::ROOM_TOPIC, $payload);
         });
     }
