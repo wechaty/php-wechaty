@@ -23,6 +23,7 @@ use Wechaty\Puppet\ContactPayloadResponse;
 use Wechaty\Puppet\EventResponse;
 use Wechaty\Puppet\EventType;
 use Wechaty\Puppet\MessagePayloadResponse;
+use Wechaty\Puppet\RoomPayloadResponse;
 
 class PuppetHostie extends Puppet {
     private $_channel = null;
@@ -157,15 +158,26 @@ class PuppetHostie extends Puppet {
     }
 
     function _messageRawPayloadParser(MessagePayload $rawPayload) : MessagePayload {
-        return $$rawPayload;
+        return $rawPayload;
     }
 
     function _roomRawPayload(string $roomId): RoomPayload {
-        // TODO: Implement _roomRawPayload() method.
+        $request = new \Wechaty\Puppet\RoomPayloadRequest();
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomPayload($request)->wait();
+        $payload = new RoomPayload($response->getId());
+        $payload->adminIdList = $response->getAdminIds();
+        $payload->avatar = $response->getAvatar();
+        $payload->memberIdList = $response->getMemberIds();
+        $payload->ownerId = $response->getOwnerId();
+        $payload->topic = $response->getTopic();
+
+        return $payload;
     }
 
     function _roomRawPayloadParser(RoomPayload $roomPayload): RoomPayload {
-        // TODO: Implement _roomRawPayloadParser() method.
+        return $roomPayload;
     }
 
     function roomMemberList(string $roomId): array {
