@@ -51,9 +51,11 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     }
 })->onLogin(function(ContactSelf $user) {
     echo "login user id " . $user->getId() . "\n";
+    echo "login user name " . $user->getPayload()->name . "\n";
 })->onMessage(function(\IO\Github\Wechaty\User\Message $message) {
-    echo "message from user id " . $message->from()->getId() . "\n";
-    $message->say("hello from PHP7.4");
+    echo "message from user name " . $message->from()->getPayload()->name . "\n";
+    $name = $message->from()->getPayload()->name;
+    $message->say("hello $name from PHP7.4");
     $file = new FileBox();
     $message->say($file);
     $file = new UrlLink();
