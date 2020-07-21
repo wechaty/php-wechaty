@@ -10,6 +10,7 @@ namespace IO\Github\Wechaty\User;
 
 use IO\Github\Wechaty\Accessory;
 use IO\Github\Wechaty\Exceptions\WechatyException;
+use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
@@ -32,17 +33,62 @@ class Message extends Accessory {
         parent::__construct($wechaty);
     }
 
-    function room() : Room {
+    function room() : ?Room {
         if($this->_payload == null){
-        throw new WechatyException("no payload");
+            throw new WechatyException("no payload");
         }
 
         $roomId = $this->_payload->roomId;
 
         if (empty($roomId)) {
-            return false;
+            return null;
         }
         return $this->wechaty->roomManager->load($roomId);
+    }
+
+    function say($something, Contact $contact = null) {
+        $from = $this->from();
+        $room = $this->room();
+
+        $conversationId = "";
+
+        if(!empty($room)) {
+            $conversationId = $room->getId();
+        } else if(!empty($from)) {
+            $conversationId = $from->getId();
+        } else {
+            throw new WechatyException("neither room nor fromId?");
+        }
+        $msgId = "";
+
+        if(gettype($something) == "string") {
+            $msgId = $this->_puppet->messageSendText($conversationId, $something);
+        } else if($something instanceof FileBox) {
+            $msgId = $this->_puppet->messageSendFile($conversationId, $something);
+        } else if($something instanceof UrlLink) {
+            $msgId = $this->_puppet->messageSendUrl($conversationId, $something["payload"]);
+        } else if($something instanceof MiniProgram) {
+            $msgId = $this->_puppet->messageSendMiniProgram($conversationId, $something["payload"]);
+        } else {
+            throw new WechatyException("unknow message");
+        }
+        if(!empty($msgId)) {
+            $msg = $this->wechaty->messageManager->load($msgId);
+            return $msg;
+        }
+        return null;
+    }
+
+    function from() : ?Contact {
+        if($this->_payload == null) {
+            throw new WechatyException("no payload");
+        }
+        $fromId = $this->_payload->fromId ?: false;
+        if(empty($fromId)) {
+            return null;
+        }
+
+        return $this->wechaty->contactManager->load($fromId);
     }
 
     function ready() : void {

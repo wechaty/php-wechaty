@@ -10,10 +10,11 @@ namespace IO\Github\Wechaty\Puppet;
 use IO\Github\Wechaty\Puppet\Cache\CacheFactory;
 use IO\Github\Wechaty\Puppet\EventEmitter\EventEmitter;
 use IO\Github\Wechaty\Puppet\Exceptions\InvalidArgumentException;
-use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
+use IO\Github\Wechaty\Puppet\FileBox\FileBox;use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
-use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
+use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
+use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
 
@@ -60,6 +61,13 @@ abstract class Puppet extends EventEmitter {
     abstract function _roomRawPayloadParser(RoomPayload $roomPayload) : RoomPayload;
     abstract function roomMemberList(String $roomId) : array;
 
+    abstract function messageSendContact(String $conversationId, String $contactId) : String;
+    abstract function messageSendFile(String $conversationId, FileBox $file) : String;
+
+    abstract function messageSendMiniProgram(String $conversationId, MiniProgramPayload $miniProgramPayload) : String;
+    abstract function messageSendText(String $conversationId, String $text, array $mentionList = array()) : String;
+    abstract function messageSendUrl(String $conversationId, UrlLinkPayload $urlLinkPayload) : String;
+
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
         return true;
@@ -79,7 +87,7 @@ abstract class Puppet extends EventEmitter {
         return $payload;
     }
 
-    protected function _contactPayloadCache(String $contactId) : ContactPayload {
+    protected function _contactPayloadCache(String $contactId) : ?ContactPayload {
         $contactPayload = $this->_cache->get(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
 
         Logger::DEBUG(array("contactPayload" => $contactPayload, "contactId" => $contactId));

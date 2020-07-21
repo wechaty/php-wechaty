@@ -27,4 +27,8 @@ class Accessory extends EventEmitter {
     protected function _initCache() {
         return CacheFactory::getCache();
     }
+
+    public function getId() {
+        return $this->_id;
+    }
 }

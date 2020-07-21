@@ -7,14 +7,17 @@
  */
 namespace IO\Github\Wechaty\PuppetHostie;
 
+use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Puppet;
 use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
 use IO\Github\Wechaty\Puppet\Schemas\Event\EventScanPayload;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
+use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
+use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\PuppetHostie\Exceptions\PuppetHostieException;
 use IO\Github\Wechaty\Util\Console;
@@ -187,6 +190,26 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->RoomMemberList($request)->wait();
 
         return $response->getMemberIds();
+    }
+
+    function messageSendContact(string $conversationId, string $contactId): string {
+        // TODO: Implement messageSendContact() method.
+    }
+
+    function messageSendFile(string $conversationId, FileBox $file): string {
+        // TODO: Implement messageSendFile() method.
+    }
+
+    function messageSendMiniProgram(string $conversationId, MiniProgramPayload $miniProgramPayload): string {
+        // TODO: Implement messageSendMiniProgram() method.
+    }
+
+    function messageSendText(string $conversationId, string $text, array $mentionList = array()): string {
+        // TODO: Implement messageSendText() method.
+    }
+
+    function messageSendUrl(string $conversationId, UrlLinkPayload $urlLinkPayload): string {
+        // TODO: Implement messageSendUrl() method.
     }
 
     private function _startGrpcClient() {
