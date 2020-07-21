@@ -28,7 +28,7 @@ class ContactManager extends Accessory {
         if(empty($contact)) {
             $contact = new Contact($this->wechaty, $id);
         }
-        $this->_cache->set(self::CACHE_CONTACT_PREFIX . $id, $contact);
+        $this->_contactCache->set(self::CACHE_CONTACT_PREFIX . $id, $contact);
         return $contact;
     }
 
