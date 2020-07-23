@@ -39,6 +39,8 @@ require ROOT . '/vendor/autoload.php';
 // \IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
 
 /*
+ * https://wechaty.github.io/2019/07/18/send-miniprogram-using-padpro/
+ * https://github.com/wechaty/wechaty/issues/1806
  * {
   "id": "1099177530",
   "timestamp": 1562210085,
