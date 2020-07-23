@@ -7,6 +7,7 @@
  */
 
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
+use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
 use IO\Github\Wechaty\User\ContactSelf;
 use IO\Github\Wechaty\User\MiniProgram;
 use IO\Github\Wechaty\User\UrlLink;
@@ -66,8 +67,17 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $url = "https://tb-m.luomor.com/";
         $urlLink = UrlLink::create($url);
         $message->say($urlLink);
-        /*$file = new MiniProgram();
-        $message->say($file);*/
+
+        $payload = new MiniProgramPayload();
+        $payload->appId = "wxfb2e52f9fd4d88ed";
+        $payload->pagePath = "index/index";
+        $payload->title = "hello";
+        $payload->description = "hello";
+        $payload->username = "wechaty";
+        $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
+        $payload->thumbKey = "key";
+        $miniProgram = new MiniProgram($payload);
+        $message->say($miniProgram);
     }
 })->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
