@@ -38,6 +38,17 @@ require ROOT . '/vendor/autoload.php';
 // change dir
 // \IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
 
+/*
+ * {
+  "id": "1099177530",
+  "timestamp": 1562210085,
+  "type": 9,
+  "filename": "1099177530-to-be-implement.txt",
+  "fromId": "wxid_jy0q2q63aggm21",
+  "roomId": "8397442379@chatroom",
+  "text": "<?xml version=\"1.0\"?>\n<msg>\n\t<appmsg appid=\"\" sdkver=\"0\">\n\t\t<title>毛豆课堂-专注于少儿领域的在线教育平台</title>\n\t\t<des>毛豆课堂</des>\n\t\t<action />\n\t\t<type>33</type>\n\t\t<showtype>0</showtype>\n\t\t<soundtype>0</soundtype>\n\t\t<mediatagname />\n\t\t<messageext />\n\t\t<messageaction />\n\t\t<content />\n\t\t<contentattr>0</contentattr>\n\t\t<url>https://mp.weixin.qq.com/mp/waerrpage?appid=wxe638e634ed8b3907&amp;type=upgrade&amp;upgradetype=3#wechat_redirect</url>\n\t\t<lowurl />\n\t\t<dataurl />\n\t\t<lowdataurl />\n\t\t<appattach>\n\t\t\t<totallen>0</totallen>\n\t\t\t<attachid />\n\t\t\t<emoticonmd5 />\n\t\t\t<fileext />\n\t\t\t<cdnthumburl>30590201000452305002010002043591c1e102032f4f560204e87ac2dc02045d1d6f24042b777875706c6f61645f383339373434323337394063686174726f6f6d313439345f313536323231303038340204010400030201000400</cdnthumburl>\n\t\t\t<cdnthumbmd5>bc3adb4160b6cbbac4be374b2acae80d</cdnthumbmd5>\n\t\t\t<cdnthumblength>7453</cdnthumblength>\n\t\t\t<cdnthumbwidth>720</cdnthumbwidth>\n\t\t\t<cdnthumbheight>576</cdnthumbheight>\n\t\t\t<cdnthumbaeskey>f922a8fbce1e7c3a8627dc2a9678f455</cdnthumbaeskey>\n\t\t\t<aeskey>f922a8fbce1e7c3a8627dc2a9678f455</aeskey>\n\t\t\t<encryver>0</encryver>\n\t\t\t<filekey>8397442379@chatroom1494_1562210084</filekey>\n\t\t</appattach>\n\t\t<extinfo />\n\t\t<sourceusername>gh_a1cd71094745@app</sourceusername>\n\t\t<sourcedisplayname>毛豆课堂</sourcedisplayname>\n\t\t<thumburl />\n\t\t<md5 />\n\t\t<statextstr />\n\t\t<weappinfo>\n\t\t\t<username><![CDATA[gh_a1cd71094745@app]]></username>\n\t\t\t<appid><![CDATA[wxe638e634ed8b3907]]></appid>\n\t\t\t<type>2</type>\n\t\t\t<version>19</version>\n\t\t\t<weappiconurl><![CDATA[http://mmbiz.qpic.cn/mmbiz_png/5lFWgxHFPzeu01RyEibY7vb5iceGcpBu9mReAHiaiaoXF7BicEYNSM2HretSX7DUa9CmASvspmiaSPDhIWm4w7nibXlQw/640?wx_fmt=png&wxfrom=200]]></weappiconurl>\n\t\t\t<pagepath><![CDATA[pages/index/index.html?userId=5cff40a739b221001136af8a]]></pagepath>\n\t\t\t<shareId><![CDATA[0_wxe638e634ed8b3907_898744801_1562210083_0]]></shareId>\n\t\t\t<appservicetype>0</appservicetype>\n\t\t</weappinfo>\n\t</appmsg>\n\t<fromusername>wxid_jy0q2q63aggm21</fromusername>\n\t<scene>0</scene>\n\t<appinfo>\n\t\t<version>1</version>\n\t\t<appname></appname>\n\t</appinfo>\n\t<commenturl></commenturl>\n</msg>\n",
+  "toId": "wxid_3kxyh21gj3gt22"
+}*/
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
 $appId = getenv("WECHAT_MINI_PROGRAM_APPID");
