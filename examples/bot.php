@@ -73,7 +73,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $payload->pagePath = "pages/index/index";
         $payload->title = "烙馍倾听";
         $payload->description = "烙馍FM";
-        $payload->username = "wechaty";
+        $payload->username = "烙馍网";
         $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
         $payload->thumbKey = "key";
         $miniProgram = new MiniProgram($payload);
