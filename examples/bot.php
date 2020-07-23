@@ -88,10 +88,10 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 
         $payload = new MiniProgramPayload();
         $payload->appid = $appId;
-        $payload->pagePath = "pages/index/index";
+        $payload->pagePath = "pages/index/index.html";
         $payload->title = "烙馍FM";
         $payload->description = "烙馍倾听";
-        $payload->username = $username; // 'gh_xxxxxxx', get from mp.weixin.qq.com
+        $payload->username = "$username@app"; // 'gh_xxxxxxx', get from mp.weixin.qq.com
         $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
         $payload->thumbKey = "";
         $miniProgram = new MiniProgram($payload);
