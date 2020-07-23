@@ -86,7 +86,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 
         $payload = new MiniProgramPayload();
         $payload->appId = $appId;
-        $payload->pagepath = "pages/index/index";
+        $payload->pagepath = "pages/index/index.html";
         $payload->title = "烙馍FM";
         $payload->description = "烙馍倾听";
         $payload->username = $username; // 'gh_xxxxxxx', get from mp.weixin.qq.com
