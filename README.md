@@ -236,16 +236,19 @@ pecl install yac
 sudo yum install php-pecl-grpc
 sudo yum install php-pecl-protobuf
 sudo yum install php-pecl-yac
+sudo yum install php-xml
 
 # php74
 sudo yum install php74-php-pecl-grpc
 sudo yum install php74-php-pecl-protobuf
 sudo yum install php74-php-pecl-yac
+sudo yum install php74-php-xml
 
 # php[x]
 sudo yum install php[x]-php-pecl-grpc
 sudo yum install php[x]-php-pecl-protobuf
 sudo yum install php[x]-php-pecl-yac
+sudo yum install php[x]-php-xml
 ```
 ### Yac enable 
 
