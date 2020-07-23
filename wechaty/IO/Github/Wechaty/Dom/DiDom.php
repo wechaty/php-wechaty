@@ -25,6 +25,7 @@ class DiDom extends Dom {
         $image = "";
 
         if(count($imageDom) > 0) {
+            print_r($imageDom[0]);
             $image = $imageDom[0]->getAttribute("src");
         }
         if(count($descriptionDom) > 0) {
