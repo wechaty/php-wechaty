@@ -19,6 +19,10 @@ class Dom {
     }
 
     public function getShareInfo($url) {
-
+        return array(
+            "title" => "",
+            "description" => "",
+            "image" => "",
+        );
     }
 }
