@@ -8,7 +8,11 @@
 namespace IO\Github\Wechaty\Puppet\Util;
 
 class JsonUtil {
-    public static function get() {
+    public static function readValue(String $json) {
+        return json_decode($json);
+    }
 
+    public static function write($input) : String {
+        return json_encode($input);
     }
 }
