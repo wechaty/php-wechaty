@@ -28,7 +28,7 @@ class DiDom extends Dom {
             $image = $imageDom[0]->attr("src");
         }
         if(count($descriptionDom) > 0) {
-            $description = $descriptionDom[0]->getAttribute("content");
+            $description = $descriptionDom[0]->attr("content");
         }
 
         return array(
