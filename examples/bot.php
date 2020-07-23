@@ -63,9 +63,10 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $fileBoxOptions = new \IO\Github\Wechaty\Puppet\FileBox\FileBoxOptionsUrl($url, "php-wechaty.png");
         $file = new FileBox($fileBoxOptions);
         $message->say($file);
-        /*$file = new UrlLink();
+        $url = "https://tb-m.luomor.com/";
+        $file = UrlLink::create($url);
         $message->say($file);
-        $file = new MiniProgram();
+        /*$file = new MiniProgram();
         $message->say($file);*/
     }
 })->onHeartBeat(function($data) use ($wechaty) {

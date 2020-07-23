@@ -17,9 +17,19 @@ class DiDom extends Dom {
     public function getShareInfo($url) {
         $this->_dom_parser->loadHtmlFile($url);
 
-        $title = "";
-        $description = "";
+        $descriptionDom = $this->_dom_parser->first('head')->find('meta[name="description"]');
+        $imageDom = $this->_dom_parser->find('img');
+
+        $title = $this->_dom_parser->first('head')->first('title'); // title
+        $description = ""; //meta description
         $image = "";
+
+        if(count($imageDom) > 0) {
+            $image = $imageDom[0]->getAttribute("src");
+        }
+        if(count($descriptionDom) > 0) {
+            $description = $descriptionDom[0]->getAttribute("content");
+        }
 
         return array(
             "title" => $title,
