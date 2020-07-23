@@ -37,10 +37,6 @@ require ROOT . '/vendor/autoload.php';
 // change dir
 // \IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
 
-$url = "https://tb-m.luomor.com/";
-$urlLink = UrlLink::create($url);
-echo $urlLink->getPayload()->toJsonString();
-
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
