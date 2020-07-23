@@ -37,6 +37,9 @@ require ROOT . '/vendor/autoload.php';
 // change dir
 // \IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
 
+$url = "https://tb-m.luomor.com/";
+$urlLink = UrlLink::create($url);
+
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
@@ -64,8 +67,8 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $file = new FileBox($fileBoxOptions);
         $message->say($file);
         $url = "https://tb-m.luomor.com/";
-        $file = UrlLink::create($url);
-        $message->say($file);
+        $urlLink = UrlLink::create($url);
+        $message->say($urlLink);
         /*$file = new MiniProgram();
         $message->say($file);*/
     }
