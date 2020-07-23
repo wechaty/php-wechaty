@@ -7,6 +7,8 @@
  */
 namespace IO\Github\Wechaty\Puppet\FileBox;
 
+use IO\Github\Wechaty\Puppet\Util\JsonUtil;
+
 class FileBox {
     private FileBoxOptions $_options;
     
@@ -110,6 +112,31 @@ class FileBox {
         $headers = $res->getHeaders();
 
         return $headers;
+    }
+
+    function toJsonString(): String {
+        $data = array();
+        foreach(self::$COLUMNS as $value) {
+            $data[$value] = $this->$value;
+        }
+
+        return JsonUtil::write($data);
+    }
+
+    function toByte(FileBox $fileBox) {
+        if($fileBox->type() == FileBoxType::FILE) {
+            $file = fopen("dong.png", "r");
+            $data = array();
+            while(!feof($file)) {
+                $data[] = fgetc($file);
+            }
+            fclose($file);
+            return $data;
+        } else if($fileBox->type() == FileBoxType::URL) {
+            return null;
+        } else {
+            //TODO
+        }
     }
 
 }
