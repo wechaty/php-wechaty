@@ -55,10 +55,11 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     echo "login user name " . $user->getPayload()->name . "\n";
 })->onMessage(function(\IO\Github\Wechaty\User\Message $message) {
     $name = $message->from()->getPayload()->name;
+    $text = $message->getPayload()->text;
     echo "message from user name $name\n";
-    if($message->getPayload()->text == "ding") {
+    if($text == "ding") {
         $message->say("dong");
-    } else {
+    } else if($text == "hello") {
         $message->say("hello $name from PHP7.4");
         $url = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
         $fileBoxOptions = new \IO\Github\Wechaty\Puppet\FileBox\FileBoxOptionsUrl($url, "php-wechaty.png");
@@ -78,6 +79,8 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $payload->thumbKey = "key";
         $miniProgram = new MiniProgram($payload);
         $message->say($miniProgram);
+    } else if(stripos($text, "@烙馍网") === 0) {
+        $message->say("hello $name from PHP7.4");
     }
 })->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
