@@ -106,7 +106,7 @@ It is a great example for demonstrating how do we translate the TypeScript to PH
 ### Image Class Source Code
 
 - TypeScript: <https://github.com/wechaty/wechaty/blob/master/src/user/image.ts>
-- PHP: <https://github.com/wechaty/php-wechaty/blob/master/src/wechaty/user/image.php>
+- PHP: <https://github.com/wechaty/php-wechaty/blob/master/wechaty/IO/Github/Wechaty/User/Image.php>
 
 If you are interested in the translation and want to look at how it works, it will be a good start from reading and comparing those two `Image` class files in TypeScript and PHP at the same time.
 
