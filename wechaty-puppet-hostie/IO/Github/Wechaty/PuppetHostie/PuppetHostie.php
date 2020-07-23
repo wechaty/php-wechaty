@@ -237,8 +237,13 @@ class PuppetHostie extends Puppet {
     }
 
     function messageSendUrl(string $conversationId, UrlLinkPayload $urlLinkPayload): string {
-        // TODO: Implement messageSendUrl() method.
-        return $this->messageSendText($conversationId, "messageSendUrl not implement");
+        $request = new \Wechaty\Puppet\MessageSendUrlRequest();
+        $request->setConversationId($conversationId);
+        $request->setUrlLink($urlLinkPayload);
+
+        list($response, $status) = $this->_grpcClient->MessageSendUrl($request)->wait();
+        //Google\Protobuf\StringValue Object
+        return $response->getId()->getValue();
     }
 
     private function _startGrpcClient() {
