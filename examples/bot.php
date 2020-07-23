@@ -40,6 +40,8 @@ require ROOT . '/vendor/autoload.php';
 
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
+$appId = getenv("WECHAT_MINI_PROGRAM_APPID");
+$username = getenv("WECHAT_MINI_PROGRAM_USERNAME");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->onScan(function($qrcode, $status, $data) {
     //{"qrcode":"http://weixin.qq.com/x/IcPycVXZP4RV8WZ9MXF-","status":2}
@@ -53,7 +55,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 })->onLogin(function(ContactSelf $user) {
     echo "login user id " . $user->getId() . "\n";
     echo "login user name " . $user->getPayload()->name . "\n";
-})->onMessage(function(\IO\Github\Wechaty\User\Message $message) {
+})->onMessage(function(\IO\Github\Wechaty\User\Message $message) use ($appId, $username) {
     $name = $message->from()->getPayload()->name;
     $text = $message->getPayload()->text;
     echo "message from user name $name\n";
@@ -70,11 +72,11 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $message->say($urlLink);
 
         $payload = new MiniProgramPayload();
-        $payload->appId = "wxfb2e52f9fd4d88ed";
+        $payload->appId = $appId;
         $payload->pagePath = "pages/index/index";
         $payload->title = "烙馍FM";
         $payload->description = "烙馍倾听";
-        $payload->username = "烙馍网";
+        $payload->username = $username;
         $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
         //$payload->thumbKey = "key";
         $miniProgram = new MiniProgram($payload);
