@@ -19,7 +19,7 @@ class MiniProgramPayload extends AbstractPayload {
     public $thumbKey = null;
 
     public static $COLUMNS = array(
-        "appId",
+        "appid",
         "description",
         "pagePath",
         "thumbUrl",
