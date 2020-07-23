@@ -31,7 +31,7 @@ class MiniProgramPayload extends AbstractPayload {
     function toJsonString() : String {
         $data = array();
         foreach(self::$COLUMNS as $value) {
-            $data[strtolower($value)] = $this->$value;
+            $data[$value] = $this->$value;
         }
 
         return JsonUtil::write($data);
