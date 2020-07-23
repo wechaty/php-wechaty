@@ -239,7 +239,7 @@ class PuppetHostie extends Puppet {
     function messageSendUrl(string $conversationId, UrlLinkPayload $urlLinkPayload): string {
         $request = new \Wechaty\Puppet\MessageSendUrlRequest();
         $request->setConversationId($conversationId);
-        $request->setUrlLink($urlLinkPayload);
+        $request->setUrlLink($urlLinkPayload->toJsonString());
 
         list($response, $status) = $this->_grpcClient->MessageSendUrl($request)->wait();
         //Google\Protobuf\StringValue Object
