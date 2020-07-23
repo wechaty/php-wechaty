@@ -52,5 +52,11 @@
   },
   "support": {
     "issues": "https://github.com/wechaty/php-wechaty/issues"
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://mirrors.aliyun.com/composer/"
+    }
   }
 }

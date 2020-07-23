@@ -75,4 +75,41 @@ class FileBox {
             $this->base64 = $options->base64;
         }
     }
+
+    function type() : int {
+        return $this->boxType;
+    }
+
+    function ready(): void {
+        if ($this->boxType == FileBoxType::URL) {
+
+        }
+
+        return;
+    }
+
+    function syncRemoteName(): void {
+        $httpHeadHeader = $this->_httpHeadHeader($this->remoteUrl);
+
+        $fi = new \finfo(FILEINFO_MIME_TYPE);
+        $mimeType = $fi->file($this->localPath);
+
+        $contentType = $httpHeadHeader["content-type"];
+
+        if(!empty($contentType)) {
+            $this->mimeType = $contentType;
+        } else if(!empty($mimeType)) {
+            $this->mimeType = $mimeType;
+        } else {
+            $this->mimeType = null;
+        }
+    }
+
+    private function _httpHeadHeader(String $url) : array {
+        $res = $this->_client->request('GET', $url);
+        $headers = $res->getHeaders();
+
+        return $headers;
+    }
+
 }
