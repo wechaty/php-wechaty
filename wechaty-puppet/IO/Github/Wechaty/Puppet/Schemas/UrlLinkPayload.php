@@ -8,5 +8,12 @@
 namespace IO\Github\Wechaty\Puppet\Schemas;
 
 class UrlLinkPayload extends AbstractPayload {
+    public $title;
+    public $url;
+    public $description;
+    public $thumbnailUrl;
 
+    public function __toString() {
+        return "UrlLinkPayload(title='$this->title', url='$this->url', description=$this->description, thumbnailUrl=$this->thumbnailUrl)";
+    }
 }

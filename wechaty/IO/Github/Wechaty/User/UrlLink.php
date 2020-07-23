@@ -19,4 +19,24 @@ class UrlLink {
     function getPayload() : UrlLinkPayload {
         return $this->_payload;
     }
+
+    function url () : String {
+        return $this->_payload->url;
+    }
+
+    function title () : String {
+        return $this->_payload->title;
+    }
+
+    function thumbnailUrl () : ?String {
+        return $this->_payload->thumbnailUrl;
+    }
+
+    function description () : ?String {
+        return $this->_payload->description;
+    }
+
+    public function __toString() {
+        return "UrlLink(payload=$this->_payload)";
+    }
 }
