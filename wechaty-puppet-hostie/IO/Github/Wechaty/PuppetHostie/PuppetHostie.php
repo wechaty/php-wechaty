@@ -207,8 +207,18 @@ class PuppetHostie extends Puppet {
     }
 
     function messageSendFile(string $conversationId, FileBox $file): string {
-        // TODO: Implement messageSendFile() method.
-        return $this->messageSendText($conversationId, "messageSendFile not implement");
+        $fileJson = $file->toJsonString();
+
+        Logger::DEBUG("json is $fileJson");
+        Logger::DEBUG("json size is " . strlen($fileJson));
+
+        $request = new \Wechaty\Puppet\MessageSendFileRequest();
+        $request->setConversationId($conversationId);
+        $request->setFilebox($fileJson);
+
+        list($response, $status) = $this->_grpcClient->MessageSendFile($request)->wait();
+
+        return $response->getId()->getValue();
     }
 
     function messageSendMiniProgram(string $conversationId, MiniProgramPayload $miniProgramPayload): string {

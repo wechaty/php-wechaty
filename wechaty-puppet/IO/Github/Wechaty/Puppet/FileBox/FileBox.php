@@ -115,7 +115,7 @@ class FileBox {
         return $headers;
     }
 
-    function toJsonString(): String {
+    function toJsonString() : String {
         $data = array();
         foreach(self::$COLUMNS as $value) {
             $data[$value] = $this->$value;
@@ -151,7 +151,7 @@ class FileBox {
         return new FileBox($fileBoxOptionsFile);
     }
 
-    static function fromJson(String $json): FileBox {
+    static function fromJson(String $json) : FileBox {
         $data = json_decode($json, true);
 
         $fileBox = null;

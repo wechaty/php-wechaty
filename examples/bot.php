@@ -59,9 +59,11 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $message->say("dong");
     } else {
         $message->say("hello $name from PHP7.4");
-        /*$file = new FileBox();
+        $url = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
+        $fileBoxOptions = new \IO\Github\Wechaty\Puppet\FileBox\FileBoxOptionsUrl($url, "php-wechaty");
+        $file = new FileBox($fileBoxOptions);
         $message->say($file);
-        $file = new UrlLink();
+        /*$file = new UrlLink();
         $message->say($file);
         $file = new MiniProgram();
         $message->say($file);*/
