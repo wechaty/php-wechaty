@@ -72,13 +72,13 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $message->say($urlLink);
 
         $payload = new MiniProgramPayload();
-        $payload->appId = $appId;
-        $payload->pagePath = "pages/index/index";
-        $payload->title = "烙馍FM";
-        $payload->description = "烙馍倾听";
+        $payload->appId = "";
+        $payload->pagePath = "";
+        $payload->title = "";
+        $payload->description = "";
         $payload->username = $username; // 'gh_xxxxxxx', get from mp.weixin.qq.com
-        $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
-        //$payload->thumbKey = "key";
+        $payload->thumbUrl = "";
+        $payload->thumbKey = "";
         $miniProgram = new MiniProgram($payload);
         $message->say($miniProgram);
     } else if(stripos($text, "@烙馍网") === 0) {
