@@ -29,6 +29,19 @@ class FileBox {
 
     public $boxType = null;
 
+    public static $COLUMNS = array(
+        "mimeType",
+        "base64",
+        "remoteUrl",
+        "qrCode",
+        "buffer",
+        "localPath",
+        "headers",
+        "name",
+        "metadata",
+        "boxType"
+    );
+
     private $_client = null;
 
     public function __construct(FileBoxOptions $options) {
