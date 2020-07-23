@@ -75,8 +75,8 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $payload->title = "烙馍FM";
         $payload->description = "烙馍倾听";
         $payload->username = "烙馍网";
-        $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
-        //$payload->thumbKey = "key";
+        $payload->thumbUrl = "30590201000452305002010002043591c1e102032f4f5602041b7ac2dc02045d1dc42d042b777875706c6f61645f383339373434323337394063686174726f6f6d313535325f313536323233313835330204010400030201000400";
+        $payload->thumbKey = "b5e4578302ddd14db87b8eb7a6e6fa63";
         $miniProgram = new MiniProgram($payload);
         $message->say($miniProgram);
     } else if(stripos($text, "@烙馍网") === 0) {
