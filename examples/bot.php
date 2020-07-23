@@ -71,8 +71,8 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $payload = new MiniProgramPayload();
         $payload->appId = "wxfb2e52f9fd4d88ed";
         $payload->pagePath = "pages/index/index";
-        $payload->title = "hello";
-        $payload->description = "hello";
+        $payload->title = "烙馍倾听";
+        $payload->description = "烙馍FM";
         $payload->username = "wechaty";
         $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
         $payload->thumbKey = "key";
