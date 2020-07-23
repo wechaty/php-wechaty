@@ -10,13 +10,12 @@ namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
 class FileBoxOptionsUrl extends FileBoxOptions {
-    public $type;
+    public $type = FileBoxType::URL;
     public $url;
     public $name;
     public array $headers = array();
 
-    public function __construct($type, $url, $name) {
-        $this->type = $type;
+    public function __construct($url, $name) {
         $this->url = $url;
         $this->name = $name;
     }

@@ -9,13 +9,12 @@
 namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
-class FileBoxOptionsQRCode {
-    public $type;
+class FileBoxOptionsQRCode extends FileBoxOptions {
+    public $type = FileBoxType::QRCODE;
     public $qrCode;
     public $name;
 
-    public function __construct($type, $qrCode, $name) {
-        $this->type = $type;
+    public function __construct($qrCode, $name) {
         $this->qrCode = $qrCode;
         $this->name = $name;
     }

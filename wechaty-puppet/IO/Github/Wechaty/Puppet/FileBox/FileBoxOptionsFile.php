@@ -8,14 +8,12 @@
 
 namespace IO\Github\Wechaty\Puppet\FileBox;
 
-
-class FileBoxOptionsFile {
-    public $type;
+class FileBoxOptionsFile extends FileBoxOptions {
+    public $type = FileBoxType::FILE;
     public $path;
     public $name;
 
-    public function __construct($type, $path, $name) {
-        $this->type = $type;
+    public function __construct($path, $name) {
         $this->path = $path;
         $this->name = $name;
     }

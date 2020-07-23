@@ -139,4 +139,14 @@ class FileBox {
         }
     }
 
+    static function fromFile(String $path, String $name) : FileBox {
+        $localname = $name;
+
+        if (empty($name)) {
+            $localname = basename($path);
+        }
+
+        $fileBoxOptionsFile = new FileBoxOptionsFile($path, $localname);
+        return new FileBox($fileBoxOptionsFile);
+    }
 }

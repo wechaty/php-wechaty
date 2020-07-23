@@ -9,13 +9,12 @@
 namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
-class FileBoxOptionsBase64 {
-    public $type;
+class FileBoxOptionsBase64 extends FileBoxOptions {
+    public $type = FileBoxType::BASE64;
     public $base64;
     public $name;
 
-    public function __construct($type, $base64, $name) {
-        $this->type = $type;
+    public function __construct($base64, $name) {
         $this->base64 = $base64;
         $this->name = $name;
     }

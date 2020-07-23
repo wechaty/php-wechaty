@@ -9,13 +9,12 @@
 namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
-class FileBoxOptionsStream {
-    public $type;
+class FileBoxOptionsStream extends FileBoxOptions {
+    public $type = FileBoxType::STREAM;
     public $stream;
     public $name;
 
-    public function __construct($type, $stream, $name) {
-        $this->type = $type;
+    public function __construct($stream, $name) {
         $this->stream = $stream;
         $this->name = $name;
     }
