@@ -18,6 +18,14 @@ class MiniProgramPayload extends AbstractPayload {
     public $username = null;
     public $thumbKey = null;
 
+    /*
+     * appid              : '',
+      description        : '',
+      pagePath           : '',
+      thumbKey           : '',
+      thumbUrl           : '',
+      title              : '',
+      username           : '',*/
     public static $COLUMNS = array(
         "appid",
         "description",
