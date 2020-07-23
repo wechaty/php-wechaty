@@ -72,11 +72,11 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $payload = new MiniProgramPayload();
         $payload->appId = "wxfb2e52f9fd4d88ed";
         $payload->pagePath = "pages/index/index";
-        $payload->title = "烙馍倾听";
-        $payload->description = "烙馍FM";
+        $payload->title = "烙馍FM";
+        $payload->description = "烙馍倾听";
         $payload->username = "烙馍网";
         $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
-        $payload->thumbKey = "key";
+        //$payload->thumbKey = "key";
         $miniProgram = new MiniProgram($payload);
         $message->say($miniProgram);
     } else if(stripos($text, "@烙馍网") === 0) {
