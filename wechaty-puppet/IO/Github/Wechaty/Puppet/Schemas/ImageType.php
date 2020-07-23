@@ -9,7 +9,7 @@
 namespace IO\Github\Wechaty\Puppet\Schemas;
 
 class ImageType {
-    private $code;
+    public $code;
 
     const UNKNOWN = 0;
     const THUMBNAIL = 1;
