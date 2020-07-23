@@ -53,6 +53,8 @@ class UrlLink {
             } else {
                 $imageUrl = $url . $images;
             }
+        } else {
+            $imageUrl = $images;
         }
 
         $title = $meta["title"];
