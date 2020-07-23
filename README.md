@@ -169,7 +169,7 @@ If you are interested in the translation and want to look at how it works, it wi
     - [ ] Documentation
 1. [ ] Class MiniProgram
     - TS SLOC(70): <https://github.com/wechaty/wechaty/blob/master/src/user/mini-program.ts>
-    - [ ] Code
+    - [x] Code
     - [ ] Unit Tests
     - [ ] Documentation
 1. [ ] Class RoomInvitation

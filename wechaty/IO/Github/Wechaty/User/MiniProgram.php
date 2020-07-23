@@ -19,4 +19,32 @@ class MiniProgram {
     function getPayload() : MiniProgramPayload {
         return $this->_payload;
     }
+
+    function appid(): ?string{
+        return $this->_payload->appid;
+    }
+
+    function title(): ?string{
+        return $this->_payload->title;
+    }
+
+    function pagePath(): ?string{
+        return $this->_payload->pagePath;
+    }
+
+    function username(): ?string{
+        return $this->_payload->username;
+    }
+
+    function description(): ?string{
+        return $this->_payload->description;
+    }
+
+    function thumbUrl(): ?string{
+        return $this->_payload->thumbUrl;
+    }
+
+    function thumbKey(): ?string{
+        return $this->_payload->thumbKey;
+    }
 }
