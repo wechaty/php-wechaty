@@ -20,7 +20,7 @@ class DiDom extends Dom {
         $descriptionDom = $this->_dom_parser->first('head')->find('meta[name="description"]');
         $imageDom = $this->_dom_parser->find('img');
 
-        $title = $this->_dom_parser->first('head')->first('title'); // title
+        $title = $this->_dom_parser->first('head')->first('title')->text(); // title
         $description = ""; //meta description
         $image = "";
 
