@@ -10,7 +10,7 @@ namespace IO\Github\Wechaty\Puppet\Schemas;
 use IO\Github\Wechaty\Puppet\Util\JsonUtil;
 
 class MiniProgramPayload extends AbstractPayload {
-    public $appId = null;
+    public $appid = null;
     public $description = null;
     public $pagePath = null;
     public $thumbUrl = null;
