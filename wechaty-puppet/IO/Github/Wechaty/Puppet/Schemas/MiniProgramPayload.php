@@ -12,7 +12,7 @@ use IO\Github\Wechaty\Puppet\Util\JsonUtil;
 class MiniProgramPayload extends AbstractPayload {
     public $appId = null;
     public $description = null;
-    public $pagePath = null;
+    public $pagepath = null;
     public $thumbUrl = null;
     public $title = null;
     public $username = null;
