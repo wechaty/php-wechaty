@@ -23,7 +23,6 @@ class DiDom extends Dom {
         $title = $this->_dom_parser->first('head')->first('title'); // title
         $description = ""; //meta description
         $image = "";
-        print_r($imageDom);
 
         if(count($imageDom) > 0) {
             $image = $imageDom[0]->getAttribute("src");

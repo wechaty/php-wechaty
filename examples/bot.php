@@ -39,6 +39,7 @@ require ROOT . '/vendor/autoload.php';
 
 $url = "https://tb-m.luomor.com/";
 $urlLink = UrlLink::create($url);
+echo $urlLink->getPayload()->toJsonString();
 
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
 $endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
