@@ -222,8 +222,18 @@ class PuppetHostie extends Puppet {
     }
 
     function messageSendMiniProgram(string $conversationId, MiniProgramPayload $miniProgramPayload): string {
-        // TODO: Implement messageSendMiniProgram() method.
-        return $this->messageSendText($conversationId, "messageSendMiniProgram not implement");
+        $miniProgramJson = $miniProgramPayload->toJsonString();
+
+        Logger::DEBUG("json is $miniProgramJson");
+        Logger::DEBUG("json size is " . strlen($miniProgramJson));
+
+        $request = new \Wechaty\Puppet\MessageSendMiniProgramRequest();
+        $request->setConversationId($conversationId);
+        $request->setMiniProgram($miniProgramJson);
+
+        list($response, $status) = $this->_grpcClient->MessageSendMiniProgram($request)->wait();
+
+        return $response->getId()->getValue();
     }
 
     function messageSendText(string $conversationId, string $text, array $mentionList = array()): string {

@@ -13,7 +13,7 @@ use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 class UrlLink {
     public UrlLinkPayload $_payload;
 
-    public function __construct($payload) {
+    public function __construct(UrlLinkPayload $payload) {
         $this->_payload = $payload;
     }
 

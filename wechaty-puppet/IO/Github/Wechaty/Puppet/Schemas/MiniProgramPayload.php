@@ -7,6 +7,33 @@
  */
 namespace IO\Github\Wechaty\Puppet\Schemas;
 
-class MiniProgramPayload extends AbstractPayload {
+use IO\Github\Wechaty\Puppet\Util\JsonUtil;
 
+class MiniProgramPayload extends AbstractPayload {
+    public $appId = null;
+    public $description = null;
+    public $pagePath = null;
+    public $thumbUrl = null;
+    public $title = null;
+    public $username = null;
+    public $thumbKey = null;
+
+    public static $COLUMNS = array(
+        "appId",
+        "description",
+        "pagePath",
+        "thumbUrl",
+        "title",
+        "username",
+        "thumbKey",
+    );
+
+    function toJsonString() : String {
+        $data = array();
+        foreach(self::$COLUMNS as $value) {
+            $data[$value] = $this->$value;
+        }
+
+        return JsonUtil::write($data);
+    }
 }
