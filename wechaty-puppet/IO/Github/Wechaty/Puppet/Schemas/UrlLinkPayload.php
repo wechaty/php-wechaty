@@ -8,5 +8,8 @@
 namespace IO\Github\Wechaty\Puppet\Schemas;
 
 class UrlLinkPayload extends AbstractPayload {
-
+    public $description = null;
+    public $thumbnailUrl = null;
+    public $title = null;
+    public $url = null;
 }
