@@ -7,6 +7,7 @@
  */
 namespace IO\Github\Wechaty\Puppet\FileBox;
 
+use http\Exception\InvalidArgumentException;
 use IO\Github\Wechaty\Puppet\Util\JsonUtil;
 
 class FileBox {
@@ -148,5 +149,56 @@ class FileBox {
 
         $fileBoxOptionsFile = new FileBoxOptionsFile($path, $localname);
         return new FileBox($fileBoxOptionsFile);
+    }
+
+    static function fromJson(String $json): FileBox {
+        $data = json_decode($json, true);
+
+        $fileBox = null;
+
+        $type = $data["boxType"];
+        if($type == FileBoxType::BASE64) {
+            $fileBox = self::fromBase64($data["base64"], $data["name"]);
+        } else if($type == FileBoxType::URL) {
+            $fileBox = self::fromUrl($data["remoteUrl"], $data["name"]);
+        } else if($type == FileBoxType::QRCODE) {
+            $fileBox = self::fromQRCode($data["qrCode"]);
+        } else {
+            throw new \IO\Github\Wechaty\Puppet\Exceptions\InvalidArgumentException("unknown filebox json object{type} $json");
+        }
+
+        return $fileBox;
+    }
+
+    static function fromBase64(String $base64, String $name) : FileBox {
+        $options = new FileBoxOptionsBase64($base64, $name);
+        return new FileBox($options);
+    }
+
+    static function fromDataUrl(String $dataUrl, String $name) : FileBox {
+        $base64 = self::dataUrlToBase64($dataUrl);
+        return self::fromBase64($base64, $name);
+    }
+
+
+    static function fromQRCode(String $qrCode) : FileBox {
+        $optionsQRCode = new FileBoxOptionsQRCode($qrCode, $name = "qrcode.png");
+        return new FileBox($optionsQRCode);
+    }
+
+    static function fromUrl(String $url, string $name, array $headers = array()) : FileBox {
+        $localName = $name;
+        if (empty($url)) {
+            $localName = $url;
+        }
+
+        $optionsUrl = new FileBoxOptionsUrl($url, $localName);
+        $optionsUrl->headers = $headers;
+        return new FileBox($optionsUrl);
+    }
+
+    static function dataUrlToBase64(String $dataUrl) : String {
+        $split = explode($dataUrl, ",");
+        return $split[count($split) - 1];
     }
 }
