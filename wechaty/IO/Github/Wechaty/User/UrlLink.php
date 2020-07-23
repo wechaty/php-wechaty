@@ -7,13 +7,14 @@
  */
 namespace IO\Github\Wechaty\User;
 
+use IO\Github\Wechaty\Dom\DomFactory;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 
 class UrlLink {
     public UrlLinkPayload $_payload;
 
-    public function __construct() {
-        $this->_payload = new UrlLinkPayload();
+    public function __construct($payload) {
+        $this->_payload = $payload;
     }
 
     function getPayload() : UrlLinkPayload {
@@ -38,5 +39,32 @@ class UrlLink {
 
     public function __toString() {
         return "UrlLink(payload=$this->_payload)";
+    }
+
+    static function create(String $url) : UrlLink {
+        $meta = DomFactory::getDom()->getShareInfo($url);
+
+        $imageUrl = "";
+
+        $images = $meta["image"];
+        if(stripos($images, "http") !== 0) {
+            if(stripos($images, "/") !== 0) {
+                $imageUrl = "$url/$images";
+            } else {
+                $imageUrl = $url . $images;
+            }
+        }
+
+        $title = $meta["title"];
+        $description = $meta["description"];
+        if(empty($description)) {
+            $description = $title;
+        }
+
+        $payload = new UrlLinkPayload($title, $url);
+        $payload->description = $description;
+        $payload->thumbnailUrl = $imageUrl;
+
+        return new UrlLink($payload);
     }
 }

@@ -13,6 +13,12 @@ class UrlLinkPayload extends AbstractPayload {
     public $description;
     public $thumbnailUrl;
 
+    public function __construct(String $title, String $url, $id = "") {
+        $this->title = $title;
+        $this->url = $url;
+        parent::__construct($id);
+    }
+
     public function __toString() {
         return "UrlLinkPayload(title='$this->title', url='$this->url', description=$this->description, thumbnailUrl=$this->thumbnailUrl)";
     }
