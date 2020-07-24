@@ -276,6 +276,14 @@ class PuppetHostie extends Puppet {
         return $response->getSuccess();
     }
 
+    function contactList() {
+        $request = new \Wechaty\Puppet\ContactListRequest();
+
+        list($response, $status) = $this->_grpcClient->ContactList($request)->wait();
+
+        return $response->getIds();
+    }
+
     /**
      * @param string $messageId
      * @return string

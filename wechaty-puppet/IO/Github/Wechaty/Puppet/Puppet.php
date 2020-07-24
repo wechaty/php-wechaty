@@ -77,6 +77,7 @@ abstract class Puppet extends EventEmitter {
     abstract function messageMiniProgram(String $messageId): MiniProgramPayload;
     abstract function messageUrl(String $messageId) : UrlLinkPayload;
 
+    abstract function contactList();
     abstract function contactAlias(String $contactId, String $alias = "") : void;
     abstract function setContactAvatar(String $contactId, FileBox $file) : void;
 

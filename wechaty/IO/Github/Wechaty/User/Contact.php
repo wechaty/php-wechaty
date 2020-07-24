@@ -58,6 +58,13 @@ class Contact extends Accessory implements Sayable {
         return null;
     }
 
+    function contactList() {
+        $ret = $this->_puppet->contactList();
+        print_r($ret);
+
+        return null;
+    }
+
     function saySomething($something, Contact $contact) {
         $conversationId = $this->getId();
         if(gettype($something) == "string") {
