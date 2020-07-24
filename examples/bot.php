@@ -11,6 +11,7 @@ use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
 use IO\Github\Wechaty\Puppet\Schemas\Query\FriendshipSearchCondition;
 use IO\Github\Wechaty\User\Contact;
 use IO\Github\Wechaty\User\ContactSelf;
+use IO\Github\Wechaty\User\Friendship;
 use IO\Github\Wechaty\User\MiniProgram;
 use IO\Github\Wechaty\User\UrlLink;
 
@@ -160,6 +161,10 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         echo $urlLink->getPayload()->toJsonString() . "\n";
     }
 
+})->onFriendShip(function(Friendship $friendship) {
+    if($friendship->getPayload()->type == \IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload::FRIENDSHIPTYPE_RECEIVE) {
+        $friendship->accept();
+    }
 })->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
     echo $data . "\n";

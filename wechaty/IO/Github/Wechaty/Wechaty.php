@@ -150,20 +150,24 @@ class Wechaty extends EventEmitter {
         return $this->_on(EventEnum::LOGIN, $listener);
     }
 
-    function onRoomJoin($listener):Wechaty {
+    function onRoomJoin($listener) : Wechaty {
         return $this->_on(EventEnum::ROOM_JOIN, $listener);
     }
 
-    function onRoomLeave($listener):Wechaty {
+    function onRoomLeave($listener) : Wechaty {
         return $this->_on(EventEnum::ROOM_LEAVE, $listener);
     }
 
-    function onRoomTopic($listener):Wechaty {
+    function onRoomTopic($listener) : Wechaty {
         return $this->_on(EventEnum::ROOM_TOPIC, $listener);
     }
 
-    function onMessage($listener):Wechaty{
+    function onMessage($listener) : Wechaty {
         return $this->_on(EventEnum::MESSAGE, $listener);
+    }
+
+    function onFriendShip($listener) : Wechaty {
+        return $this->_on(EventEnum::FRIENDSHIP, $listener);
     }
 
     function getPuppet() : Puppet {
