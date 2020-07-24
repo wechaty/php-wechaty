@@ -37,6 +37,21 @@ class UrlLinkPayload extends AbstractPayload {
         return JsonUtil::write($data);
     }
 
+    static function fromJson(String $json) : UrlLinkPayload {
+        $data = json_decode($json, true);
+
+        $urlLinkPayload = new UrlLinkPayload($data["title"], $data["url"]);
+        foreach(self::$COLUMNS as $value) {
+            if(isset($data[$value])) {
+                $urlLinkPayload->$value = $data[$value];
+            } else {
+                $urlLinkPayload->$value = null;
+            }
+        }
+
+        return $urlLinkPayload;
+    }
+
     public function __toString() {
         return "UrlLinkPayload(title='$this->title', url='$this->url', description=$this->description, thumbnailUrl=$this->thumbnailUrl)";
     }

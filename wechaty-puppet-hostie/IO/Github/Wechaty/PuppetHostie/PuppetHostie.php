@@ -326,7 +326,14 @@ class PuppetHostie extends Puppet {
     }
 
     function messageUrl(string $messageId): UrlLinkPayload {
-        // TODO: Implement messageUrl() method.
+        $request = new \Wechaty\Puppet\MessageUrlRequest();
+        $request->setId($messageId);
+
+        list($response, $status) = $this->_grpcClient->MessageUrl($request)->wait();
+
+        $jsonText = $response->getUrlLink();
+
+        return UrlLinkPayload::fromJson($jsonText);
     }
 
     private function _startGrpcClient() {

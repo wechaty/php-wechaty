@@ -125,6 +125,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
          */
         $miniProgram = $message->toMiniProgram();
         echo $miniProgram->getPayload()->toJsonString() . "\n";
+    } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_URL) {
+        $urlLink = $message->toUrlLink();
+        echo $urlLink->getPayload()->toJsonString() . "\n";
     }
 
 })->onHeartBeat(function($data) use ($wechaty) {
