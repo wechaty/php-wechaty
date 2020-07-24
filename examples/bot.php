@@ -87,7 +87,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
                 echo $value->name() . "\n";
             }
             foreach($contactList as $value) {
-                echo $value->say("hello {$value->name()}, the message is send to all friend by PHP7.4, Good Night.");
+                $value->say("hello {$value->name()}, the message is send to all friend by PHP7.4, Good Night.");
             }
         } elseif($text = "search") {
             $searchPhone = getenv("WECHAT_SEARCH_PHONE");

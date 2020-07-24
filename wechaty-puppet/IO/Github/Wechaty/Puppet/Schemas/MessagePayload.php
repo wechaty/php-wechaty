@@ -44,7 +44,7 @@ class MessagePayload {
     const MESSAGETYPE_VIDEO = 15;
 
     public $id = null;
-    public $mentionIdList = null;
+    public $mentionIdList = array();
     public $filename = null;
     public $text = null;
     public $timestamp = null;
@@ -54,6 +54,6 @@ class MessagePayload {
     public $toId = null;
 
     public function __toString() {
-        return "MessagePayload(id='$this->id', mentionIdList=$this->mentionIdList, filename=$this->filename, text=$this->text, timestamp=$this->timestamp, type=$this->type, fromId=$this->fromId, roomId=$this->roomId, toId=$this->toId)";
+        return "MessagePayload(id='$this->id', mentionIdList=" . json_encode($this->mentionIdList) . ", filename=$this->filename, text=$this->text, timestamp=$this->timestamp, type=$this->type, fromId=$this->fromId, roomId=$this->roomId, toId=$this->toId)";
     }
 }

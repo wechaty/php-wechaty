@@ -163,6 +163,7 @@ class PuppetHostie extends Puppet {
     }
 
     function _messageRawPayloadParser(MessagePayload $rawPayload) : MessagePayload {
+        $rawPayload->mentionIdList = $this->_repeatFieldToArray($rawPayload->mentionIdList);
         return $rawPayload;
     }
 
@@ -182,6 +183,8 @@ class PuppetHostie extends Puppet {
     }
 
     function _roomRawPayloadParser(RoomPayload $roomPayload): RoomPayload {
+        $roomPayload->adminIdList = $this->_repeatFieldToArray($roomPayload->adminIdList);
+        $roomPayload->memberIdList = $this->_repeatFieldToArray($roomPayload->memberIdList);
         return $roomPayload;
     }
 
@@ -402,6 +405,18 @@ class PuppetHostie extends Puppet {
         } else {
             return null;
         }
+    }
+
+    private function _repeatFieldToArray($repeatField) : array {
+        $ret = array();
+        if($repeatField instanceof \Google\Protobuf\Internal\RepeatedField) {
+            $count = $repeatField->count();
+            for($i = 0 ; $i < $count ; $i++) {
+                $ret[] = $repeatField->offsetGet($i);
+            }
+            return $ret;
+        }
+        return $repeatField;
     }
 
     private function _startGrpcClient() {
