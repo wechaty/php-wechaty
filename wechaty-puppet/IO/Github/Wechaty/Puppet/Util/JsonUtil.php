@@ -9,7 +9,7 @@ namespace IO\Github\Wechaty\Puppet\Util;
 
 class JsonUtil {
     public static function readValue(String $json) {
-        return json_decode($json);
+        return json_decode($json, true);
     }
 
     public static function write($input) : String {

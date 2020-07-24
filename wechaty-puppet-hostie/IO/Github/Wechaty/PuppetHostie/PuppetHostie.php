@@ -207,13 +207,33 @@ class PuppetHostie extends Puppet {
     }
 
     function messageSendFile(string $conversationId, FileBox $file): string {
-        // TODO: Implement messageSendFile() method.
-        return $this->messageSendText($conversationId, "messageSendFile not implement");
+        $fileJson = $file->toJsonString();
+
+        Logger::DEBUG("json is $fileJson");
+        Logger::DEBUG("json size is " . strlen($fileJson));
+
+        $request = new \Wechaty\Puppet\MessageSendFileRequest();
+        $request->setConversationId($conversationId);
+        $request->setFilebox($fileJson);
+
+        list($response, $status) = $this->_grpcClient->MessageSendFile($request)->wait();
+
+        return $response->getId()->getValue();
     }
 
     function messageSendMiniProgram(string $conversationId, MiniProgramPayload $miniProgramPayload): string {
-        // TODO: Implement messageSendMiniProgram() method.
-        return $this->messageSendText($conversationId, "messageSendMiniProgram not implement");
+        $miniProgramJson = $miniProgramPayload->toJsonString();
+
+        Logger::DEBUG("json is $miniProgramJson");
+        Logger::DEBUG("json size is " . strlen($miniProgramJson));
+
+        $request = new \Wechaty\Puppet\MessageSendMiniProgramRequest();
+        $request->setConversationId($conversationId);
+        $request->setMiniProgram($miniProgramJson);
+
+        list($response, $status) = $this->_grpcClient->MessageSendMiniProgram($request)->wait();
+
+        return $response->getId()->getValue();
     }
 
     function messageSendText(string $conversationId, string $text, array $mentionList = array()): string {
@@ -227,8 +247,18 @@ class PuppetHostie extends Puppet {
     }
 
     function messageSendUrl(string $conversationId, UrlLinkPayload $urlLinkPayload): string {
-        // TODO: Implement messageSendUrl() method.
-        return $this->messageSendText($conversationId, "messageSendUrl not implement");
+        $urlLinkJson = $urlLinkPayload->toJsonString();
+
+        Logger::DEBUG("json is $urlLinkJson");
+        Logger::DEBUG("json size is " . strlen($urlLinkJson));
+
+        $request = new \Wechaty\Puppet\MessageSendUrlRequest();
+        $request->setConversationId($conversationId);
+        $request->setUrlLink($urlLinkJson);
+
+        list($response, $status) = $this->_grpcClient->MessageSendUrl($request)->wait();
+        //Google\Protobuf\StringValue Object
+        return $response->getId()->getValue();
     }
 
     private function _startGrpcClient() {

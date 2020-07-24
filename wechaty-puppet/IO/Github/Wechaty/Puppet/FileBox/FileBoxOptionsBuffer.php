@@ -9,13 +9,12 @@
 namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
-class FileBoxOptionsBuffer {
-    public $type;
+class FileBoxOptionsBuffer extends FileBoxOptions {
+    public $type = FileBoxType::BUFFER;
     public $buffer;
     public $name;
 
-    public function __construct($type, $buffer, $name) {
-        $this->type = $type;
+    public function __construct($buffer, $name) {
         $this->buffer = $buffer;
         $this->name = $name;
     }

@@ -12,39 +12,44 @@ use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
 class MiniProgram {
     public MiniProgramPayload $_payload;
 
-    public function __construct() {
-        $this->_payload = new MiniProgramPayload();
+    public function __construct(MiniProgramPayload $payload) {
+        $this->_payload = $payload;
     }
 
     function getPayload() : MiniProgramPayload {
         return $this->_payload;
     }
 
-    function appid(): ?string{
-        return $this->_payload->appid;
+    function appId() : ?String {
+        return $this->_payload->appId;
     }
 
-    function title(): ?string{
+    function titile() : ?String {
         return $this->_payload->title;
     }
 
-    function pagePath(): ?string{
+    function pagePath() : ?String {
         return $this->_payload->pagePath;
     }
 
-    function username(): ?string{
+    function username() : ?String {
         return $this->_payload->username;
     }
 
-    function description(): ?string{
+    function description() : ?String {
         return $this->_payload->description;
     }
 
-    function thumbUrl(): ?string{
+    function thumbUrl() : ?String {
         return $this->_payload->thumbUrl;
     }
 
-    function thumbKey(): ?string{
+    function thumbKey() : ?String {
         return $this->_payload->thumbKey;
+    }
+
+    static function create() : MiniProgram {
+        $payload = new MiniProgramPayload();
+        return new MiniProgram($payload);
     }
 }

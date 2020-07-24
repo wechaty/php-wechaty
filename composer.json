@@ -23,7 +23,8 @@
     "google/protobuf": "^v3.3.0",
     "wechaty/php-grpc": "^v0.16.2",
     "guzzlehttp/guzzle": "^7.0",
-    "zhangchunsheng/php-qrcode": "^v0.0.2"
+    "zhangchunsheng/php-qrcode": "^v0.0.2",
+    "imangazaliev/didom": "^v1.16"
   },
   "require-dev": {
 
@@ -52,5 +53,11 @@
   },
   "support": {
     "issues": "https://github.com/wechaty/php-wechaty/issues"
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://mirrors.aliyun.com/composer/"
+    }
   }
 }
