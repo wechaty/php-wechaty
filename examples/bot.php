@@ -79,6 +79,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     echo "message from user name $name\n";
 
     $contactList = $wechaty->userSelf()->contactList();
+    foreach($contactList as $value) {
+        echo $value->name() . "\n";
+    }
 
     if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_TEXT) {
         if($text == "ding") {
