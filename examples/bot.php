@@ -114,7 +114,8 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             print_r($e);
         }
     } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_IMAGE) {
-
+        $image = $message->toImage();
+        echo $image->thumbnail()->toJsonString() . "\n";
     }
 
 })->onHeartBeat(function($data) use ($wechaty) {

@@ -18,7 +18,6 @@ class Image extends Accessory {
     }
 
     function thumbnail() : ?FileBox {
-        //TODO
         return $this->wechaty->getPuppet()->messageImage($this->_id, ImageType::THUMBNAIL);
     }
 
