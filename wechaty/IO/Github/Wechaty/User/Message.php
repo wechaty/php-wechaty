@@ -227,4 +227,22 @@ class Message extends Accessory {
         }
         return null;
     }
+
+    function mentionText() : String {
+        $text = $this->text();
+        $room = $this->room();
+
+        $mentionList = $this->mentionList();
+        if($room == null || empty($mentionList)){
+        return $text;
+        }
+
+    }
+
+    function mentionSelf() : bool {
+        $selfId = $this->_puppet->selfId();
+        $mentionList = $this->mentionList();
+
+        return true;
+    }
 }
