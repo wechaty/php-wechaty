@@ -78,8 +78,10 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     $type = $message->getPayload()->type;
     echo "message from user name $name\n";
 
+    $searchPhone = getenv("WECHAT_SEARCH_PHONE");
+
     $condition = new FriendshipSearchCondition();
-    $condition->phone = "18911116661";
+    $condition->phone = $searchPhone;
     $contact = $wechaty->friendship()->search($condition);
     echo "search result:" . $contact->getPayload()->name;
 
