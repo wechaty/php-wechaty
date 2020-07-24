@@ -10,7 +10,7 @@ namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
 class FileBoxOptionsBase64 extends FileBoxOptions {
-    public $type = FileBoxType::BASE64;
+    public $_type = FileBoxType::BASE64;
     public $base64;
     public $name;
 
@@ -20,6 +20,6 @@ class FileBoxOptionsBase64 extends FileBoxOptions {
     }
 
     public function __toString() {
-        return "FileBoxOptionsBase64(type=$this->type, buffer=$this->base64)";
+        return "FileBoxOptionsBase64(type=$this->_type, buffer=$this->base64)";
     }
 }

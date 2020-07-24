@@ -10,7 +10,7 @@ namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
 class FileBoxOptionsUrl extends FileBoxOptions {
-    public $type = FileBoxType::URL;
+    public $_type = FileBoxType::URL;
     public $url;
     public $name;
     public array $headers = array();
@@ -21,6 +21,6 @@ class FileBoxOptionsUrl extends FileBoxOptions {
     }
 
     public function __toString() {
-        return "FileBoxOptionsUrl(type=$this->type, path='$this->url', headrs=" . json_encode($this->headers) . "";
+        return "FileBoxOptionsUrl(type=$this->_type, path='$this->url', headrs=" . json_encode($this->headers) . "";
     }
 }

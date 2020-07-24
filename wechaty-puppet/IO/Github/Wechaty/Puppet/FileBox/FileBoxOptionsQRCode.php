@@ -10,7 +10,7 @@ namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
 class FileBoxOptionsQRCode extends FileBoxOptions {
-    public $type = FileBoxType::QRCODE;
+    public $_type = FileBoxType::QRCODE;
     public $qrCode;
     public $name;
 
@@ -20,6 +20,6 @@ class FileBoxOptionsQRCode extends FileBoxOptions {
     }
 
     public function __toString() {
-        return "FileBoxOptionsQRCode(type=$this->type, buffer=$this->qrCode)";
+        return "FileBoxOptionsQRCode(type=$this->_type, buffer=$this->qrCode)";
     }
 }

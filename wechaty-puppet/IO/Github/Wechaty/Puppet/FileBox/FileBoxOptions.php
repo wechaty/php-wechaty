@@ -10,6 +10,10 @@ namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
 class FileBoxOptions {
-    public $type;
+    public $_type;
     public $name;
+
+    public function getType() {
+        return $this->_type;
+    }
 }

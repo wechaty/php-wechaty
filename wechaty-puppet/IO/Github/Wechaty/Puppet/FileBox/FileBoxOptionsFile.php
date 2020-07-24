@@ -9,7 +9,7 @@
 namespace IO\Github\Wechaty\Puppet\FileBox;
 
 class FileBoxOptionsFile extends FileBoxOptions {
-    public $type = FileBoxType::FILE;
+    public $_type = FileBoxType::FILE;
     public $path;
     public $name;
 
@@ -19,6 +19,6 @@ class FileBoxOptionsFile extends FileBoxOptions {
     }
 
     public function __toString() {
-        return "FileBoxOptionsFile(type=$this->type, path='$this->path')";
+        return "FileBoxOptionsFile(type=$this->_type, path='$this->path')";
     }
 }

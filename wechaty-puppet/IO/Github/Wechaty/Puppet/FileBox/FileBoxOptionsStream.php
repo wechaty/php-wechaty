@@ -10,7 +10,7 @@ namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
 class FileBoxOptionsStream extends FileBoxOptions {
-    public $type = FileBoxType::STREAM;
+    public $_type = FileBoxType::STREAM;
     public $stream;
     public $name;
 
@@ -20,6 +20,6 @@ class FileBoxOptionsStream extends FileBoxOptions {
     }
 
     public function __toString() {
-        return "FileBoxOptionsStream(type=$this->type, buffer=$this->stream)";
+        return "FileBoxOptionsStream(type=$this->_type, buffer=$this->stream)";
     }
 }

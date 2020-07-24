@@ -10,7 +10,7 @@ namespace IO\Github\Wechaty\Puppet\FileBox;
 
 
 class FileBoxOptionsBuffer extends FileBoxOptions {
-    public $type = FileBoxType::BUFFER;
+    public $_type = FileBoxType::BUFFER;
     public $buffer;
     public $name;
 
@@ -20,6 +20,6 @@ class FileBoxOptionsBuffer extends FileBoxOptions {
     }
 
     public function __toString() {
-        return "FileBoxOptionsBuffer(type=$this->type, buffer=$this->buffer)";
+        return "FileBoxOptionsBuffer(type=$this->_type, buffer=$this->buffer)";
     }
 }

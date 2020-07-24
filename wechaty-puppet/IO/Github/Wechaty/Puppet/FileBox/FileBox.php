@@ -54,27 +54,27 @@ class FileBox {
 
         if($options instanceof FileBoxOptionsBuffer) {
             $this->name = $options->name;
-            $this->boxType = $options->type;
+            $this->boxType = $options->getType();
             $this->buffer = $options->buffer;
         } else if($options instanceof FileBoxOptionsFile) {
             $this->name = $options->name;
-            $this->boxType = $options->type;
+            $this->boxType = $options->getType();
             $this->localPath = $options->path;
         } else if($options instanceof FileBoxOptionsUrl) {
             $this->name = $options->name;
-            $this->boxType = $options->type;
+            $this->boxType = $options->getType();
             $this->remoteUrl = $options->url;
             $this->headers = $options->headers;
         } else if($options instanceof FileBoxOptionsStream) {
             $this->name = $options->name;
-            $this->boxType = $options->type;
+            $this->boxType = $options->getType();
         } else if($options instanceof FileBoxOptionsQRCode) {
             $this->name = $options->name;
-            $this->boxType = $options->type;
+            $this->boxType = $options->getType();
             $this->qrCode = $options->qrCode;
         } else if($options instanceof FileBoxOptionsBase64) {
             $this->name = $options->name;
-            $this->boxType = $options->type;
+            $this->boxType = $options->getType();
             $this->base64 = $options->base64;
         }
     }
