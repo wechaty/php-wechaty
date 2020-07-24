@@ -62,6 +62,9 @@ class Contact extends Accessory implements Sayable {
         $contactList = $this->_puppet->contactList();
         $contactObjs = array();
         foreach($contactList as $value) {
+            if($value == $this->_id) {
+                break;
+            }
             $contact = $this->wechaty->contactManager->load($value)->ready();
             $contactObjs[] = $contact;
         }

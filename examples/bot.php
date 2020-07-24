@@ -80,6 +80,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 
     $contactList = $wechaty->userSelf()->contactList();
     foreach($contactList as $value) {
+        echo "1111111";
         print_r($value);
     }
 
