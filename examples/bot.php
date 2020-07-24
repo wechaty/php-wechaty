@@ -78,21 +78,21 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     $type = $message->getPayload()->type;
     echo "message from user name $name\n";
 
-    $searchPhone = getenv("WECHAT_SEARCH_PHONE");
-
-    $condition = new FriendshipSearchCondition();
-    $condition->phone = $searchPhone;
-    $contact = $wechaty->friendship()->search($condition);
-    if($contact) {
-        //search result:xxxx
-        echo "search result:" . $contact->getPayload()->name . "\n";
-    } else {
-        echo "search result empty\n";
-    }
-
     if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_TEXT) {
         if($text == "ding") {
             $message->say("dong");
+        } elseif($text = "search") {
+            $searchPhone = getenv("WECHAT_SEARCH_PHONE");
+
+            $condition = new FriendshipSearchCondition();
+            $condition->phone = $searchPhone;
+            $contact = $wechaty->friendship()->search($condition);
+            if($contact) {
+                //search result:xxxx
+                echo "search result:" . $contact->getPayload()->name . " {$contact->getPayload()->weixin}\n";
+            } else {
+                echo "search result empty\n";
+            }
         } else if($text == "hello") {
             $message->say("hello $name from PHP7.4");
             $url = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
