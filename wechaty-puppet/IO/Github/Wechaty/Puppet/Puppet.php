@@ -151,9 +151,9 @@ abstract class Puppet extends EventEmitter {
         Logger::DEBUG("friendshipSearch{}", $condition);
 
         if (!empty($condition->phone)) {
-            $this->friendshipSearchPhone($condition->phone);
+            return $this->friendshipSearchPhone($condition->phone);
         } elseif(!empty($condition->weixin)) {
-            $this->friendshipSearchWeixin($condition->weixin);
+            return $this->friendshipSearchWeixin($condition->weixin);
         } else {
             throw new InvalidArgumentException("friendshipSearch condition error");
         }
