@@ -78,13 +78,6 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     echo "message from user name $name\n";
 
     if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_TEXT) {
-        try {
-            $fileBox = $message->toFileBox();
-            echo $fileBox->toJsonString() . "\n";
-        } catch(\IO\Github\Wechaty\Exceptions\WechatyException $e) {
-            print_r($e);
-        }
-
         if($text == "ding") {
             $message->say("dong");
         } else if($text == "hello") {
@@ -109,6 +102,13 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             $message->say($miniProgram);
         } else if(stripos($text, "@烙馍网") === 0) {
             $message->say("hello $name from PHP7.4");
+        }
+    } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_ATTACHMENT) {
+        try {
+            $fileBox = $message->toFileBox();
+            echo $fileBox->toJsonString() . "\n";
+        } catch(\IO\Github\Wechaty\Exceptions\WechatyException $e) {
+            print_r($e);
         }
     } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_IMAGE) {
 

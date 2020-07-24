@@ -320,7 +320,7 @@ class Message extends Accessory {
     }
 
     function toFileBox() : FileBox {
-        if($this->type() != MessagePayload::MESSAGETYPE_TEXT) {
+        if($this->type() != MessagePayload::MESSAGETYPE_ATTACHMENT) {
             throw new WechatyException("text message no file");
         }
         return $this->wechaty->getPuppet()->messageFile($this->_id);
