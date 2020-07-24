@@ -78,14 +78,17 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     $type = $message->getPayload()->type;
     echo "message from user name $name\n";
 
-    $contactList = $wechaty->userSelf()->contactList();
-    foreach($contactList as $value) {
-        echo $value->name() . "\n";
-    }
-
     if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_TEXT) {
         if($text == "ding") {
             $message->say("dong");
+        } elseif($text == "群发") {
+            $contactList = $wechaty->userSelf()->contactList();
+            foreach($contactList as $value) {
+                echo $value->name() . "\n";
+            }
+            foreach($contactList as $value) {
+                echo $value->say("hello {$value->name()}, the message is send to all friend by PHP7.4, Good Night.");
+            }
         } elseif($text = "search") {
             $searchPhone = getenv("WECHAT_SEARCH_PHONE");
 
@@ -98,7 +101,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             } else {
                 echo "search result empty\n";
             }
-        } else if($text == "hello") {
+        } elseif($text == "hello") {
             $message->say("hello $name from PHP7.4");
             $url = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
             $fileBoxOptions = new \IO\Github\Wechaty\Puppet\FileBox\FileBoxOptionsUrl($url, "php-wechaty.png");
@@ -118,7 +121,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             $payload->thumbKey = "";
             $miniProgram = new MiniProgram($payload);
             $message->say($miniProgram);
-        } else if(stripos($text, "@烙馍网") === 0) {
+        } elseif(stripos($text, "@烙馍网") === 0) {
             $message->say("hello $name from PHP7.4");
         }
     } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_ATTACHMENT) {
