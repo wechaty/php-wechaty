@@ -20,8 +20,8 @@ class MiniProgram {
         return $this->_payload;
     }
 
-    function appId() : ?String {
-        return $this->_payload->appId;
+    function appid() : ?String {
+        return $this->_payload->appid;
     }
 
     function titile() : ?String {
