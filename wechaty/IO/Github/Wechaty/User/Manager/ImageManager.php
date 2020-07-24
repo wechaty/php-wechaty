@@ -12,6 +12,6 @@ use IO\Github\Wechaty\User\Image;
 
 class ImageManager extends Accessory {
     function create(String $id) : Image {
-        return new Image($this->wechaty,$id);
+        return new Image($this->wechaty, $id);
     }
 }

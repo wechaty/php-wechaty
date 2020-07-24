@@ -76,8 +76,8 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     $text = $message->getPayload()->text;
     echo "message from user name $name\n";
     try {
-        $contact = $message->toContact();
-        echo $contact->name() . "\n";
+        $contact = $message->toFileBox();
+        echo $contact->toJsonString() . "\n";
     } catch(\IO\Github\Wechaty\Exceptions\WechatyException $e) {
         print_r($e);
     }
