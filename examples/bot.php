@@ -8,6 +8,7 @@
 
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
+use IO\Github\Wechaty\User\Contact;
 use IO\Github\Wechaty\User\ContactSelf;
 use IO\Github\Wechaty\User\MiniProgram;
 use IO\Github\Wechaty\User\UrlLink;
@@ -74,6 +75,12 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     $name = $message->from()->getPayload()->name;
     $text = $message->getPayload()->text;
     echo "message from user name $name\n";
+    try {
+        $contact = $message->toContact();
+        echo $contact->name() . "\n";
+    } catch(\IO\Github\Wechaty\Exceptions\WechatyException $e) {
+        print_r($e);
+    }
     if($text == "ding") {
         $message->say("dong");
     } else if($text == "hello") {
