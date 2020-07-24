@@ -407,6 +407,21 @@ class PuppetHostie extends Puppet {
         }
     }
 
+    function friendshipAccept(string $friendshipId): void {
+        $request = new \Wechaty\Puppet\FriendshipAcceptRequest();
+        $request->setId($friendshipId);
+
+        list($response, $status) = $this->_grpcClient->FriendshipAccept($request)->wait();
+    }
+
+    function friendshipAdd(string $contractId, string $hello): void {
+        $request = new \Wechaty\Puppet\FriendshipAddRequest();
+        $request->setContactId($contractId);
+        $request->setHello($hello);
+
+        list($response, $status) = $this->_grpcClient->FriendshipAdd($request)->wait();
+    }
+
     private function _repeatFieldToArray($repeatField) : array {
         $ret = array();
         if($repeatField instanceof \Google\Protobuf\Internal\RepeatedField) {
