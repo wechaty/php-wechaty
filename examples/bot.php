@@ -105,6 +105,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         }
     } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_ATTACHMENT) {
         try {
+            /**
+             * {"mimeType":null,"base64":null,"remoteUrl":"http:\/\/siyouyunsy-1253559996.cos.ap-guangzhou.myqcloud.com\/","qrCode":null,"buffer":null,"localPath":null,"headers":[],"name":"","metadata":null,"boxType":2}
+             */
             $fileBox = $message->toFileBox();
             echo $fileBox->toJsonString() . "\n";
         } catch(\IO\Github\Wechaty\Exceptions\WechatyException $e) {
