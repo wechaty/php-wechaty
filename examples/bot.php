@@ -126,6 +126,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $miniProgram = $message->toMiniProgram();
         echo $miniProgram->getPayload()->toJsonString() . "\n";
     } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_URL) {
+        /**
+         * {"title":"\u70d9\u998d\u7701\u94b1-\u4f18\u60e0\u5238\u9886\u53d6","url":"https:\/\/tb-m.luomor.com\/","description":"\u70d9\u998d\u7701\u94b1\u5b98\u7f51-\u6bcf\u65e5\u66f4\u65b0\u5929\u732b\u6dd8\u5b9d\u4f18\u60e0\u5238\uff0c\u66f4\u67099.9\u5305\u90ae\u4e13\u533a\uff0c\u54c1\u724c\u4f18\u9009\uff0c\u627e\u5238\u529f\u80fd\u9f50\u5168\u3002\u805a\u5212\u7b97\u7684\u4f18\u60e0\u5238\uff0c\u6dd8\u5b9e\u60e0\u7684\u8d2d\u7269\u7f51\u7ad9\uff0c\u5927\u54c1\u724c\u5546\u54c1\u53ef\u4eab\u6298\u4e0a\u6298\uff0c\u5404\u79cd\u8d85\u503c\u5546\u54c1\u53ea\u9700\u4e00\u952e\u641c\u7d22\u3002\u7279\u5356\u3001\u4f4e\u4ef7\u3001\u767d\u83dc\u4ef7\uff0c\u5c3d\u5728\u70d9\u998d\u7701\u94b1","thumbnailUrl":"https:\/\/img.alicdn.com\/imgextra\/i4\/790237325\/O1CN01hY4aU523ytm2F4HxA_!!790237325.jpg?t=1586059949000"}
+         */
         $urlLink = $message->toUrlLink();
         echo $urlLink->getPayload()->toJsonString() . "\n";
     }
