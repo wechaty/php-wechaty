@@ -293,7 +293,7 @@ class Message extends Accessory {
         }
 
         $contact = $this->wechaty->contactManager->load($contactId);
-        $contactId->ready();
+        $contact->ready();
         return $contact;
     }
 

@@ -286,7 +286,13 @@ class PuppetHostie extends Puppet {
     }
 
     function messageFile(string $messageId): FileBox {
-        // TODO: Implement messageFile() method.
+        $request = new \Wechaty\Puppet\MessageFileRequest();
+        $request->setId($messageId);
+
+        list($response, $status) = $this->_grpcClient->MessageFile($request)->wait();
+        $jsonText = $response->getFilebox();
+
+        return FileBox::fromJson($jsonText);
     }
 
     function messageImage(string $messageId, ImageType $imageType): FileBox {
