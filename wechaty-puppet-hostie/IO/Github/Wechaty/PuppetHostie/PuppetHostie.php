@@ -13,6 +13,7 @@ use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
 use IO\Github\Wechaty\Puppet\Schemas\Event\EventScanPayload;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload;
+use IO\Github\Wechaty\Puppet\Schemas\ImageType;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
@@ -202,8 +203,13 @@ class PuppetHostie extends Puppet {
     }
 
     function messageSendContact(string $conversationId, string $contactId): string {
-        // TODO: Implement messageSendContact() method.
-        return $this->messageSendText($conversationId, "messageSendContact not implement");
+        $request = new \Wechaty\Puppet\MessageSendContactRequest();
+        $request->setContactId($contactId);
+        $request->setConversationId($conversationId);
+
+        list($response, $status) = $this->_grpcClient->MessageSendContact($request)->wait();
+
+        return $response->getId()->getValue();
     }
 
     function messageSendFile(string $conversationId, FileBox $file): string {
@@ -268,6 +274,26 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->messageRecall($request)->wait();
 
         return $response->getSuccess();
+    }
+
+    function messageContact(string $messageId): string {
+        // TODO: Implement messageContact() method.
+    }
+
+    function messageFile(string $messageId): FileBox {
+        // TODO: Implement messageFile() method.
+    }
+
+    function messageImage(string $messageId, ImageType $imageType): FileBox {
+        // TODO: Implement messageImage() method.
+    }
+
+    function messageMiniProgram(string $messageId): MiniProgramPayload {
+        // TODO: Implement messageMiniProgram() method.
+    }
+
+    function messageUrl(string $messageId): UrlLinkPayload {
+        // TODO: Implement messageUrl() method.
     }
 
     private function _startGrpcClient() {

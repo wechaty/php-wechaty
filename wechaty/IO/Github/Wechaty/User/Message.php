@@ -251,7 +251,7 @@ class Message extends Accessory {
 
         $textWithoutMention = $text;
         foreach($mentionNameList as $value) {
-            $escapedCur = escapeRegExp($value);
+            $escapedCur = $this->escapeRegExp($value);
             $regex = "@${escapedCur}(\\u2005|\\u0020|\$)";
             $textWithoutMention = preg_replace($regex, "", $text);
         }
@@ -283,7 +283,6 @@ class Message extends Accessory {
     }
 
     function toContact() : Contact {
-
         if($this->type() != MessagePayload::MESSAGETYPE_CONTACT) {
             throw new WechatyException("message not a ShareCard");
         }

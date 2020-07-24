@@ -11,6 +11,7 @@ use IO\Github\Wechaty\Puppet\Cache\CacheFactory;
 use IO\Github\Wechaty\Puppet\EventEmitter\EventEmitter;
 use IO\Github\Wechaty\Puppet\Exceptions\InvalidArgumentException;
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
+use IO\Github\Wechaty\Puppet\Schemas\ImageType;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
@@ -69,6 +70,12 @@ abstract class Puppet extends EventEmitter {
     abstract function messageSendUrl(String $conversationId, UrlLinkPayload $urlLinkPayload) : String;
 
     abstract function messageRecall(String $messageId) : bool;
+
+    abstract function messageContact(String $messageId) : String;
+    abstract function messageFile(String $messageId) : FileBox;
+    abstract function messageImage(String $messageId, ImageType $imageType): FileBox;
+    abstract function messageMiniProgram(String $messageId): MiniProgramPayload;
+    abstract function messageUrl(String $messageId) : UrlLinkPayload;
 
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
