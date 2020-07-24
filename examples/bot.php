@@ -83,6 +83,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     $condition = new FriendshipSearchCondition();
     $condition->phone = $searchPhone;
     $contact = $wechaty->friendship()->search($condition);
+    //search result:xxxx
     echo "search result:" . $contact->getPayload()->name;
 
     if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_TEXT) {
