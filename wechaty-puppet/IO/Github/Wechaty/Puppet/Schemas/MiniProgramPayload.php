@@ -52,7 +52,11 @@ class MiniProgramPayload extends AbstractPayload {
 
         $miniProgramPayload = new MiniProgramPayload();
         foreach(self::$COLUMNS as $value) {
-            $miniProgramPayload->$value = $data[$value];
+            if(isset($data[$value])) {
+                $miniProgramPayload->$value = $data[$value];
+            } else {
+                $miniProgramPayload->$value = null;
+            }
         }
 
         return $miniProgramPayload;

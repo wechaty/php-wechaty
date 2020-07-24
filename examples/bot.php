@@ -120,8 +120,11 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         $image = $message->toImage();
         echo $image->thumbnail()->toJsonString() . "\n";
     } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_MINIPROGRAM) {
-        $image = $message->toMiniProgram();
-        echo $image->getPayload()->toJsonString() . "\n";
+        /**
+         * {"appid":null,"description":"\u70d9\u998d\u503e\u542c","pagePath":"pages\/index\/index.html","thumbUrl":"https:\/\/wx1.sinaimg.cn\/mw690\/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg","title":"\u70d9\u998dFM","username":"gh_xxxxxxxxxx","thumbKey":null}
+         */
+        $miniProgram = $message->toMiniProgram();
+        echo $miniProgram->getPayload()->toJsonString() . "\n";
     }
 
 })->onHeartBeat(function($data) use ($wechaty) {
