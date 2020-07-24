@@ -60,8 +60,9 @@ class Contact extends Accessory implements Sayable {
 
     function contactList() {
         $ret = $this->_puppet->contactList();
-        while($ret->getIterator()->valid()) {
-            print_r($ret->getIterator()->next());
+        $count = $ret->count();
+        for($i = 0 ; $i < $count ; $i++) {
+            print_r($ret->offsetGet($i));
         }
 
         return null;
