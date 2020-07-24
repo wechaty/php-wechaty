@@ -269,4 +269,76 @@ class Message extends Accessory {
 
         return false;
     }
+
+    function file() : FileBox {
+        return $this->toFileBox();
+    }
+
+    function toImage() : Image {
+        if($this->type() != MessagePayload::MESSAGETYPE_IMAGE) {
+            throw new WechatyException("not a image type, type is " . $this->type());
+        }
+        return $this->wechaty->imageManager->create($this->_id);
+    }
+
+    function toContact() : Contact {
+
+        if($this->type() != MessagePayload::MESSAGETYPE_CONTACT) {
+            throw new WechatyException("message not a ShareCard");
+        }
+
+        $contactId = $this->wechaty->getPuppet()->messageContact($this->_id);
+        if(empty($contactId)){
+            throw new WechatyException("can not get contact id by message {$this->_id}");
+        }
+
+        $contact = $this->wechaty->contactManager->load($contactId);
+        $contactId->ready();
+        return $contact;
+    }
+
+    function toUrlLink() : UrlLink {
+        if($this->type() != MessagePayload::MESSAGETYPE_URL) {
+            throw new WechatyException("message not a Url Link");
+        }
+
+        $urlPayload = $this->wechaty->getPuppet()->messageUrl($this->_id);
+        return new UrlLink($urlPayload);
+    }
+
+    function toMiniProgram():MiniProgram{
+        if($this->type() != MessagePayload::MESSAGETYPE_MINIPROGRAM) {
+            throw new WechatyException("message not a MiniProgram");
+        }
+
+        $miniProgramPayload = $this->wechaty->getPuppet()->messageMiniProgram($this->_id);
+        return new MiniProgram($miniProgramPayload);
+    }
+
+    function toFileBox() : FileBox {
+        if($this->type() != MessagePayload::MESSAGETYPE_TEXT) {
+            throw new WechatyException("text message no file");
+        }
+        return $this->wechaty->getPuppet()->messageFile($this->_id);
+    }
+
+    public function __toString() {
+        return "Message(payload=$this->_payload,id=$this->_id)";
+    }
+
+    function multipleAt(String $str) : array {
+        $re = "^.*?@";
+        $str1 = preg_replace($re, "@", $str);
+
+        $name = "";
+        $nameList = array();
+        $mentionNames = array_reverse(array_filter(explode("@", $str1), function($value) {
+            return !empty($value);
+        }));
+        foreach($mentionNames as $mentionName) {
+            $name = "$mentionName@$name";
+            $nameList[] = substr($name, 0, strlen($name) - 1);
+        }
+        return $nameList;
+    }
 }
