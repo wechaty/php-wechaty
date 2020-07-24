@@ -101,6 +101,12 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             } else {
                 echo "search result empty\n";
             }
+        } elseif($text = "add") {
+            $wechatId = getenv("WECHAT_ADD_WECHAT_ID");
+
+            $contact = $wechaty->contactManager->load($wechatId);
+            $contact->ready();
+            $wechaty->friendship()->add($contact, "hello from PHP7.4");
         } elseif($text == "hello") {
             $message->say("hello $name from PHP7.4");
             $url = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
