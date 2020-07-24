@@ -10,7 +10,7 @@ namespace IO\Github\Wechaty\Puppet\Schemas;
 class RoomPayload extends AbstractPayload {
     public $topic = null;
     public $avatar = null;
-    public $memberIdList = null;
+    public $memberIdList = array();
     public $ownerId = null;
-    public $adminIdList = null;
+    public $adminIdList = array();
 }

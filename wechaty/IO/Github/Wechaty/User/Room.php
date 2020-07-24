@@ -57,6 +57,7 @@ class Room extends Accessory {
         if($this->_payload == null) {
             throw new WechatyException("no payload");
         }
+        // cache contact ?
         $memberIdList = $this->_puppet->roomMemberList($this->_id);
         foreach($memberIdList as $value) {
             $this->wechaty->contactManager->load($value)->ready();

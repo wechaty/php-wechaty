@@ -195,8 +195,11 @@ class PuppetHostie extends Puppet {
         Logger::DEBUG(array("method" => "roomMemberList", "memberIds" => $memberIds));
         //Google\Protobuf\Internal\RepeatedField Object
         $memberList = array();
-        // TODO
         if(is_object($memberIds)) {
+            $count = $memberIds->count();
+            for($i = 0 ; $i < $count ; $i++) {
+                $memberList[] = $memberIds->offsetGet($i);
+            }
             return $memberList;
         }
         return $memberIds;
@@ -276,12 +279,18 @@ class PuppetHostie extends Puppet {
         return $response->getSuccess();
     }
 
-    function contactList() {
+    function contactList() : array {
         $request = new \Wechaty\Puppet\ContactListRequest();
 
         list($response, $status) = $this->_grpcClient->ContactList($request)->wait();
 
-        return $response->getIds();
+        $ids = $response->getIds();
+        $count = $ids->count();
+        $ret = array();
+        for($i = 0 ; $i < $count ; $i++) {
+            $ret[] = $ids->offsetGet($i);
+        }
+        return $ret;
     }
 
     /**
