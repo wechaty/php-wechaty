@@ -368,7 +368,7 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->FriendshipSearchPhone($request)->wait();
 
         if($response) {
-            $response->getContactId()->getValue();
+            return $response->getContactId()->getValue();
         } else {
             return null;
         }
@@ -381,7 +381,7 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->FriendshipSearchWeixin($request)->wait();
 
         if($response) {
-            $response->getContactId()->getValue();
+            return $response->getContactId()->getValue();
         } else {
             return null;
         }
