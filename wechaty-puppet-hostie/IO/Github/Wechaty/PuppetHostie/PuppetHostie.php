@@ -316,7 +316,13 @@ class PuppetHostie extends Puppet {
     }
 
     function messageMiniProgram(string $messageId): MiniProgramPayload {
-        // TODO: Implement messageMiniProgram() method.
+        $request = new \Wechaty\Puppet\MessageMiniProgramRequest();
+        $request->setId($messageId);
+
+        list($response, $status) = $this->_grpcClient->MessageMiniProgram($request)->wait();
+        $jsonText = $response->getMiniProgram();
+
+        return MiniProgramPayload::fromJson($jsonText);
     }
 
     function messageUrl(string $messageId): UrlLinkPayload {

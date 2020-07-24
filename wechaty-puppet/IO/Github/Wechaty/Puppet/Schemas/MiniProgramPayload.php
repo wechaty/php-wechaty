@@ -46,4 +46,15 @@ class MiniProgramPayload extends AbstractPayload {
 
         return JsonUtil::write($data);
     }
+
+    static function fromJson(String $json) : MiniProgramPayload {
+        $data = json_decode($json, true);
+
+        $miniProgramPayload = new MiniProgramPayload();
+        foreach(self::$COLUMNS as $value) {
+            $miniProgramPayload->$value = $data[$value];
+        }
+
+        return $miniProgramPayload;
+    }
 }

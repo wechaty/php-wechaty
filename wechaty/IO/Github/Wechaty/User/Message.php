@@ -310,7 +310,7 @@ class Message extends Accessory {
         return new UrlLink($urlPayload);
     }
 
-    function toMiniProgram():MiniProgram{
+    function toMiniProgram() : MiniProgram {
         if($this->type() != MessagePayload::MESSAGETYPE_MINIPROGRAM) {
             throw new WechatyException("message not a MiniProgram");
         }
