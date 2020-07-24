@@ -106,7 +106,7 @@ abstract class Puppet extends EventEmitter {
     protected function _contactPayloadCache(String $contactId) : ?ContactPayload {
         $contactPayload = $this->_cache->get(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
 
-        Logger::DEBUG(array("contactPayload" => $contactPayload, "contactId" => $contactId));
+        Logger::DEBUG(array("method" => "_contactPayloadCache", "contactPayload" => $contactPayload, "contactId" => $contactId));
 
         return $contactPayload;
     }
