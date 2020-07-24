@@ -361,22 +361,30 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->ContactAvatar($request)->wait();
     }
 
-    function friendshipSearchPhone(string $phone): string {
+    function friendshipSearchPhone(string $phone): ?string {
         $request = new \Wechaty\Puppet\FriendshipSearchPhoneRequest();
         $request->setPhone($phone);
 
         list($response, $status) = $this->_grpcClient->FriendshipSearchPhone($request)->wait();
 
-        return $response->getContactId()->getValue();
+        if($response) {
+            $response->getContactId()->getValue();
+        } else {
+            return null;
+        }
     }
 
-    function friendshipSearchWeixin(string $weixin): string {
+    function friendshipSearchWeixin(string $weixin): ?string {
         $request = new \Wechaty\Puppet\FriendshipSearchWeixinRequest();
         $request->setWeixin($weixin);
 
         list($response, $status) = $this->_grpcClient->FriendshipSearchWeixin($request)->wait();
 
-        return $response->getContactId()->getValue();
+        if($response) {
+            $response->getContactId()->getValue();
+        } else {
+            return null;
+        }
     }
 
     private function _startGrpcClient() {

@@ -80,8 +80,8 @@ abstract class Puppet extends EventEmitter {
     abstract function contactAlias(String $contactId, String $alias = "") : void;
     abstract function setContactAvatar(String $contactId, FileBox $file) : void;
 
-    abstract function friendshipSearchPhone(String $phone) : String;
-    abstract function friendshipSearchWeixin(String $weixin) : String;
+    abstract function friendshipSearchPhone(String $phone) : ?String;
+    abstract function friendshipSearchWeixin(String $weixin) : ?String;
 
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
