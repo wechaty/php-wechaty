@@ -12,9 +12,10 @@ use IO\Github\Wechaty\Exceptions\WechatyException;
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
+use IO\Github\Wechaty\Type\Sayable;
 use IO\Github\Wechaty\Util\Logger;
 
-class Contact extends Accessory {
+class Contact extends Accessory implements Sayable {
     /**
      * @var null|ContactPayload
      */
@@ -54,6 +55,14 @@ class Contact extends Accessory {
             return $message;
         }
 
+        return null;
+    }
+
+    function saySomething($something, Contact $contact) {
+        $conversationId = $this->getId();
+        if(gettype($something) == "string") {
+            $msgId = $this->_puppet->messageSendText($conversationId, $something);
+        }
         return null;
     }
 
