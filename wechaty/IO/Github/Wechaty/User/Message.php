@@ -97,7 +97,7 @@ class Message extends Accessory {
     }
 
     function to() : ?Contact {
-        if($this->_payload == null){
+        if($this->_payload == null) {
             throw new WechatyException("no payload");
         }
         $toId = $this->_payload->toId ?: false;
@@ -112,7 +112,7 @@ class Message extends Accessory {
     }
 
     function type() : int {
-        if($this->_payload == null){
+        if($this->_payload == null) {
             throw new WechatyException("no payload");
         }
         return $this->_payload->type ?: MessagePayload::MESSAGETYPE_UNKNOWN;
@@ -162,7 +162,7 @@ class Message extends Accessory {
     }
 
     function text() : String {
-        if($this->_payload == null){
+        if($this->_payload == null) {
             throw new WechatyException("no payload");
         }
 
