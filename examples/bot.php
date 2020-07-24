@@ -114,6 +114,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             print_r($e);
         }
     } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_IMAGE) {
+        /**
+         * {"mimeType":null,"base64":null,"remoteUrl":"http:\/\/siyouyunsy-1253559996.cos.ap-guangzhou.myqcloud.com\/msg\/0FAPG\/20200724\/3182738554781097821_wxid_w3nebr749m5t21_1595589739165_.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDBi7d3I4UK7iDXkAhQyQsDMNGxY2KmlCY%26q-sign-time%3D1595589739%3B1681903339%26q-key-time%3D1595589739%3B1681903339%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D5fe1565b474c45d0500290a87e2000d75c1bb8c1","qrCode":null,"buffer":null,"localPath":null,"headers":[],"name":"3182738554781097821_wxid_w3nebr749m5t21_1595589739165_.png","metadata":null,"boxType":2}
+         */
         $image = $message->toImage();
         echo $image->thumbnail()->toJsonString() . "\n";
     }
