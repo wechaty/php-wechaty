@@ -12,6 +12,7 @@ use IO\Github\Wechaty\Accessory;
 use IO\Github\Wechaty\Exceptions\WechatyException;
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
+use IO\Github\Wechaty\Puppet\Schemas\RoomMemberQueryFilter;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
 
