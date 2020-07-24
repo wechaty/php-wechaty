@@ -287,8 +287,12 @@ class Message extends Accessory {
             throw new WechatyException("message not a ShareCard");
         }
 
+        /**
+         * PuppetServiceImpl grpcError() messageContact() rejection: not implement
+         * { code: 13, details: 'not implement' }
+         */
         $contactId = $this->wechaty->getPuppet()->messageContact($this->_id);
-        if(empty($contactId)){
+        if(empty($contactId)) {
             throw new WechatyException("can not get contact id by message {$this->_id}");
         }
 
