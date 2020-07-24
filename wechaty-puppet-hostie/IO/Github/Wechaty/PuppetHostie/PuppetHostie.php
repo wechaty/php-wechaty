@@ -261,6 +261,15 @@ class PuppetHostie extends Puppet {
         return $response->getId()->getValue();
     }
 
+    function messageRecall(string $messageId): bool {
+        $request = new \Wechaty\Puppet\MessageRecallRequest();
+        $request->setId($messageId);
+
+        list($response, $status) = $this->_grpcClient->messageRecall($request)->wait();
+
+        return $response->getSuccess();
+    }
+
     private function _startGrpcClient() {
         $endPoint = $this->_puppetOptions ? $this->_puppetOptions->endPoint : "";
         $discoverHostieIp = array();

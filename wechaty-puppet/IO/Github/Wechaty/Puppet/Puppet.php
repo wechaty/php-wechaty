@@ -68,6 +68,8 @@ abstract class Puppet extends EventEmitter {
     abstract function messageSendText(String $conversationId, String $text, array $mentionList = array()) : String;
     abstract function messageSendUrl(String $conversationId, UrlLinkPayload $urlLinkPayload) : String;
 
+    abstract function messageRecall(String $messageId) : bool;
+
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
         return true;

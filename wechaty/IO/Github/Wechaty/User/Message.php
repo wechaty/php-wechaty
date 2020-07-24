@@ -95,6 +95,21 @@ class Message extends Accessory {
         return $this->wechaty->contactManager->load($fromId);
     }
 
+    function to() : ?Contact {
+        if($this->_payload == null){
+            throw new WechatyException("no payload");
+        }
+        $toId = $this->_payload->toId ?: false;
+        if(empty($toId)) {
+            return null;
+        }
+        return $this->wechaty->contactManager->load($toId);
+    }
+
+    function recall() : bool {
+        $this->_puppet->messageRecall($this->_id);
+    }
+
     function ready() : void {
         if ($this->isReady()) {
             return;
