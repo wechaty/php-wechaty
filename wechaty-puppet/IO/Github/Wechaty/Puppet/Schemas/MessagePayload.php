@@ -36,7 +36,7 @@ class MessagePayload {
     const MESSAGETYPE_TEXT = 7; // Text(1)
     const MESSAGETYPE_LOCATION = 8; // Location(48)
     const MESSAGETYPE_MINIPROGRAM = 9; // MiniProgram(33)
-    const MESSAGETYPE_GROUPNOTE = 10; // Transfers(2000)
+    const MESSAGETYPE_GROUPNOTE = 10; //
     const MESSAGETYPE_TRANSFER = 11; // Transfers(2000)
     const MESSAGETYPE_REDENVELOPE = 12; // RedEnvelopes(2001)
     const MESSAGETYPE_RECALLED = 13; // Recalled(10002)
