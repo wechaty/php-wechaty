@@ -14,7 +14,7 @@ use IO\Github\Wechaty\Puppet\FileBox\FileBox;use IO\Github\Wechaty\Puppet\Schema
 use IO\Github\Wechaty\Puppet\Schemas\ImageType;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
-use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
+use IO\Github\Wechaty\Puppet\Schemas\Query\FriendshipSearchCondition;use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
@@ -80,6 +80,9 @@ abstract class Puppet extends EventEmitter {
     abstract function contactAlias(String $contactId, String $alias = "") : void;
     abstract function setContactAvatar(String $contactId, FileBox $file) : void;
 
+    abstract function friendshipSearchPhone(String $phone) : String;
+    abstract function friendshipSearchWeixin(String $weixin) : String;
+
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
         return true;
@@ -142,6 +145,18 @@ abstract class Puppet extends EventEmitter {
         $payload = $this->_roomRawPayloadParser($roomRawPayload);
 
         return $payload;
+    }
+
+    function friendshipSearch(FriendshipSearchCondition $condition): ?String {
+        Logger::DEBUG("friendshipSearch{}", $condition);
+
+        if (!empty($condition->phone)) {
+            $this->friendshipSearchPhone($condition->phone);
+        } elseif(!empty($condition->weixin)) {
+            $this->friendshipSearchWeixin($condition->weixin);
+        } else {
+            throw new InvalidArgumentException("friendshipSearch condition error");
+        }
     }
 
     function selfId() : String {

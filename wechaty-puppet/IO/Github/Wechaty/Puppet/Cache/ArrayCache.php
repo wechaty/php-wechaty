@@ -10,7 +10,7 @@ namespace IO\Github\Wechaty\Puppet\Cache;
 class ArrayCache extends Cache {
 
     public static function getInstanceWithName($name) {
-        if(isset(self::$_INSTANCES[$name]) && !empty(self::$_INSTANCES[$name])) {
+        if(!(isset(self::$_INSTANCES[$name]) && !empty(self::$_INSTANCES[$name]))) {
             self::$_INSTANCES[$name] = new self();
         }
         return self::$_INSTANCES[$name];

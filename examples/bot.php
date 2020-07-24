@@ -8,6 +8,7 @@
 
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
+use IO\Github\Wechaty\Puppet\Schemas\Query\FriendshipSearchCondition;
 use IO\Github\Wechaty\User\Contact;
 use IO\Github\Wechaty\User\ContactSelf;
 use IO\Github\Wechaty\User\MiniProgram;
@@ -71,11 +72,16 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 })->onLogin(function(ContactSelf $user) {
     echo "login user id " . $user->getId() . "\n";
     echo "login user name " . $user->getPayload()->name . "\n";
-})->onMessage(function(\IO\Github\Wechaty\User\Message $message) use ($appId, $username) {
+})->onMessage(function(\IO\Github\Wechaty\User\Message $message) use ($wechaty, $appId, $username) {
     $name = $message->from()->getPayload()->name;
     $text = $message->getPayload()->text;
     $type = $message->getPayload()->type;
     echo "message from user name $name\n";
+
+    $condition = new FriendshipSearchCondition();
+    $condition->phone = "18911116661";
+    $contact = $wechaty->friendship()->search($condition);
+    echo "search result:" . $contact->getPayload()->name;
 
     if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_TEXT) {
         if($text == "ding") {

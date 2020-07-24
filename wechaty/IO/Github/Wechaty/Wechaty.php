@@ -16,6 +16,7 @@ use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\WechatyOptions;
 use IO\Github\Wechaty\Puppet\StateEnum;
 use IO\Github\Wechaty\Puppet\MemoryCard\MemoryCard;
+use IO\Github\Wechaty\User\ContactSelf;
 use IO\Github\Wechaty\User\Friendship;
 use IO\Github\Wechaty\User\Manager\ContactManager;
 use IO\Github\Wechaty\User\Manager\ImageManager;
@@ -28,6 +29,9 @@ use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
 
 class Wechaty extends EventEmitter {
+
+    protected static $_INSTANCE;
+    protected static $_INSTANCES = array();
 
     private $_puppetOptions = null;
     private $_wechatyOptions = null;
@@ -81,13 +85,25 @@ class Wechaty extends EventEmitter {
         $this->_puppetOptions = $wechatyOptions->puppetOptions;
     }
 
+    /**
+     * @param $token
+     * @param string $endPoint
+     * @return Wechaty
+     */
     public static function getInstance($token, $endPoint = "") {
-        $puppetOptions = new PuppetOptions();
-        $puppetOptions->token = $token;
-        $puppetOptions->endPoint = $endPoint;
-        $wechatyOptions = new WechatyOptions();
-        $wechatyOptions->puppetOptions = $puppetOptions;
-        return new Wechaty($wechatyOptions);
+        $key = md5($token . $endPoint);
+        if(isset(self::$_INSTANCES[$key]) && !empty(self::$_INSTANCES[$key])) {
+            return self::$_INSTANCES[$key];
+        } else {
+            $puppetOptions = new PuppetOptions();
+            $puppetOptions->token = $token;
+            $puppetOptions->endPoint = $endPoint;
+            $wechatyOptions = new WechatyOptions();
+            $wechatyOptions->puppetOptions = $puppetOptions;
+            $wechaty = new Wechaty($wechatyOptions);
+            self::$_INSTANCES[$key] = $wechaty;
+            return self::$_INSTANCES[$key];
+        }
     }
 
     public function start() : Wechaty {
@@ -156,6 +172,12 @@ class Wechaty extends EventEmitter {
 
     function friendship() : Friendship {
         return new Friendship($this);
+    }
+
+    function userSelf(): ContactSelf {
+        $userId = $this->_puppet->selfId();
+        $user = $this->contactManager->loadSelf($userId);
+        return $user;
     }
 
     private function _on($event, \Closure $listener) : Wechaty {
