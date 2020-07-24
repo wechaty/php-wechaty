@@ -234,15 +234,39 @@ class Message extends Accessory {
 
         $mentionList = $this->mentionList();
         if($room == null || empty($mentionList)){
-        return $text;
+            return $text;
+        }
+        $mentionNameList = array();
+        foreach($mentionList as $value) {
+            $alias = $room->alias($value);
+            $name = $value->name();
+            if(!empty($alias)) {
+                $toAliasName = $alias;
+            } else {
+                $toAliasName = $name;
+            }
+            $mentionNameList[] = $toAliasName;
         }
 
+        $textWithoutMention = $text;
+        foreach($mentionNameList as $value) {
+            $escapedCur = escapeRegExp($value);
+            $regex = "@${escapedCur}(\\u2005|\\u0020|\$)";
+            $textWithoutMention = preg_replace($regex, "", $text);
+        }
+        return trim($textWithoutMention);
     }
 
     function mentionSelf() : bool {
         $selfId = $this->_puppet->selfId();
         $mentionList = $this->mentionList();
 
-        return true;
+        foreach($mentionList as $value) {
+            if($value->getId() == $selfId) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

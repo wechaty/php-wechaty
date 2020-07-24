@@ -59,4 +59,7 @@ class Contact extends Accessory {
 
     }
 
+    function name() : String {
+        return $this->_payload->name ?: "";
+    }
 }
