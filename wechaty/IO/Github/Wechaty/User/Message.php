@@ -202,4 +202,29 @@ class Message extends Accessory {
     function isReady() : bool {
         return $this->_payload != null;
     }
+
+    function talker() : ?Contact {
+        return $this->from();
+    }
+
+    function toRecalled() : ?Message {
+        if($this->type() != MessagePayload::MESSAGETYPE_RECALLED) {
+            throw new WechatyException("Cannot call  toRecalled() on message which id not recalled type");
+        }
+
+        $originalMessageId = $this->text();
+
+        if(empty($originalMessageId)) {
+            throw new WechatyException("Cannot find recalled Message");
+        }
+
+        try {
+            $message = $this->wechaty->messageManager->load($originalMessageId);
+            $message->ready();
+            return $message;
+        } catch (\Exception $e){
+            Logger::WARNING("Can not retrieve the recalled message with id ${originalMessageId}");
+        }
+        return null;
+    }
 }
