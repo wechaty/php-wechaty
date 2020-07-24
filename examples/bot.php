@@ -80,7 +80,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 
     $contactList = $wechaty->userSelf()->contactList();
     foreach($contactList as $value) {
-        echo $value->name() . "\n";
+        print_r($value);
     }
 
     if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_TEXT) {
