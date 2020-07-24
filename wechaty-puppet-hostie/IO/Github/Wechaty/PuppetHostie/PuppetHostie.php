@@ -276,13 +276,22 @@ class PuppetHostie extends Puppet {
         return $response->getSuccess();
     }
 
+    /**
+     * @param string $messageId
+     * @return string
+     */
     function messageContact(string $messageId): string {
         $request = new \Wechaty\Puppet\MessageContactRequest();
         $request->setId($messageId);
+        Logger::DEBUG("messageContact:$messageId");
 
         list($response, $status) = $this->_grpcClient->MessageContact($request)->wait();
 
-        return $response->getId()->getValue();
+        if($response) {
+            return $response->getId()->getValue();
+        } else {
+            return "";
+        }
     }
 
     function messageFile(string $messageId): FileBox {
