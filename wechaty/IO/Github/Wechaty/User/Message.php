@@ -222,7 +222,7 @@ class Message extends Accessory {
             $message = $this->wechaty->messageManager->load($originalMessageId);
             $message->ready();
             return $message;
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             Logger::WARNING("Can not retrieve the recalled message with id ${originalMessageId}");
         }
         return null;
