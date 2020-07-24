@@ -8,6 +8,24 @@
 namespace IO\Github\Wechaty\Puppet\Schemas;
 
 class MessagePayload {
+    /**
+     * MessageTypeUnknown     MessageType = 0
+    MessageTypeAttachment  MessageType = 1
+    MessageTypeAudio       MessageType = 2
+    MessageTypeContact     MessageType = 3
+    MessageTypeChatHistory MessageType = 4
+    MessageTypeEmoticon    MessageType = 5
+    MessageTypeImage       MessageType = 6
+    MessageTypeText        MessageType = 7
+    MessageTypeLocation    MessageType = 8
+    MessageTypeMiniProgram MessageType = 9
+    MessageTypeGroupNote   MessageType = 10
+    MessageTypeTransfer    MessageType = 11
+    MessageTypeRedEnvelope MessageType = 12
+    MessageTypeRecalled    MessageType = 13
+    MessageTypeURL         MessageType = 14
+    MessageTypeVideo       MessageType = 15
+     */
     const MESSAGETYPE_UNKNOWN = 0;
     const MESSAGETYPE_ATTACHMENT = 1; // Attach(6),
     const MESSAGETYPE_AUDIO = 2; // Audio(1), Voice(34)
@@ -18,11 +36,12 @@ class MessagePayload {
     const MESSAGETYPE_TEXT = 7; // Text(1)
     const MESSAGETYPE_LOCATION = 8; // Location(48)
     const MESSAGETYPE_MINIPROGRAM = 9; // MiniProgram(33)
-    const MESSAGETYPE_TRANSFER = 10; // Transfers(2000)
-    const MESSAGETYPE_REDENVELOPE = 11; // RedEnvelopes(2001)
-    const MESSAGETYPE_RECALLED = 12; // Recalled(10002)
-    const MESSAGETYPE_URL = 13; // Url(5)
-    const MESSAGETYPE_VIDEO = 14;
+    const MESSAGETYPE_GROUPNOTE = 10; // Transfers(2000)
+    const MESSAGETYPE_TRANSFER = 11; // Transfers(2000)
+    const MESSAGETYPE_REDENVELOPE = 12; // RedEnvelopes(2001)
+    const MESSAGETYPE_RECALLED = 13; // Recalled(10002)
+    const MESSAGETYPE_URL = 14; // Url(5)
+    const MESSAGETYPE_VIDEO = 15;
 
     public $id = null;
     public $mentionIdList = null;
