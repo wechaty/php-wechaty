@@ -20,31 +20,31 @@ class MiniProgram {
         return $this->_payload;
     }
 
-    function appId() : String {
+    function appId() : ?String {
         return $this->_payload->appId;
     }
 
-    function titile() : String {
+    function titile() : ?String {
         return $this->_payload->title;
     }
 
-    function pagePath() : String {
+    function pagePath() : ?String {
         return $this->_payload->pagePath;
     }
 
-    function username() : String {
+    function username() : ?String {
         return $this->_payload->username;
     }
 
-    function description() : String {
+    function description() : ?String {
         return $this->_payload->description;
     }
 
-    function thumbUrl() : String {
+    function thumbUrl() : ?String {
         return $this->_payload->thumbUrl;
     }
 
-    function thumbKey() : String {
+    function thumbKey() : ?String {
         return $this->_payload->thumbKey;
     }
 

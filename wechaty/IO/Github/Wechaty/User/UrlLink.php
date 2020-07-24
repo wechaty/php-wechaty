@@ -21,11 +21,11 @@ class UrlLink {
         return $this->_payload;
     }
 
-    function url () : String {
+    function url () : ?String {
         return $this->_payload->url;
     }
 
-    function title () : String {
+    function title () : ?String {
         return $this->_payload->title;
     }
 

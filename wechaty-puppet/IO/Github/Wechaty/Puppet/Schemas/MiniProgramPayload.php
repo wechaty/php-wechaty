@@ -13,6 +13,8 @@ class MiniProgramPayload extends AbstractPayload {
     public $appid = null;
     public $description = null;
     public $pagePath = null;
+    public $iconUrl = null;
+    public $shareId = null;
     public $thumbUrl = null;
     public $title = null;
     public $username = null;
