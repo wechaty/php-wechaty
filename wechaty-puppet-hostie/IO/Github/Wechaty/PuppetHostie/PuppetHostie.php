@@ -336,6 +336,18 @@ class PuppetHostie extends Puppet {
         return UrlLinkPayload::fromJson($jsonText);
     }
 
+    function contactAlias(string $contactId, string $alias = ""): void {
+        $request = new \Wechaty\Puppet\ContactAliasRequest();
+        $request->setId($contactId);
+        if($alias) {
+            $value = new \Google\Protobuf\StringValue();
+            $value->setValue($alias);
+            $request->setAlias($value);
+        }
+
+        list($response, $status) = $this->_grpcClient->ContactAlias($request)->wait();
+    }
+
     private function _startGrpcClient() {
         $endPoint = $this->_puppetOptions ? $this->_puppetOptions->endPoint : "";
         $discoverHostieIp = array();
