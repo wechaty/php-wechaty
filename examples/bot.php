@@ -74,38 +74,46 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 })->onMessage(function(\IO\Github\Wechaty\User\Message $message) use ($appId, $username) {
     $name = $message->from()->getPayload()->name;
     $text = $message->getPayload()->text;
+    $type = $message->getPayload()->type;
     echo "message from user name $name\n";
-    try {
-        $contact = $message->toFileBox();
-        echo $contact->toJsonString() . "\n";
-    } catch(\IO\Github\Wechaty\Exceptions\WechatyException $e) {
-        print_r($e);
-    }
-    if($text == "ding") {
-        $message->say("dong");
-    } else if($text == "hello") {
-        $message->say("hello $name from PHP7.4");
-        $url = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
-        $fileBoxOptions = new \IO\Github\Wechaty\Puppet\FileBox\FileBoxOptionsUrl($url, "php-wechaty.png");
-        $file = new FileBox($fileBoxOptions);
-        $message->say($file);
-        $url = "https://tb-m.luomor.com/";
-        $urlLink = UrlLink::create($url);
-        $message->say($urlLink);
 
-        $payload = new MiniProgramPayload();
-        $payload->appid = $appId;
-        $payload->pagePath = "pages/index/index.html";
-        $payload->title = "烙馍FM";
-        $payload->description = "烙馍倾听";
-        $payload->username = "$username@app"; // 'gh_xxxxxxx', get from mp.weixin.qq.com
-        $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
-        $payload->thumbKey = "";
-        $miniProgram = new MiniProgram($payload);
-        $message->say($miniProgram);
-    } else if(stripos($text, "@烙馍网") === 0) {
-        $message->say("hello $name from PHP7.4");
+    if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_TEXT) {
+        try {
+            $fileBox = $message->toFileBox();
+            echo $fileBox->toJsonString() . "\n";
+        } catch(\IO\Github\Wechaty\Exceptions\WechatyException $e) {
+            print_r($e);
+        }
+
+        if($text == "ding") {
+            $message->say("dong");
+        } else if($text == "hello") {
+            $message->say("hello $name from PHP7.4");
+            $url = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
+            $fileBoxOptions = new \IO\Github\Wechaty\Puppet\FileBox\FileBoxOptionsUrl($url, "php-wechaty.png");
+            $file = new FileBox($fileBoxOptions);
+            $message->say($file);
+            $url = "https://tb-m.luomor.com/";
+            $urlLink = UrlLink::create($url);
+            $message->say($urlLink);
+
+            $payload = new MiniProgramPayload();
+            $payload->appid = $appId;
+            $payload->pagePath = "pages/index/index.html";
+            $payload->title = "烙馍FM";
+            $payload->description = "烙馍倾听";
+            $payload->username = "$username@app"; // 'gh_xxxxxxx', get from mp.weixin.qq.com
+            $payload->thumbUrl = "https://wx1.sinaimg.cn/mw690/46b94231ly1gh0xjf8rkhj21js0jf0xb.jpg";
+            $payload->thumbKey = "";
+            $miniProgram = new MiniProgram($payload);
+            $message->say($miniProgram);
+        } else if(stripos($text, "@烙馍网") === 0) {
+            $message->say("hello $name from PHP7.4");
+        }
+    } elseif($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_IMAGE) {
+
     }
+
 })->onHeartBeat(function($data) use ($wechaty) {
     // {"data":"heartbeat@browserbridge ding","timeout":60000}
     echo $data . "\n";
