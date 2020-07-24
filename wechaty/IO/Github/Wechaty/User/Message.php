@@ -301,7 +301,7 @@ class Message extends Accessory {
         return $contact;
     }
 
-    function toUrlLink() : UrlLink { // video?
+    function toUrlLink() : UrlLink {
         if($this->type() != MessagePayload::MESSAGETYPE_URL) {
             throw new WechatyException("message not a Url Link");
         }
