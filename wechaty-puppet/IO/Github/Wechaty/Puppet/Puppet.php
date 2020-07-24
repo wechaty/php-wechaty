@@ -78,6 +78,7 @@ abstract class Puppet extends EventEmitter {
     abstract function messageUrl(String $messageId) : UrlLinkPayload;
 
     abstract function contactAlias(String $contactId, String $alias = "") : void;
+    abstract function setContactAvatar(String $contactId, FileBox $file) : void;
 
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);

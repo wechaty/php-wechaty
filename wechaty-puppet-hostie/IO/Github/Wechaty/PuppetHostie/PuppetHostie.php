@@ -348,6 +348,19 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->ContactAlias($request)->wait();
     }
 
+    function setContactAvatar(String $contactId, FileBox $file) : void {
+        $request = new \Wechaty\Puppet\ContactAvatarRequest();
+
+        $toJsonString = $file->toJsonString();
+
+        $request->setId($contactId);
+        $value = new \Google\Protobuf\StringValue();
+        $value->setValue($toJsonString);
+        $request->setFilebox($value);
+
+        list($response, $status) = $this->_grpcClient->ContactAvatar($request)->wait();
+    }
+
     private function _startGrpcClient() {
         $endPoint = $this->_puppetOptions ? $this->_puppetOptions->endPoint : "";
         $discoverHostieIp = array();
