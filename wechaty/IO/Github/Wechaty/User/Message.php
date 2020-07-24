@@ -18,6 +18,7 @@ use IO\Github\Wechaty\Util\Logger;
 
 class Message extends Accessory {
     const AT_SEPRATOR_REGEX = "[\\u2005\\u0020]";
+    const SPECIAL_REGEX_CHARS = "[{}()\\[\\].+*?^$\\\\|]";
 
     /**
      * @var null|MessagePayload
@@ -340,5 +341,9 @@ class Message extends Accessory {
             $nameList[] = substr($name, 0, strlen($name) - 1);
         }
         return $nameList;
+    }
+
+    function escapeRegExp(String $str) : ?String {
+        return preg_replace(self::SPECIAL_REGEX_CHARS, "\\\\$0", $str);
     }
 }
