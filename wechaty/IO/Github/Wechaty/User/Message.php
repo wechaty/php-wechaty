@@ -110,6 +110,64 @@ class Message extends Accessory {
         $this->_puppet->messageRecall($this->_id);
     }
 
+    function type() : int {
+        if($this->_payload == null){
+            throw new WechatyException("no payload");
+        }
+        return $this->_payload->type ?: MessagePayload::MESSAGETYPE_UNKNOWN;
+    }
+
+    function self() : bool{
+        $selfId = $this->_puppet->selfId();
+        $from = $this->from();
+
+        return $selfId == $from->getId();
+    }
+
+    function mentionList() : array {
+        $room = $this->room();
+
+        if ($room == null && $this->type() != MessagePayload::MESSAGETYPE_TEXT) {
+            return array();
+        }
+
+        if (!empty($this->_payload->mentionIdList)) {
+            $list = array();
+            foreach ($this->_payload->mentionIdList as $value) {
+                $contact = $this->wechaty->contactManager->load($value)->ready();
+                $list[] = $contact;
+            }
+            return $list;
+        }
+
+        $atList = preg_split(self::AT_SEPRATOR_REGEX, $this->text());
+        if (empty($atList)) {
+            return array();
+        }
+
+        //TODO
+        $rawMentionList = array();
+
+        $mentionNameList = array();
+
+        $roomMemberQueryFilter = new RoomMemberQueryFilter();
+        $flatten = array();
+
+        return $flatten;
+    }
+
+    function content() : String {
+        return $this->text();
+    }
+
+    function text() : String {
+        if($this->_payload == null){
+            throw new WechatyException("no payload");
+        }
+
+        return $this->_payload->text ?:  "";
+    }
+
     function ready() : void {
         if ($this->isReady()) {
             return;
