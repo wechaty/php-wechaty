@@ -5,7 +5,7 @@
  * Date: 2020/7/24
  * Time: 10:43 AM
  */
-namespace IO\Github\Wechaty\Puppet\Schemas;
+namespace IO\Github\Wechaty\Puppet\Schemas\Query;
 
 class RoomMemberQueryFilter {
     public $name = null;
