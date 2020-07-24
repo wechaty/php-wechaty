@@ -8,6 +8,8 @@
 namespace IO\Github\Wechaty\User;
 
 use IO\Github\Wechaty\Accessory;
+use IO\Github\Wechaty\Exceptions\WechatyException;
+use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
@@ -26,6 +28,33 @@ class Contact extends Accessory {
         $this->_id = $id;
         $this->_puppet = $wechaty->getPuppet();
         parent::__construct($wechaty);
+    }
+
+    function say($something) : ?Message {
+        $msgId = "";
+
+        $conversationId = $this->getId();
+        if(gettype($something) == "string") {
+            $msgId = $this->_puppet->messageSendText($conversationId, $something);
+        } else if($something instanceof Contact) {
+            $msgId = $this->_puppet->messageSendContact($conversationId, $something);
+        } else if($something instanceof FileBox) {
+            $msgId = $this->_puppet->messageSendFile($conversationId, $something);
+        } else if($something instanceof UrlLink) {
+            $msgId = $this->_puppet->messageSendUrl($conversationId, $something->getPayload());
+        } else if($something instanceof MiniProgram) {
+            $msgId = $this->_puppet->messageSendMiniProgram($conversationId, $something->getPayload());
+        } else {
+            throw new WechatyException("unknow message");
+        }
+
+        if ($msgId != null) {
+            $message = $this->wechaty->messageManager->load($msgId);
+            $message->ready();
+            return $message;
+        }
+
+        return null;
     }
 
     function sync() {
@@ -61,5 +90,23 @@ class Contact extends Accessory {
 
     function name() : String {
         return $this->_payload->name ?: "";
+    }
+
+    function setAlias(String $newAlias) {
+        if($this->_payload == null) {
+            throw new WechatyException("no payload");
+        }
+        try {
+            $this->_puppet->contactAlias($this->_id, $newAlias);
+            $this->_puppet->contactPayloadDirty($this->_id);
+            $this->_payload = $this->_puppet->contactPayload($this->_id);
+        } catch (\Exception $e) {
+            Logger::ERR("alias({}) rejected: {}", $newAlias, $e->getMessage());
+            throw $e;
+        }
+    }
+
+    function getAlias() : ?String {
+        return $this->_payload->alias ?:null;
     }
 }
