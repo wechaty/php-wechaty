@@ -136,7 +136,8 @@ class Message extends Accessory {
         if (!empty($this->_payload->mentionIdList)) {
             $list = array();
             foreach ($this->_payload->mentionIdList as $value) {
-                $contact = $this->wechaty->contactManager->load($value)->ready();
+                $contact = $this->wechaty->contactManager->load($value);
+                $contact->ready();
                 $list[] = $contact;
             }
             return $list;

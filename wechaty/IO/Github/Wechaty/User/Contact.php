@@ -65,7 +65,8 @@ class Contact extends Accessory implements Sayable {
             if($value == $this->_id) {
                 break;
             }
-            $contact = $this->wechaty->contactManager->load($value)->ready();
+            $contact = $this->wechaty->contactManager->load($value);
+            $contact->ready();
             $contactObjs[] = $contact;
         }
 
