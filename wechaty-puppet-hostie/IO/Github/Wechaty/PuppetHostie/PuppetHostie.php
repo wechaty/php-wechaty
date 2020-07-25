@@ -445,6 +445,50 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->FriendshipAdd($request)->wait();
     }
 
+    function roomAdd(string $roomId, string $contactId): void {
+        // TODO: Implement roomAdd() method.
+    }
+
+    function roomAvatar(string $roomId): FileBox {
+        // TODO: Implement roomAvatar() method.
+    }
+
+    function roomCreate(array $contactIdList, string $topic): string {
+        // TODO: Implement roomCreate() method.
+    }
+
+    function roomDel(string $roomId, string $contactId): void {
+        // TODO: Implement roomDel() method.
+    }
+
+    function roomList(): array {
+        // TODO: Implement roomList() method.
+    }
+
+    function roomQRCode(string $roomId): string {
+        // TODO: Implement roomQRCode() method.
+    }
+
+    function roomQuit(string $roomId): void {
+        // TODO: Implement roomQuit() method.
+    }
+
+    function roomTopic(string $roomId): string {
+        // TODO: Implement roomTopic() method.
+    }
+
+    function setRoomTopic(string $roomId, string $topic): void {
+        // TODO: Implement setRoomTopic() method.
+    }
+
+    function roomRawPayload(string $roomId): RoomPayload {
+        // TODO: Implement roomRawPayload() method.
+    }
+
+    function roomRawPayloadParser(RoomPayload $roomPayload): RoomPayload {
+        // TODO: Implement roomRawPayloadParser() method.
+    }
+
     private function _repeatFieldToArray($repeatField) : array {
         $ret = array();
         if($repeatField instanceof \Google\Protobuf\Internal\RepeatedField) {

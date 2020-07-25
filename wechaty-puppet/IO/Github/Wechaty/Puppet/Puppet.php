@@ -90,6 +90,24 @@ abstract class Puppet extends EventEmitter {
     abstract function friendshipAccept(String $friendshipId) : void;
     abstract function friendshipAdd(String $contractId, String $hello) : void;
 
+    /**
+     * Room
+     */
+    abstract function roomAdd(String $roomId, String $contactId) : void;
+
+    abstract function roomAvatar(String $roomId) : FileBox;
+    abstract function roomCreate(array $contactIdList, String $topic) : String;
+
+    abstract function roomDel(String $roomId, String $contactId) : void;
+
+    abstract function roomList(): array;
+    abstract function roomQRCode(String $roomId): String;
+    abstract function roomQuit(String $roomId): void;
+    abstract function roomTopic(String $roomId): String;
+    abstract function setRoomTopic(String $roomId, String $topic): void;
+    abstract function roomRawPayload(String $roomId): RoomPayload;
+    abstract function roomRawPayloadParser(RoomPayload $roomPayload): RoomPayload;
+
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
         return true;
