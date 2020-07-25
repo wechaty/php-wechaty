@@ -82,7 +82,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     $room = $message->room();
     if($room) {
         if($text == "room") {
-            $room->say("hello from PHP7.4");
+            $topic = $room->getPayload()->topic;
+            echo "room topic:$topic";
+            $room->say("hello $topic from PHP7.4");
         }
     }
 
