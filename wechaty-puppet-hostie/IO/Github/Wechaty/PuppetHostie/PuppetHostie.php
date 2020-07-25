@@ -252,6 +252,7 @@ class PuppetHostie extends Puppet {
         $request = new \Wechaty\Puppet\MessageSendTextRequest();
         $request->setConversationId($conversationId);
         $request->setText($text);
+        $request->setMentonalIds($mentionList);
 
         list($response, $status) = $this->_grpcClient->MessageSendText($request)->wait();
         //Google\Protobuf\StringValue Object

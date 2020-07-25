@@ -9,12 +9,16 @@ namespace IO\Github\Wechaty\User;
 
 use IO\Github\Wechaty\Accessory;
 use IO\Github\Wechaty\Exceptions\WechatyException;
+use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
+use phpDocumentor\Reflection\Types\Mixed_;
 
 class Room extends Accessory {
+    const FOUR_PER_EM_SPACE = "\u2005";
+
     /**
      * @var null|RoomPayload
      */
@@ -62,6 +66,69 @@ class Room extends Accessory {
         foreach($memberIdList as $value) {
             $this->wechaty->contactManager->load($value)->ready();
         }
+    }
+
+    function say($something, $varList) {
+        $msgId = "";
+        $text = "";
+
+        if(gettype($something) == "string") {
+            $mentionList = array();
+            if(!empty($varList)) {
+                $list = $varList[0];
+                if(gettype($list) != "array") {
+                    throw new WechatyException("room say contact args not valid");
+                }
+                foreach($list as $value) {
+                    if(!$value instanceof Contact) {
+                        throw new WechatyException("mentionList must be contact when not using String array function call.");
+                    }
+                }
+                $mentionList = $list;
+                $mentionAlias = [];
+                foreach($mentionList as $contact) {
+                    $alias = $this->alias($contact);
+                    if(!empty($alias)) {
+                        $concatText = $alias;
+                    } else {
+                        $concatText = $contact->name();
+                    }
+                    $mentionAlias[] = "@$concatText";
+                }
+                $mentionText = implode(self::FOUR_PER_EM_SPACE, $mentionAlias);
+                $text = $mentionText;
+            } else {
+                $text = $something;
+            }
+            $mentionIds = array();
+            foreach($mentionList as $value) {
+                $mentionIds[] = $value->getId();
+            }
+            $msgId = $this->_puppet->messageSendText($this->_id, $something, $mentionIds);
+        } else if($something instanceof FileBox) {
+            $msgId = $this->_puppet->messageSendFile($this->_id, $something);
+        } else if($something instanceof Contact) {
+            $msgId = $this->_puppet->messageSendContact($this->_id, $something->getId());
+        } else if($something instanceof UrlLink) {
+            $msgId = $this->_puppet->messageSendUrl($this->_id, $something->getPayload());
+        } else if($something instanceof MiniProgram) {
+            $msgId = $this->_puppet->messageSendMiniProgram($this->_id, $something->getPayload());
+        } else {
+            throw new WechatyException("unknow message");
+        }
+
+        if ($msgId != null) {
+            $msg = $this->wechaty->messageManager->load($msgId);
+            return $msg;
+        }
+
+        return null;
+    }
+
+    function alias(Contact $contact) : String {
+        $roomMemberPayload = $this->wechaty->getPuppet()->roomMemberPayload($this->_id, $contact->getId());
+
+        return $roomMemberPayload->roomAlias;
     }
 
     function onInvite($listener) : Room {
