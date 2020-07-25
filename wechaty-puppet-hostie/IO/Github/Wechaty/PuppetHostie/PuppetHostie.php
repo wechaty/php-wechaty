@@ -446,7 +446,11 @@ class PuppetHostie extends Puppet {
     }
 
     function roomAdd(string $roomId, string $contactId): void {
-        // TODO: Implement roomAdd() method.
+        $request = new \Wechaty\Puppet\RoomAddRequest();
+        $request->setContactId($contactId);
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomAdd($request)->wait();
     }
 
     function roomAvatar(string $roomId): FileBox {
