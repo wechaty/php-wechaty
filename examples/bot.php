@@ -112,7 +112,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             } else {
                 echo "search result empty\n";
             }
-        } elseif($text = "add") {
+        } elseif($text == "add") {
             $wechatId = getenv("WECHAT_ADD_WECHAT_ID");
 
             $contact = $wechaty->contactManager->load($wechatId);
