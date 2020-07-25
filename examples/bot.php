@@ -93,6 +93,10 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             $wechatId = getenv("WECHAT_ADD_WECHAT_ID");
             $contact = $wechaty->contactManager->load($wechatId);
             $room->add($contact);
+        } elseif($text == "roomDel") {
+            $wechatId = getenv("WECHAT_ADD_WECHAT_ID");
+            $contact = $wechaty->contactManager->load($wechatId);
+            $room->del($contact);
         }
     }
 

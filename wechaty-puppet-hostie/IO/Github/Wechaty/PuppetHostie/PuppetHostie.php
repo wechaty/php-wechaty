@@ -462,7 +462,11 @@ class PuppetHostie extends Puppet {
     }
 
     function roomDel(string $roomId, string $contactId): void {
-        // TODO: Implement roomDel() method.
+        $request = new \Wechaty\Puppet\RoomDelRequest();
+        $request->setContactId($contactId);
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomDel($request)->wait();
     }
 
     function roomList(): array {
