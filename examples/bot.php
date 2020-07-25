@@ -100,7 +100,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
                 //$value->say("hello {$value->name()}, the message is send to all friend by PHP7.4, Good Night.");
                 sleep(2);
             }
-        } elseif($text = "search") {
+        } elseif($text == "search") {
             $searchPhone = getenv("WECHAT_SEARCH_PHONE");
 
             $condition = new FriendshipSearchCondition();
