@@ -14,7 +14,9 @@ use IO\Github\Wechaty\Puppet\FileBox\FileBox;use IO\Github\Wechaty\Puppet\Schema
 use IO\Github\Wechaty\Puppet\Schemas\ImageType;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
-use IO\Github\Wechaty\Puppet\Schemas\Query\FriendshipSearchCondition;use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
+use IO\Github\Wechaty\Puppet\Schemas\Query\FriendshipSearchCondition;
+use IO\Github\Wechaty\Puppet\Schemas\RoomMemberPayload;
+use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 use IO\Github\Wechaty\Util\Logger;
 use LM\Exception;
@@ -61,6 +63,8 @@ abstract class Puppet extends EventEmitter {
     abstract function _roomRawPayload(String $roomId) : RoomPayload;
     abstract function _roomRawPayloadParser(RoomPayload $roomPayload) : RoomPayload;
     abstract function roomMemberList(String $roomId) : array;
+    protected abstract function _roomMemberRawPayload(String $roomId, String $contactId): RoomMemberPayload;
+    protected abstract function _roomMemberRawPayloadParser(RoomMemberPayload $rawPayload): RoomMemberPayload;
 
     abstract function messageSendContact(String $conversationId, String $contactId) : String;
     abstract function messageSendFile(String $conversationId, FileBox $file) : String;
@@ -160,6 +164,25 @@ abstract class Puppet extends EventEmitter {
         } else {
             throw new InvalidArgumentException("friendshipSearch condition error");
         }
+    }
+
+    function roomMemberPayload(String $roomId, String $memberId): RoomMemberPayload {
+        $key = $this->_cacheKeyRoomMember($roomId, $memberId);
+        $roomMemberPayload = $this->_cache->get($key);
+        if($roomMemberPayload != null) {
+            return $roomMemberPayload;
+        }
+        $rawPayload = $this->_roomMemberRawPayload($roomId, $memberId);
+        $payload = $this->_roomMemberRawPayloadParser($rawPayload);
+
+        return $payload;
+    }
+
+    /**
+     * Concat roomId & contactId to one string
+     */
+    private function _cacheKeyRoomMember(String $roomId, String $contactId) : String {
+        return self::CACHE_ROOM_MEMBER_PAYLOAD_PREFIX . "$contactId@@@$roomId";
     }
 
     function selfId() : String {

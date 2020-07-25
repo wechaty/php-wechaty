@@ -17,6 +17,7 @@ use IO\Github\Wechaty\Puppet\Schemas\ImageType;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
+use IO\Github\Wechaty\Puppet\Schemas\RoomMemberPayload;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 use IO\Github\Wechaty\Puppet\StateEnum;
@@ -28,6 +29,7 @@ use Wechaty\Puppet\EventResponse;
 use Wechaty\Puppet\EventType;
 use Wechaty\Puppet\MessagePayloadResponse;
 use Wechaty\Puppet\MessageSendTextResponse;
+use Wechaty\Puppet\RoomMemberPayloadResponse;
 use Wechaty\Puppet\RoomPayloadResponse;
 
 class PuppetHostie extends Puppet {
@@ -206,6 +208,26 @@ class PuppetHostie extends Puppet {
             return $memberList;
         }
         return $memberIds;
+    }
+
+    protected function _roomMemberRawPayload(string $roomId, string $contactId): RoomMemberPayload {
+        $request = new \Wechaty\Puppet\RoomMemberPayloadRequest();
+        $request->setId($roomId);
+        $request->setMemberId($contactId);
+
+        list($response, $status) = $this->_grpcClient->RoomMemberPayload($request)->wait();
+        $payload = new RoomMemberPayload();
+        $payload->avatar = $response->getAvatar();
+        $payload->id = $response->getId();
+        $payload->inviterId = $response->getInviterId();
+        $payload->name = $response->getName();
+        $payload->roomAlias = $response->getRoomAlias();
+
+        return $payload;
+    }
+
+    protected function _roomMemberRawPayloadParser(RoomMemberPayload $rawPayload): RoomMemberPayload {
+        return $rawPayload;
     }
 
     function messageSendContact(string $conversationId, string $contactId): string {
