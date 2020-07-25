@@ -68,7 +68,7 @@ class Room extends Accessory {
         }
     }
 
-    function say($something, $varList) {
+    function say($something, $varList = array()) {
         $msgId = "";
         $text = "";
 

@@ -79,6 +79,13 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     $type = $message->getPayload()->type;
     echo "message from user name $name\n";
 
+    $room = $message->room();
+    if($room) {
+        if($text == "room") {
+            $room->say("hello from PHP7.4");
+        }
+    }
+
     if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_TEXT) {
         if($text == "ding") {
             $message->say("dong");
