@@ -126,6 +126,7 @@ abstract class Puppet extends EventEmitter {
         $messageRawPayload = $this->_messageRawPayload($messageId);
         $payload = $this->_messageRawPayloadParser($messageRawPayload);
 
+        $this->_cache->set(self::CACHE_MESSAGE_PAYLOAD_PREFIX . $messageId, $payload);
         return $payload;
     }
 
@@ -151,6 +152,7 @@ abstract class Puppet extends EventEmitter {
         $roomRawPayload = $this->_roomRawPayload($roomId);
         $payload = $this->_roomRawPayloadParser($roomRawPayload);
 
+        $this->_cache->set(self::CACHE_ROOM_PAYLOAD_PREFIX . $roomId, $payload);
         return $payload;
     }
 
@@ -174,6 +176,8 @@ abstract class Puppet extends EventEmitter {
         }
         $rawPayload = $this->_roomMemberRawPayload($roomId, $memberId);
         $payload = $this->_roomMemberRawPayloadParser($rawPayload);
+
+        $this->_cache->set($key, $payload);
 
         return $payload;
     }
