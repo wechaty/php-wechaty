@@ -74,9 +74,13 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     echo "login user id " . $user->getId() . "\n";
     echo "login user name " . $user->getPayload()->name . "\n";
 })->onMessage(function(\IO\Github\Wechaty\User\Message $message) use ($wechaty, $appId, $username) {
+    $type = $message->getPayload()->type;
+    if($type == \IO\Github\Wechaty\Puppet\Schemas\MessagePayload::MESSAGETYPE_UNKNOWN) {
+        echo "unknown message {$message->text()}\n";
+        return;
+    }
     $name = $message->from()->getPayload()->name;
     $text = $message->getPayload()->text;
-    $type = $message->getPayload()->type;
     echo "message from user name $name\n";
 
     $room = $message->room();
