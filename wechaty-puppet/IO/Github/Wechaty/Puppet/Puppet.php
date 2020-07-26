@@ -62,7 +62,6 @@ abstract class Puppet extends EventEmitter {
     abstract function _messageRawPayloadParser(MessagePayload $rawPayload) : MessagePayload;
     abstract function _roomRawPayload(String $roomId) : RoomPayload;
     abstract function _roomRawPayloadParser(RoomPayload $roomPayload) : RoomPayload;
-    abstract function roomMemberList(String $roomId) : array;
     protected abstract function _roomMemberRawPayload(String $roomId, String $contactId): RoomMemberPayload;
     protected abstract function _roomMemberRawPayloadParser(RoomMemberPayload $rawPayload): RoomMemberPayload;
 
@@ -107,6 +106,13 @@ abstract class Puppet extends EventEmitter {
     abstract function setRoomTopic(String $roomId, String $topic): void;
     abstract function roomRawPayload(String $roomId): RoomPayload;
     abstract function roomRawPayloadParser(RoomPayload $roomPayload): RoomPayload;
+
+    /**
+     * RoomMember
+     */
+    abstract function getRoomAnnounce(String $roomId): ?String;
+    abstract function setRoomAnnounce(String $roomId, String $text): object;
+    abstract function roomMemberList(String $roomId): array;
 
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);

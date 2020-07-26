@@ -468,6 +468,7 @@ class PuppetHostie extends Puppet {
 
         list($response, $status) = $this->_grpcClient->RoomDel($request)->wait();
 
+        //status:{"metadata":[],"code":0,"details":"OK"} $status->details
         Logger::DEBUG("roomDel", array("status" => $status));
     }
 
@@ -518,6 +519,32 @@ class PuppetHostie extends Puppet {
 
     function roomRawPayloadParser(RoomPayload $roomPayload): RoomPayload {
         // TODO: Implement roomRawPayloadParser() method.
+    }
+
+    function getRoomAnnounce(string $roomId): ?string {
+        $request = new \Wechaty\Puppet\RoomAnnounceRequest();
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomAnnounce($request)->wait();
+
+        if($response) {
+            return $response->getText()->getValue();
+        } else {
+            return null;
+        }
+    }
+
+    function setRoomAnnounce(string $roomId, string $text): object {
+        $value = new \Google\Protobuf\StringValue();
+        $value->setValue($text);
+
+        $request = new \Wechaty\Puppet\RoomAnnounceRequest();
+        $request->setId($roomId);
+        $request->setText($value);
+
+        list($response, $status) = $this->_grpcClient->RoomAnnounce($request)->wait();
+
+        return $status;
     }
 
     private function _repeatFieldToArray($repeatField) : array {
