@@ -19,6 +19,7 @@ use IO\Github\Wechaty\Puppet\MemoryCard\MemoryCard;
 use IO\Github\Wechaty\User\ContactSelf;
 use IO\Github\Wechaty\User\Friendship;
 use IO\Github\Wechaty\User\Manager\ContactManager;
+use IO\Github\Wechaty\User\Manager\FriendshipManager;
 use IO\Github\Wechaty\User\Manager\ImageManager;
 use IO\Github\Wechaty\User\Manager\MessageManager;
 use IO\Github\Wechaty\User\Manager\RoomInvitationManager;
@@ -67,7 +68,12 @@ class Wechaty extends EventEmitter {
     /**
      * @var null | ImageManager
      */
-    public $imageManager = null;
+    public ?ImageManager $imageManager = null;
+
+    /**
+     * @var null | FriendshipManager
+     */
+    public ?FriendshipManager $friendshipManager = null;
 
     /**
      * @var null|PuppetHostie\PuppetHostie
@@ -298,5 +304,6 @@ class Wechaty extends EventEmitter {
         $this->roomInvitationManager = new RoomInvitationManager($this);
         $this->imageManager = new ImageManager($this);
         $this->tagManager = new TagManager($this);
+        $this->friendshipManager = new FriendshipManager($this);
     }
 }

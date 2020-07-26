@@ -164,6 +164,10 @@ class Room extends Accessory {
         $this->_puppet->roomDel($this->_id, $contact->getId());
     }
 
+    function quit(): void {
+        $this->_puppet->roomQuit($this->_id);
+    }
+
     private function _on($eventName, $listener) : Room {
         /*parent::on($eventName, function($contact, $roomInvitation) use ($listener) {
             call_user_func($listener, $contact, $roomInvitation);

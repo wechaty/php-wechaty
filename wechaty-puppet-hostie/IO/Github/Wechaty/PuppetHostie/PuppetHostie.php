@@ -467,6 +467,8 @@ class PuppetHostie extends Puppet {
         $request->setId($roomId);
 
         list($response, $status) = $this->_grpcClient->RoomDel($request)->wait();
+
+        Logger::DEBUG("roomDel", array("status" => $status));
     }
 
     function roomList(): array {
@@ -478,7 +480,10 @@ class PuppetHostie extends Puppet {
     }
 
     function roomQuit(string $roomId): void {
-        // TODO: Implement roomQuit() method.
+        $request = new \Wechaty\Puppet\RoomQuitRequest();
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomQuit($request)->wait();
     }
 
     function roomTopic(string $roomId): string {
