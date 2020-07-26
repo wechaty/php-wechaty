@@ -116,7 +116,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
                 if($value instanceof Contact) {
                     $room->say($value->name() . "\n");
                     echo $value->name() . "\n";
-                    $value->say("hello {$value->name()} from PHP7.4");
+                    //$value->say("hello {$value->name()} from PHP7.4");
                 }
             }
         }
