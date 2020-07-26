@@ -476,8 +476,16 @@ class PuppetHostie extends Puppet {
         // TODO: Implement roomList() method.
     }
 
-    function roomQRCode(string $roomId): string {
-        // TODO: Implement roomQRCode() method.
+    function roomQRCode(string $roomId): ?string {
+        $request = new \Wechaty\Puppet\RoomQRCodeRequest();
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomQRCode($request)->wait();
+        if($response) {
+            return $response->getQrcode()->getValue();
+        } else {
+            return null;
+        }
     }
 
     function roomQuit(string $roomId): void {

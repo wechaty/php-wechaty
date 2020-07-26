@@ -14,6 +14,7 @@ use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
+use IO\Github\Wechaty\Util\QrcodeUtils;
 
 class Room extends Accessory {
     const FOUR_PER_EM_SPACE = "\u2005";
@@ -217,6 +218,11 @@ class Room extends Accessory {
         } else {
             return $this->_puppet->setRoomAnnounce($this->_id, $text);
         }
+    }
+
+    function qrCode(): String {
+        $qrCodeValue = $this->_puppet->roomQRCode($this->_id);
+        return QrcodeUtils::guardQrCodeValue($qrCodeValue);
     }
 
     private function _on($eventName, $listener) : Room {

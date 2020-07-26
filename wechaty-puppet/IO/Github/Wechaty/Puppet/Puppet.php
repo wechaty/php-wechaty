@@ -100,7 +100,7 @@ abstract class Puppet extends EventEmitter {
     abstract function roomDel(String $roomId, String $contactId) : void;
 
     abstract function roomList(): array;
-    abstract function roomQRCode(String $roomId): String;
+    abstract function roomQRCode(String $roomId): ?String;
     abstract function roomQuit(String $roomId): void;
     abstract function roomTopic(String $roomId): ?String;
     abstract function setRoomTopic(String $roomId, String $topic): void;
