@@ -482,7 +482,7 @@ class PuppetHostie extends Puppet {
 
         list($response, $status) = $this->_grpcClient->RoomQRCode($request)->wait();
         if($response) {
-            return $response->getQrcode()->getValue();
+            return $response->getQrcode();
         } else {
             return null;
         }
