@@ -89,8 +89,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             $topic = $room->getTopic();
             //烙馍省钱优惠群
             echo "room topic:$topic\n";
-            //{"changerId":"wxid_xxxxxx","newTopic":"烙馍省钱优惠群","oldTopic":"烙馍省钱优惠群","roomId":"xxxxxx@chatroom","timestamp":1595773489028}
-            $room->setTopic("烙馍省钱优惠群");
+            echo $room->announce();
             $room->say("hello $topic from PHP7.4");
         } elseif($text == "roomAdd") {
             $wechatId = getenv("WECHAT_ADD_WECHAT_ID");
@@ -100,6 +99,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             $wechatId = getenv("WECHAT_ADD_WECHAT_ID");
             $contact = $wechaty->contactManager->load($wechatId);
             $room->del($contact);
+        } elseif($text == "roomSetTopic") {
+            //{"changerId":"wxid_xxxxxx","newTopic":"烙馍省钱优惠群","oldTopic":"烙馍省钱优惠群","roomId":"xxxxxx@chatroom","timestamp":1595773489028}
+            $room->setTopic("烙馍省钱优惠群");
         }
     }
 

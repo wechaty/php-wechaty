@@ -211,13 +211,13 @@ class Room extends Accessory {
         }
     }
 
-    function announce(?String $text) {
+    function announce(?String $text = "") {
         if(empty($text)) {
             return $this->_puppet->getRoomAnnounce($this->_id);
         } else {
             return $this->_puppet->setRoomAnnounce($this->_id, $text);
         }
-}
+    }
 
     private function _on($eventName, $listener) : Room {
         /*parent::on($eventName, function($contact, $roomInvitation) use ($listener) {
