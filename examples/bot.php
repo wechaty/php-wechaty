@@ -89,6 +89,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             $topic = $room->getTopic();
             //烙馍省钱优惠群
             echo "room topic:$topic\n";
+            //{"changerId":"wxid_xxxxxx","newTopic":"烙馍省钱优惠群","oldTopic":"烙馍省钱优惠群","roomId":"xxxxxx@chatroom","timestamp":1595773489028}
             $room->setTopic("烙馍省钱优惠群");
             $room->say("hello $topic from PHP7.4");
         } elseif($text == "roomAdd") {
