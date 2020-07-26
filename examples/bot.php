@@ -114,6 +114,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             $memberList = $room->memberList();
             foreach($memberList as $value) {
                 if($value instanceof Contact) {
+                    $room->say($value->name() . "\n");
                     echo $value->name() . "\n";
                 }
             }
