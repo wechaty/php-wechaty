@@ -15,6 +15,8 @@ use IO\Github\Wechaty\Puppet\Schemas\ImageType;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\Query\FriendshipSearchCondition;
+use IO\Github\Wechaty\Puppet\Schemas\Query\RoomMemberQueryFilter;
+use IO\Github\Wechaty\Puppet\Schemas\Query\RoomQueryFilter;
 use IO\Github\Wechaty\Puppet\Schemas\RoomMemberPayload;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
@@ -113,6 +115,14 @@ abstract class Puppet extends EventEmitter {
     abstract function getRoomAnnounce(String $roomId): ?String;
     abstract function setRoomAnnounce(String $roomId, String $text): object;
     abstract function roomMemberList(String $roomId): array;
+
+    function roomMemberSearch(String $roomId, RoomMemberQueryFilter $query): array {
+        // TODO
+    }
+
+    function roomReach(RoomQueryFilter $query): array {
+        // TODO
+    }
 
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
