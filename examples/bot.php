@@ -85,6 +85,11 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 
     $room = $message->room();
     if($room) {
+        $room->onTopic(function($data) use ($room) {
+            $params = func_get_args();
+            print_r($params);
+            $room->say("topic event");
+        });
         if($text == "room") {
             $topic = $room->getTopic();
             //烙馍省钱优惠群
@@ -100,7 +105,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             $room->del($contact);
         } elseif($text == "roomSetTopic") {
             //{"changerId":"wxid_xxxxxx","newTopic":"烙馍省钱优惠群","oldTopic":"烙馍省钱优惠群","roomId":"xxxxxx@chatroom","timestamp":1595773489028}
-            $room->setTopic("烙馍省钱优惠群");
+            $topic = $room->getTopic();
+            //烙馍省钱优惠群
+            $room->setTopic("$topic");
         } elseif($text == "roomAnnounce") {
             // Group Notice
             echo $room->announce() . "\n";
