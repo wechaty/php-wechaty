@@ -220,6 +220,12 @@ class Room extends Accessory {
         }
     }
 
+    /**
+     * 该微信号在 2020-07-26 23:05 生成的群二维码，因使用了微信外挂、非官方客户端或模拟器等违规行为，二维码已经失效。
+     *
+     * @return String
+     * @throws WechatyException
+     */
     function qrCode(): String {
         throw new WechatyException("not support");
         $qrCodeValue = $this->_puppet->roomQRCode($this->_id);
