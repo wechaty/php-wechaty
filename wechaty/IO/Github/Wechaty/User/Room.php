@@ -198,6 +198,19 @@ class Room extends Accessory {
         }
     }
 
+    function setTopic(String $newTopic) : void {
+        if (!$this->isReady()) {
+            Logger::WARNING("Room topic() room not ready");
+            throw new WechatyException("not ready");
+        }
+        try {
+            $this->_puppet->setRoomTopic($this->_id, $newTopic);
+        } catch(\Exception $e) {
+            Logger::WARNING("Room topic(newTopic=$newTopic) exception:$e");
+            throw new WechatyException($e);
+        }
+    }
+
     private function _on($eventName, $listener) : Room {
         /*parent::on($eventName, function($contact, $roomInvitation) use ($listener) {
             call_user_func($listener, $contact, $roomInvitation);

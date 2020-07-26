@@ -486,12 +486,29 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->RoomQuit($request)->wait();
     }
 
-    function roomTopic(string $roomId): string {
-        // TODO: Implement roomTopic() method.
+    function roomTopic(string $roomId): ?string {
+        $request = new \Wechaty\Puppet\RoomTopicRequest();
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomTopic($request)->wait();
+
+        if($response) {
+            return $response->getTopic()->getValue();
+        } else {
+            return null;
+        }
     }
 
     function setRoomTopic(string $roomId, string $topic): void {
-        // TODO: Implement setRoomTopic() method.
+        $value = new \Google\Protobuf\StringValue();
+        $value->setValue($topic);
+        $request = new \Wechaty\Puppet\RoomTopicRequest();
+        $request->setId($roomId);
+        $request->setTopic($value);
+
+        list($response, $status) = $this->_grpcClient->RoomTopic($request)->wait();
+
+        Logger::DEBUG("setRoomTopic", array("status" => $status));
     }
 
     function roomRawPayload(string $roomId): RoomPayload {

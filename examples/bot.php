@@ -87,7 +87,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
     if($room) {
         if($text == "room") {
             $topic = $room->getTopic();
+            //烙馍省钱优惠群
             echo "room topic:$topic\n";
+            $room->setTopic("烙馍省钱优惠群");
             $room->say("hello $topic from PHP7.4");
         } elseif($text == "roomAdd") {
             $wechatId = getenv("WECHAT_ADD_WECHAT_ID");
