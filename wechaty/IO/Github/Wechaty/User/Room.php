@@ -221,6 +221,7 @@ class Room extends Accessory {
     }
 
     function qrCode(): String {
+        throw new WechatyException("not support");
         $qrCodeValue = $this->_puppet->roomQRCode($this->_id);
         return QrcodeUtils::guardQrCodeValue($qrCodeValue);
     }

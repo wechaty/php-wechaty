@@ -89,7 +89,6 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             $topic = $room->getTopic();
             //烙馍省钱优惠群
             echo "room topic:$topic\n";
-            echo $room->qrCode();
             $room->say("hello $topic from PHP7.4");
         } elseif($text == "roomAdd") {
             $wechatId = getenv("WECHAT_ADD_WECHAT_ID");
@@ -106,6 +105,11 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             // Group Notice
             echo $room->announce() . "\n";
             print_r($room->announce("test"));
+        } elseif($text == "roomQRCode") {
+            //https://weixin.qq.com/g/xxxxxx
+            //该微信号在 2020-07-26 23:05 生成的群二维码，因使用了微信外挂、非官方客户端或模拟器等违规行为，二维码已经失效。
+            //echo $room->qrCode();
+            echo "not support\n";
         }
     }
 
