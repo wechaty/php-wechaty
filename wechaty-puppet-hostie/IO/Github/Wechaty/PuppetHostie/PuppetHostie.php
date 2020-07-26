@@ -508,6 +508,7 @@ class PuppetHostie extends Puppet {
 
         list($response, $status) = $this->_grpcClient->RoomTopic($request)->wait();
 
+        //status:{"metadata":[],"code":0,"details":"OK"}
         Logger::DEBUG("setRoomTopic", array("status" => $status));
     }
 
