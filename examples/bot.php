@@ -90,7 +90,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             echo "$string1\n";
             echo "$string2\n";
             echo "{$contact->name()}\n";
-            echo "{$date->getDate()}\n";
+            echo "{$date->getTimestamp()} {$date->getDate()}\n";
             $room->say("topic event");
         });
 
