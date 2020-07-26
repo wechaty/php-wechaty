@@ -289,7 +289,7 @@ class Wechaty extends EventEmitter {
             $changer = $this->contactManager->loadSelf($payload["changerId"]);
             $changer->ready();
 
-            $date = new Date($payload["timestamp"]);
+            $date = new Date($payload["timestamp"]);//1595780199086
 
             $this->emit(EventEnum::ROOM_TOPIC, $room, $payload["newTopic"], $payload["oldTopic"], $changer, $date);
             $room->emit(EventEnum::TOPIC, $payload["newTopic"], $payload["oldTopic"], $changer, $date);

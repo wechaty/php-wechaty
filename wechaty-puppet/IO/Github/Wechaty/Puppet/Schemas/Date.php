@@ -11,7 +11,13 @@ class Date {
     private $_timestamp;
 
     public function __construct($timestamp) {
-        $this->_timestamp = $timestamp;
+        //1595780199086
+        //1595780199
+        if($timestamp > 9999999999) {
+            $this->_timestamp = intval($timestamp / 1000);
+        } else {
+            $this->_timestamp = $timestamp;
+        }
     }
 
     public function getTimestamp() {
