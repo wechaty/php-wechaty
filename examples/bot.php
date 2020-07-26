@@ -90,6 +90,7 @@ $wechaty->onScan(function($qrcode, $status, $data) {
             print_r($params);
             $room->say("topic event");
         });
+
         if($text == "room") {
             $topic = $room->getTopic();
             //烙馍省钱优惠群
