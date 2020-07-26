@@ -85,9 +85,12 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 
     $room = $message->room();
     if($room) {
-        $room->onTopic(function($data) use ($room) {
+        $room->onTopic(function($string1, $string2, $contact, $date) use ($room) {
             $params = func_get_args();
-            print_r($params);
+            echo "$string1\n";
+            echo "$string2\n";
+            echo "{$contact->name()}\n";
+            echo "$date\n";
             $room->say("topic event");
         });
 
