@@ -11,6 +11,7 @@ use IO\Github\Wechaty\Accessory;
 use IO\Github\Wechaty\Exceptions\WechatyException;
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
+use IO\Github\Wechaty\Puppet\Schemas\Query\RoomMemberQueryFilter;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
@@ -230,6 +231,33 @@ class Room extends Accessory {
         throw new WechatyException("not support");
         $qrCodeValue = $this->_puppet->roomQRCode($this->_id);
         return QrcodeUtils::guardQrCodeValue($qrCodeValue);
+    }
+
+    function memberAll(RoomMemberQueryFilter $query): array {
+        if ($query == null) {
+            return $this->memberList();
+        }
+
+        $contactIdList = $this->wechaty->getPuppet()->roomMemberSearch($this->_id, $query);
+        $contactList = array_map(function($value) {
+            return $this->wechaty->contactManager->load($value);
+        }, $contactIdList);
+
+        return $contactList;
+
+    }
+
+    function memberList(): array {
+        $memberIdList = $this->wechaty->getPuppet()->roomMemberList($this->_id);
+
+        if (empty($memberIdList)) {
+            return array();
+        }
+
+        $contactList = array_map(function($value) {
+            return $this->wechaty->contactManager->load($value);
+        }, $memberIdList);
+        return $contactList;
     }
 
     private function _on($eventName, $listener) : Room {
