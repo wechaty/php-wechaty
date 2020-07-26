@@ -124,6 +124,8 @@ $wechaty->onScan(function($qrcode, $status, $data) {
         } elseif($text == "roomAvatar") {
             $avatar = $room->avatar();
             echo $avatar->toJsonString() . "\n";
+            $remoteUrl = $avatar->remoteUrl;
+            $room->say( "avatar: $remoteUrl");
         }
     }
 
