@@ -454,7 +454,12 @@ class PuppetHostie extends Puppet {
     }
 
     function roomAvatar(string $roomId): FileBox {
-        // TODO: Implement roomAvatar() method.
+        $request = new \Wechaty\Puppet\RoomAvatarRequest();
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomAvatar($request)->wait();
+        $fileBox = $response->getFilebox();
+        return FileBox::fromJson($fileBox);
     }
 
     function roomCreate(array $contactIdList, string $topic): string {

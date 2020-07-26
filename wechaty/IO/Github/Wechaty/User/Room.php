@@ -20,6 +20,14 @@ use IO\Github\Wechaty\Util\QrcodeUtils;
 class Room extends Accessory {
     const FOUR_PER_EM_SPACE = "\u2005";
 
+    public static array $ROOM_EVENT_DICT = array(
+        "invite" => "tbw",
+        "join" => "tbw",
+        "leave" => "tbw",
+        "message" => "message that received in this room",
+        "topic" => "tbw",
+    );
+
     /**
      * @var null|RoomPayload
      */
@@ -258,6 +266,33 @@ class Room extends Accessory {
             return $this->wechaty->contactManager->load($value);
         }, $memberIdList);
         return $contactList;
+    }
+
+    function has(Contact $contact): bool {
+        $memberIdList = $this->_puppet->roomMemberList($this->_id);
+        if (empty($memberIdList)) {
+            return false;
+        }
+        foreach($memberIdList as $value) {
+            if($value == $contact->getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function owner(): ?Contact {
+        $ownerId = $this->_payload->ownerId;
+        if(empty($ownerId)) {
+            return null;
+        } else {
+            return $this->wechaty->contactManager->load($ownerId);
+        }
+    }
+
+    function avatar(): FileBox {
+        Logger::DEBUG("avatar");
+        return $this->_puppet->roomAvatar($this->_id);
     }
 
     private function _on($eventName, $listener) : Room {
