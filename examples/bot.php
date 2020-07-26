@@ -121,6 +121,9 @@ $wechaty->onScan(function($qrcode, $status, $data) {
                     //$value->say("hello $name from PHP7.4");
                 }
             }
+        } elseif($text == "roomAvatar") {
+            $avatar = $room->avatar();
+            echo $avatar->toJsonString() . "\n";
         }
     }
 
