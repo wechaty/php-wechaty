@@ -14,7 +14,6 @@ use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
 use IO\Github\Wechaty\Util\Logger;
-use phpDocumentor\Reflection\Types\Mixed_;
 
 class Room extends Accessory {
     const FOUR_PER_EM_SPACE = "\u2005";
@@ -166,6 +165,37 @@ class Room extends Accessory {
 
     function quit(): void {
         $this->_puppet->roomQuit($this->_id);
+    }
+
+    function getTopic(): String {
+        if (!$this->isReady()) {
+            Logger::WARNING("Room topic() room not ready");
+            throw new WechatyException("not ready");
+        }
+
+        if ($this->_payload != null && $this->_payload->topic != null) {
+            return $this->_payload->topic;
+        } else {
+            $memberIdList = $this->_puppet->roomMemberList($this->_id);
+            $that = $this;
+            $memberList = array_map(function($value) use ($that) {
+                return $that->wechaty->contactManager->load($value);
+            }, array_filter($memberIdList, function($value) use ($that) {
+                return $value != $that->_puppet->selfId();
+            }));
+
+            $defaultTopic = "";
+            if (!empty($memberList)) {
+                $defaultTopic = $memberList[0]->name();
+            }
+
+            if (count($memberList) >= 2) {
+                for($i = 1 ; $i <= 2 ; $i++) {
+                    $defaultTopic .= ",{$memberList[$i]->name()}";
+                }
+            }
+            return $defaultTopic;
+        }
     }
 
     private function _on($eventName, $listener) : Room {
