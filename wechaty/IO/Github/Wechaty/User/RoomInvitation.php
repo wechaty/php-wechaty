@@ -8,6 +8,7 @@
 namespace IO\Github\Wechaty\User;
 
 use IO\Github\Wechaty\Accessory;
+use IO\Github\Wechaty\Puppet\Schemas\Date;
 use IO\Github\Wechaty\Util\Logger;
 
 class RoomInvitation extends Accessory {
@@ -26,6 +27,10 @@ class RoomInvitation extends Accessory {
         $inviter->ready();
     }
 
+    function roomTopic() : String {
+        return $this->topic();
+    }
+
     function inviter() : Contact {
         $payload = $this->wechaty->getPuppet()->roomInvitationPayload($this->_id);
         return $this->wechaty->contactManager->load($payload->inviterId);
@@ -34,5 +39,15 @@ class RoomInvitation extends Accessory {
     function topic() : String {
         $payload = $this->wechaty->getPuppet()->roomInvitationPayload($this->_id);
         return $payload->topic ?: "";
+    }
+
+    function date(): Date {
+        $payload = $this->wechaty->getPuppet()->roomInvitationPayload($this->_id);
+        return new Date($payload->timestamp);
+    }
+
+    function age(): int {
+        $recvDate = $this->date();
+        return time() - $recvDate->getTimestamp();
     }
 }
