@@ -17,6 +17,7 @@ use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;use IO\Github\Wechaty\Pu
 use IO\Github\Wechaty\Puppet\Schemas\Query\FriendshipSearchCondition;
 use IO\Github\Wechaty\Puppet\Schemas\Query\RoomMemberQueryFilter;
 use IO\Github\Wechaty\Puppet\Schemas\Query\RoomQueryFilter;
+use IO\Github\Wechaty\Puppet\Schemas\RoomInvitationPayload;
 use IO\Github\Wechaty\Puppet\Schemas\RoomMemberPayload;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
@@ -115,6 +116,15 @@ abstract class Puppet extends EventEmitter {
     abstract function getRoomAnnounce(String $roomId): ?String;
     abstract function setRoomAnnounce(String $roomId, String $text): object;
     abstract function roomMemberList(String $roomId): array;
+
+    /**
+     * Room Invitation
+     *
+     */
+    abstract function roomInvitationAccept(String $roomInvitation): object;
+
+    protected abstract function roomInvitationRawPayload(String $roomInvitationId): RoomInvitationPayload;
+    protected abstract function roomInvitationRawPayloadParser(RoomInvitationPayload $rawPayload): RoomInvitationPayload;
 
     /**
      *

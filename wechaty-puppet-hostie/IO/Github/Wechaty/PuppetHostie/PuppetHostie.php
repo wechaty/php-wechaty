@@ -17,6 +17,7 @@ use IO\Github\Wechaty\Puppet\Schemas\ImageType;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
 use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
+use IO\Github\Wechaty\Puppet\Schemas\RoomInvitationPayload;
 use IO\Github\Wechaty\Puppet\Schemas\RoomMemberPayload;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
@@ -558,6 +559,23 @@ class PuppetHostie extends Puppet {
         list($response, $status) = $this->_grpcClient->RoomAnnounce($request)->wait();
 
         return $status;
+    }
+
+    function roomInvitationAccept(string $roomInvitation): object {
+        $request = new \Wechaty\Puppet\RoomInvitationAcceptRequest();
+        $request->setId($roomInvitation);
+
+        list($response, $status) = $this->_grpcClient->RoomInvitationAccept($request)->wait();
+
+        return $status;
+    }
+
+    protected function roomInvitationRawPayload(string $roomInvitationId): RoomInvitationPayload {
+        // TODO: Implement roomInvitationRawPayload() method.
+    }
+
+    protected function roomInvitationRawPayloadParser(RoomInvitationPayload $rawPayload): RoomInvitationPayload {
+        // TODO: Implement roomInvitationRawPayloadParser() method.
     }
 
     function tagContactAdd(string $tagId, string $contactId): object {
