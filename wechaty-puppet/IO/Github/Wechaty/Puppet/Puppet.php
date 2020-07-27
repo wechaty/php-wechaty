@@ -126,9 +126,9 @@ abstract class Puppet extends EventEmitter {
      * tagContactList() - get tags from all Contacts
      *
      */
-    abstract function tagContactAdd(String $tagId, String $contactId): void;
+    abstract function tagContactAdd(String $tagId, String $contactId): object;
 
-    abstract function tagContactDelete(String $tagId): void;
+    abstract function tagContactDelete(String $tagId): object;
     abstract function tagContactList(String $contactId = ""): array;
     abstract function tagContactRemove(String $tagId, String $contactId): void;
 

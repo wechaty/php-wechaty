@@ -560,11 +560,17 @@ class PuppetHostie extends Puppet {
         return $status;
     }
 
-    function tagContactAdd(string $tagId, string $contactId): void {
-        // TODO: Implement tagContactAdd() method.
+    function tagContactAdd(string $tagId, string $contactId): object {
+        $request = new \Wechaty\Puppet\TagContactAddRequest();
+        $request->setId($tagId);
+        $request->setContactId($contactId);
+
+        list($response, $status) = $this->_grpcClient->TagContactAdd($request)->wait();
+
+        return $status;
     }
 
-    function tagContactDelete(string $tagId): void {
+    function tagContactDelete(string $tagId): object {
         // TODO: Implement tagContactDelete() method.
     }
 
