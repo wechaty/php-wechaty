@@ -116,6 +116,22 @@ abstract class Puppet extends EventEmitter {
     abstract function setRoomAnnounce(String $roomId, String $text): object;
     abstract function roomMemberList(String $roomId): array;
 
+    /**
+     *
+     * Tag
+     * tagContactAdd - add a tag for a Contact. Create it first if it not exist.
+     * tagContactRemove - remove a tag from the Contact
+     * tagContactDelete - delete a tag from Wechat
+     * tagContactList(id) - get tags from a specific Contact
+     * tagContactList() - get tags from all Contacts
+     *
+     */
+    abstract function tagContactAdd(String $tagId, String $contactId): void;
+
+    abstract function tagContactDelete(String $tagId): void;
+    abstract function tagContactList(String $contactId = ""): array;
+    abstract function tagContactRemove(String $tagId, String $contactId): void;
+
     function roomMemberSearch(String $roomId, RoomMemberQueryFilter $query): array {
         // TODO
     }

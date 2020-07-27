@@ -560,6 +560,22 @@ class PuppetHostie extends Puppet {
         return $status;
     }
 
+    function tagContactAdd(string $tagId, string $contactId): void {
+        // TODO: Implement tagContactAdd() method.
+    }
+
+    function tagContactDelete(string $tagId): void {
+        // TODO: Implement tagContactDelete() method.
+    }
+
+    function tagContactList(string $contactId = ""): array {
+        // TODO: Implement tagContactList() method.
+    }
+
+    function tagContactRemove(string $tagId, string $contactId): void {
+        // TODO: Implement tagContactRemove() method.
+    }
+
     private function _repeatFieldToArray($repeatField) : array {
         $ret = array();
         if($repeatField instanceof \Google\Protobuf\Internal\RepeatedField) {
