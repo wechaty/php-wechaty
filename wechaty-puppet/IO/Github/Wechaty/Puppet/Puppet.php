@@ -130,7 +130,7 @@ abstract class Puppet extends EventEmitter {
 
     abstract function tagContactDelete(String $tagId): object;
     abstract function tagContactList(String $contactId = ""): array;
-    abstract function tagContactRemove(String $tagId, String $contactId): void;
+    abstract function tagContactRemove(String $tagId, String $contactId): object;
 
     function roomMemberSearch(String $roomId, RoomMemberQueryFilter $query): array {
         // TODO

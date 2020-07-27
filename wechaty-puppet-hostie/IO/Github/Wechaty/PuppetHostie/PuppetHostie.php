@@ -594,8 +594,14 @@ class PuppetHostie extends Puppet {
         return $tagContactList;
     }
 
-    function tagContactRemove(string $tagId, string $contactId): void {
-        // TODO: Implement tagContactRemove() method.
+    function tagContactRemove(string $tagId, string $contactId): object {
+        $request = new \Wechaty\Puppet\TagContactRemoveRequest();
+        $request->setId($tagId);
+        $request->setContactId($contactId);
+
+        list($response, $status) = $this->_grpcClient->TagContactRemove($request)->wait();
+
+        return $status;
     }
 
     private function _repeatFieldToArray($repeatField) : array {
