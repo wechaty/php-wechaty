@@ -150,6 +150,26 @@ abstract class Puppet extends EventEmitter {
         // TODO
     }
 
+    protected function _roomInvitationPayloadCache(String $roomInvitationId): ?RoomInvitationPayload {
+        $roomInvitationPayload = $this->_cache->get(self::CACHE_ROOM_INVITATION_PAYLOAD_PREFIX . $roomInvitationId);
+
+        return $roomInvitationPayload;
+    }
+
+    public function roomInvitationPayload(String $roomInvitationId): RoomInvitationPayload {
+        $cachePayload = $this->_roomInvitationPayloadCache($roomInvitationId);
+
+        if ($cachePayload != null) {
+            return $cachePayload;
+        }
+
+        $rawPayload = $this->roomInvitationRawPayload($roomInvitationId);
+        $payload = $this->roomInvitationRawPayloadParser($rawPayload);
+
+        $this->_cache->set(self::CACHE_ROOM_INVITATION_PAYLOAD_PREFIX . $roomInvitationId, $payload);
+        return $payload;
+    }
+
     function contactPayloadDirty(String $contactId) {
         $this->_cache->delete(self::CACHE_CONTACT_PAYLOAD_PREFIX . $contactId);
         return true;
