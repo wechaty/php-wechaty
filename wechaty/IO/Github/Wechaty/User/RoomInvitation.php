@@ -26,12 +26,12 @@ class RoomInvitation extends Accessory {
         $inviter->ready();
     }
 
-    function inviter():Contact{
+    function inviter() : Contact {
         $payload = $this->wechaty->getPuppet()->roomInvitationPayload($this->_id);
         return $this->wechaty->contactManager->load($payload->inviterId);
     }
 
-    function topic():String {
+    function topic() : String {
         $payload = $this->wechaty->getPuppet()->roomInvitationPayload($this->_id);
         return $payload->topic ?: "";
     }
