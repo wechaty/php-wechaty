@@ -580,7 +580,18 @@ class PuppetHostie extends Puppet {
     }
 
     function tagContactList(string $contactId = ""): array {
-        // TODO: Implement tagContactList() method.
+        $request = new \Wechaty\Puppet\TagContactListRequest();
+        if(!empty($contactId)) {
+            $value = new \Google\Protobuf\StringValue();
+            $value->setValue($contactId);
+
+            $request->setContactId($value);
+        }
+
+        list($response, $status) = $this->_grpcClient->TagContactList($request)->wait();
+        $tagContactList = $this->_repeatFieldToArray($response->getIds());
+
+        return $tagContactList;
     }
 
     function tagContactRemove(string $tagId, string $contactId): void {
