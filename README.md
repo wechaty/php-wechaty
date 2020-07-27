@@ -318,7 +318,7 @@ php examples/bot.php
 
 1. [@zhangchunsheng](https://github.com/zhangchunsheng) - Chunsheng Zhang (张春生)
 
-## Authors
+## Creator
 
 - [@zhangchunsheng](https://github.com/zhangchunsheng) - Chunsheng Zhang (张春生) 
 
