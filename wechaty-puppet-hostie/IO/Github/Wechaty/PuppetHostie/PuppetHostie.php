@@ -30,6 +30,7 @@ use Wechaty\Puppet\EventResponse;
 use Wechaty\Puppet\EventType;
 use Wechaty\Puppet\MessagePayloadResponse;
 use Wechaty\Puppet\MessageSendTextResponse;
+use Wechaty\Puppet\RoomInvitationPayloadResponse;
 use Wechaty\Puppet\RoomMemberPayloadResponse;
 use Wechaty\Puppet\RoomPayloadResponse;
 
@@ -571,11 +572,27 @@ class PuppetHostie extends Puppet {
     }
 
     protected function roomInvitationRawPayload(string $roomInvitationId): RoomInvitationPayload {
-        // TODO: Implement roomInvitationRawPayload() method.
+        $request = new \Wechaty\Puppet\RoomInvitationPayloadRequest();
+        $request->setId($roomInvitationId);
+
+        list($response, $status) = $this->_grpcClient->RoomInvitationPayload($request)->wait();
+
+        $payload = new RoomInvitationPayload();
+        $payload->avatar = $response->getAvatar();
+        $payload->id = $response->getId();
+        $payload->invitation = $response->getInvitation();
+        $payload->inviterId = $response->getInviterId();
+        $payload->memberCount = $response->getMemberCount();
+        $payload->memberIdList = $this->_repeatFieldToArray($response->getMemberIds());
+        $payload->receiverId = $response->getReceiverId();
+        $payload->timestamp = $response->getTimestamp();
+        $payload->topic = $response->getTopic();
+
+        return $payload;
     }
 
     protected function roomInvitationRawPayloadParser(RoomInvitationPayload $rawPayload): RoomInvitationPayload {
-        // TODO: Implement roomInvitationRawPayloadParser() method.
+        return $rawPayload;
     }
 
     function tagContactAdd(string $tagId, string $contactId): object {
