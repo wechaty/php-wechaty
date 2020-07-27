@@ -36,6 +36,26 @@ class RoomInvitation extends Accessory {
         return $payload->memberCount ?: 0;
     }
 
+    function memberList() : array {
+        $payload = $this->wechaty->getPuppet()->roomInvitationPayload($this->_id);
+
+        $memberIdList = $payload->memberIdList;
+
+        if(!empty($memberIdList)) {
+            $that = $this;
+            $contactList = array_map(function ($value) use ($that) {
+                return $that->wechaty->contactManager->load($value);
+            }, $memberIdList);
+
+            foreach ($contactList as $contact) {
+                $contact->ready();
+            }
+            return $contactList;
+        }
+
+        return array();
+    }
+
     function inviter() : Contact {
         $payload = $this->wechaty->getPuppet()->roomInvitationPayload($this->_id);
         return $this->wechaty->contactManager->load($payload->inviterId);
