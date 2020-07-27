@@ -571,7 +571,12 @@ class PuppetHostie extends Puppet {
     }
 
     function tagContactDelete(string $tagId): object {
-        // TODO: Implement tagContactDelete() method.
+        $request = new \Wechaty\Puppet\TagContactDeleteRequest();
+        $request->setId($tagId);
+
+        list($response, $status) = $this->_grpcClient->TagContactDelete($request)->wait();
+
+        return $status;
     }
 
     function tagContactList(string $contactId = ""): array {
