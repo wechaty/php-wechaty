@@ -301,6 +301,7 @@ php examples/bot.php
 - [Go Wechaty](https://github.com/wechaty/go-wechaty) - Go WeChaty Conversational AI Chatbot SDK for Wechat Individual Accounts (Go)
 - [Java Wechaty](https://github.com/wechaty/java-wechaty) - Java WeChaty Conversational AI Chatbot SDK for Wechat Individual Accounts (Java)
 - [Scala Wechaty](https://github.com/wechaty/scala-wechaty) - Scala WeChaty Conversational AI Chatbot SDK for WechatyIndividual Accounts (Scala)
+- [PHP Wechaty](https://github.com/wechaty/php-wechaty) - PHP WeChaty Conversational AI Chatbot SDK for WechatyIndividual Accounts (PHP)
 
 ## Badge
 
