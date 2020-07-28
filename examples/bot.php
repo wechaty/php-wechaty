@@ -85,11 +85,10 @@ $wechaty->onScan(function($qrcode, $status, $data) {
 
     $room = $message->room();
     if($room) {
-        $room->onTopic(function($string1, $string2, Contact $contact, \IO\Github\Wechaty\Puppet\Schemas\Date $date) use ($room) {
-            $params = func_get_args();
-            echo "$string1\n";
-            echo "$string2\n";
-            echo "{$contact->name()}\n";
+        $room->onTopic(function($newTopic, $oldTopic, Contact $changer, \IO\Github\Wechaty\Puppet\Schemas\Date $date) use ($room) {
+            echo "$newTopic\n";
+            echo "$oldTopic\n";
+            echo "{$changer->name()}\n";
             echo "{$date->getTimestamp()} {$date->getDate()}\n";
             $room->say("topic event");
         });
