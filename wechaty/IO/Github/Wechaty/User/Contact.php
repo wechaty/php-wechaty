@@ -133,4 +133,36 @@ class Contact extends Accessory implements Sayable {
     function getAlias() : ?String {
         return $this->_payload->alias ?:null;
     }
+
+    function stranger(): bool {
+        if(empty($this->friend())) {
+            return false;
+        } else {
+            return !$this->friend();
+        }
+    }
+
+    function friend(): bool {
+        return $this->_payload->friend;
+    }
+
+    function type(): int {
+        if(empty($this->_payload)) {
+            throw new WechatyException("no payload");
+        }
+
+        return $this->_payload->type;
+    }
+
+    function gender(): int {
+        return $this->_payload->gender ?: ContactPayload::CONTACTGENDER_UNKNOWN;
+    }
+
+    function province() : String {
+        return $this->_payload->province;
+    }
+
+    function city() : String {
+        return $this->_payload->city;
+    }
 }
