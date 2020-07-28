@@ -127,6 +127,14 @@ abstract class Puppet extends EventEmitter {
     protected abstract function roomInvitationRawPayloadParser(RoomInvitationPayload $rawPayload): RoomInvitationPayload;
 
     /**
+     * contactSelf
+     */
+    abstract function contactSelfName(String $name): object;
+
+    abstract function contactSelfQRCode(): String;
+    abstract function contactSelfSignature(String $signature): object;
+
+    /**
      *
      * Tag
      * tagContactAdd - add a tag for a Contact. Create it first if it not exist.

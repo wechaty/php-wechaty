@@ -15,4 +15,9 @@ class ContactSelf extends Contact {
     function setAvatar($fileBox) {
         $this->_puppet->setContactAvatar($this->_id, $fileBox);
     }
+
+    function setName(String $name) {
+        $this->_puppet->contactSelfName($name);
+        $this->sync();
+    }
 }

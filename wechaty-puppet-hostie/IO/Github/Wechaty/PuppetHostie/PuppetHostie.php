@@ -595,6 +595,23 @@ class PuppetHostie extends Puppet {
         return $rawPayload;
     }
 
+    function contactSelfName(string $name): object {
+        $request = new \Wechaty\Puppet\ContactSelfNameRequest();
+        $request->setName($name);
+
+        list($response, $status) = $this->_grpcClient->ContactSelfName($request)->wait();
+
+        return $status;
+    }
+
+    function contactSelfQRCode(): string {
+        // TODO: Implement contactSelfQRCode() method.
+    }
+
+    function contactSelfSignature(string $signature): object {
+        // TODO: Implement contactSelfSignature() method.
+    }
+
     function tagContactAdd(string $tagId, string $contactId): object {
         $request = new \Wechaty\Puppet\TagContactAddRequest();
         $request->setId($tagId);
