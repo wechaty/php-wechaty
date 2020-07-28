@@ -83,10 +83,6 @@ abstract class Puppet extends EventEmitter {
     abstract function messageMiniProgram(String $messageId): MiniProgramPayload;
     abstract function messageUrl(String $messageId) : UrlLinkPayload;
 
-    abstract function contactList();
-    abstract function contactAlias(String $contactId, String $alias = "") : void;
-    abstract function setContactAvatar(String $contactId, FileBox $file) : void;
-
     abstract function friendshipSearchPhone(String $phone) : ?String;
     abstract function friendshipSearchWeixin(String $weixin) : ?String;
     abstract function friendshipAccept(String $friendshipId) : void;
@@ -133,6 +129,18 @@ abstract class Puppet extends EventEmitter {
 
     abstract function contactSelfQRCode(): String;
     abstract function contactSelfSignature(String $signature): object;
+
+    /**
+     *
+     * Contact
+     *
+     */
+    abstract function contactList();
+    abstract function contactAlias(String $contactId, String $alias = "") : void;
+    abstract function setContactAvatar(String $contactId, FileBox $file) : void;
+    abstract function getContactAvatar(String $contactId): FileBox;
+    protected abstract function contactRawPayload(String $contractId): ContactPayload;
+    protected abstract function contactRawPayloadParser(ContactPayload $rawPayload): ContactPayload;
 
     /**
      *

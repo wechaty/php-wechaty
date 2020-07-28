@@ -617,6 +617,23 @@ class PuppetHostie extends Puppet {
         return $status;
     }
 
+    function getContactAvatar(string $contactId): FileBox {
+        $request = new \Wechaty\Puppet\ContactAvatarRequest();
+        $request->setId($contactId);
+
+        list($response, $status) = $this->_grpcClient->ContactAvatar($request)->wait();
+        $filebox = $response->getFilebox();
+        return FileBox::fromJson($filebox->getValue());
+    }
+
+    protected function contactRawPayload(string $contractId): ContactPayload {
+        // TODO: Implement contactRawPayload() method.
+    }
+
+    protected function contactRawPayloadParser(ContactPayload $rawPayload): ContactPayload {
+        // TODO: Implement contactRawPayloadParser() method.
+    }
+
     function tagContactAdd(string $tagId, string $contactId): object {
         $request = new \Wechaty\Puppet\TagContactAddRequest();
         $request->setId($tagId);

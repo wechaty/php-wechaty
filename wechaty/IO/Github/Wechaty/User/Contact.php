@@ -109,7 +109,12 @@ class Contact extends Accessory implements Sayable {
     }
 
     function avatar() {
-
+        try {
+            return $this->wechaty->getPuppet()->getContactAvatar($this->_id);
+        } catch (\Exception $e) {
+            Logger::ERR("error", $e);
+        }
+        return false;
     }
 
     function name() : String {
@@ -164,5 +169,27 @@ class Contact extends Accessory implements Sayable {
 
     function city() : String {
         return $this->_payload->city;
+    }
+
+    function tags(): array {
+        $tagIdList = $this->wechaty->getPuppet()->tagContactList($this->_id);
+        try {
+            $that = $this;
+            $tagList = array_map(function($value) use ($that) {
+                $that->wechaty->tagManager->load($value);
+            }, $tagIdList);
+            return $tagList;
+        } catch (\Exception $e) {
+            Logger::ERR("error", $e);
+            return array();
+        }
+    }
+
+    function self(): bool {
+        $userId = $this->_puppet->selfId();
+        if(empty($userId)) {
+            return false;
+        }
+        return $this->_id == $userId;
     }
 }
