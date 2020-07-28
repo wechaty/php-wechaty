@@ -20,4 +20,12 @@ class ContactSelf extends Contact {
         $this->_puppet->contactSelfName($name);
         $this->sync();
     }
+
+    function signature(String $signature) {
+        $puppetId = $this->_puppet->selfId();
+        if(!empty($puppetId)) {
+            $this->_puppet->contactSelfSignature($signature);
+            $this->sync();
+        }
+    }
 }

@@ -609,7 +609,12 @@ class PuppetHostie extends Puppet {
     }
 
     function contactSelfSignature(string $signature): object {
-        // TODO: Implement contactSelfSignature() method.
+        $request = new \Wechaty\Puppet\ContactSelfSignatureRequest();
+        $request->setSignature($signature);
+
+        list($response, $status) = $this->_grpcClient->ContactSelfSignature($request)->wait();
+
+        return $status;
     }
 
     function tagContactAdd(string $tagId, string $contactId): object {
