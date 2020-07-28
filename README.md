@@ -302,6 +302,7 @@ php examples/bot.php
 - [Java Wechaty](https://github.com/wechaty/java-wechaty) - Java WeChaty Conversational AI Chatbot SDK for Wechat Individual Accounts (Java)
 - [Scala Wechaty](https://github.com/wechaty/scala-wechaty) - Scala WeChaty Conversational AI Chatbot SDK for WechatyIndividual Accounts (Scala)
 - [PHP Wechaty](https://github.com/wechaty/php-wechaty) - PHP WeChaty Conversational AI Chatbot SDK for WechatyIndividual Accounts (PHP)
+- [.NET(C#) Wechaty](https://github.com/wechaty/dotnet-wechaty) - .NET(C#) WeChaty Conversational AI Chatbot SDK for WechatyIndividual Accounts (.NET/C#)
 
 ## Badge
 
@@ -317,7 +318,7 @@ php examples/bot.php
 
 1. [@zhangchunsheng](https://github.com/zhangchunsheng) - Chunsheng Zhang (张春生)
 
-## Authors
+## Creator
 
 - [@zhangchunsheng](https://github.com/zhangchunsheng) - Chunsheng Zhang (张春生) 
 
