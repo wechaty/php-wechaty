@@ -34,3 +34,5 @@ function autoload($clazz) {
 spl_autoload_register("autoload");
 
 require ROOT . '/vendor/autoload.php';
+
+\IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter::reflection();
