@@ -36,4 +36,11 @@ class ArrayCache extends Cache {
         unset($this->_cacheInstance[$key]);
         return true;
     }
+
+    public function keys($prefix) {
+        $keys = array_keys($this->_cacheInstance);
+        return array_filter($keys, function($value) use ($prefix) {
+            return preg_match("/^$prefix.*/", $value);
+        });
+    }
 }

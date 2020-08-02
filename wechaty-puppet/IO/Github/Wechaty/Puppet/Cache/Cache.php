@@ -30,4 +30,8 @@ class Cache {
     public function delete($key) {
 
     }
+
+    public function keys($prefix) {
+
+    }
 }

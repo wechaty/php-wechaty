@@ -16,6 +16,7 @@ use IO\Github\Wechaty\Puppet\Schemas\ImageType;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\Puppet\Schemas\Query\FriendshipSearchCondition;
+use IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter;
 use IO\Github\Wechaty\Puppet\Schemas\Query\RoomMemberQueryFilter;
 use IO\Github\Wechaty\Puppet\Schemas\Query\RoomQueryFilter;
 use IO\Github\Wechaty\Puppet\Schemas\RoomInvitationPayload;
@@ -225,6 +226,65 @@ abstract class Puppet extends EventEmitter {
 
         $this->_cache->set(self::CACHE_MESSAGE_PAYLOAD_PREFIX . $messageId, $payload);
         return $payload;
+    }
+
+    function messageList(): array {
+        $keys = $this->_cache->keys(self::CACHE_MESSAGE_PAYLOAD_PREFIX);
+        return $keys;
+    }
+
+    function messageSearch(MessageQueryFilter $query): array {
+        Logger::DEBUG("messageSearch {}", $query);
+
+        $allMessageIdList = $this->messageList();
+
+        $messagePayloadList = array_map(function($value) {
+            return $this->messagePayload($value);
+        }, $allMessageIdList);
+
+        if (!empty($query->fromId)) {
+            $messagePayloadList = array_filter($messagePayloadList, function($value) use ($query) {
+                return $value->fromId == $query->fromId;
+            });
+        }
+
+        if (!empty($query->id)) {
+            $messagePayloadList = array_filter($messagePayloadList, function($value) use ($query) {
+                return $value->id == $query->id;
+            });
+        }
+
+        if (!empty($query->roomId)) {
+            $messagePayloadList = array_filter($messagePayloadList, function($value) use ($query) {
+                return $value->roomId == $query->roomId;
+            });
+        }
+
+        if (!empty($query->toId)) {
+            $messagePayloadList = array_filter($messagePayloadList, function($value) use ($query) {
+                return $value->toId == $query->toId;
+            });
+        }
+
+        if (!empty($query->text)) {
+            $messagePayloadList = array_filter($messagePayloadList, function($value) use ($query) {
+                return $value->text == $query->text;
+            });
+        }
+
+        if (!empty($query->textReg)) {
+            $messagePayloadList = array_filter($messagePayloadList, function($value) use ($query) {
+                return preg_match($query->textReg, $value->text ?: "");
+            });
+        }
+
+        if (!empty($query->type)) {
+            $messagePayloadList = array_filter($messagePayloadList, function($value) use ($query) {
+                return $value->type == $query->type;
+            });
+        }
+
+        return $messagePayloadList;
     }
 
     function roomPayloadDirty(String $roomId) : void {
