@@ -20,6 +20,13 @@ class MessageQueryFilter {
         return "MessageQueryFilter(fromId=$this->fromId, id=$this->id, roomId=$this->roomId, text=$this->text, toId=$this->toId, type=$this->type, textReg=$this->textReg)";
     }
 
+    public static function getProperties() {
+        $ref = new \ReflectionClass(self::class);
+        $props = $ref->getDefaultProperties();
+
+        return array_keys($props);
+    }
+
     public static function reflection() {
         $ref = new \ReflectionClass("\\IO\\Github\\Wechaty\\Puppet\\Schemas\\Query\\MessageQueryFilter");
 
