@@ -22,10 +22,10 @@ class ReflectionUtil {
         foreach ($props as $key => $val) {
             if($isPublic) {
                 if($val->isPublic()) {
-                    $properties[$val->getName()] = $val->getValue($val->getName());
+                    $properties[$val->getName()] = $val->getValue($class);
                 }
             } else {
-                $properties[$val->getName()] = $val->getValue($val->getName());
+                $properties[$val->getName()] = $val->getValue($class);
             }
         }
 
