@@ -8,10 +8,8 @@
 namespace IO\Github\Wechaty\Puppet\Util;
 
 class ReflectionUtil {
-    public static function getClassName($class) {
-        if($class instanceof \ReflectionClass) {
-           $ref = $class;
-        } else {
+    public static function getClassName($class, $ref = null) {
+        if(empty($ref)) {
             $ref = new \ReflectionClass($class);
         }
 
@@ -20,10 +18,8 @@ class ReflectionUtil {
         return $name;
     }
 
-    public static function getPropertiesValue($class, $isPublic = true) {
-        if($class instanceof \ReflectionClass) {
-            $ref = $class;
-        } else {
+    public static function getPropertiesValue($class, $ref = null, $isPublic = true) {
+        if(empty($ref)) {
             $ref = new \ReflectionClass($class);
         }
 

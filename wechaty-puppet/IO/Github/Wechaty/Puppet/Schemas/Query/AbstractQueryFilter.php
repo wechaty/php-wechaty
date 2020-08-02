@@ -20,8 +20,8 @@ abstract class AbstractQueryFilter {
 
     public function __toString() {
         $ref = new \ReflectionClass($this);
-        $name = ReflectionUtil::getClassName($ref);
-        $values = ReflectionUtil::getPropertiesValue($ref);
+        $name = ReflectionUtil::getClassName($this, $ref);
+        $values = ReflectionUtil::getPropertiesValue($this, $ref);
         $strs = array();
         foreach($values as $key => $value) {
             $strs[] = "$key=$value";
