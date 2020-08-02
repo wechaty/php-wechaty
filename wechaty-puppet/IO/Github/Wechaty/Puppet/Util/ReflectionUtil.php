@@ -9,14 +9,24 @@ namespace IO\Github\Wechaty\Puppet\Util;
 
 class ReflectionUtil {
     public static function getClassName($class) {
-        $ref = new \ReflectionClass($class);
+        if($class instanceof \ReflectionClass) {
+           $ref = $class;
+        } else {
+            $ref = new \ReflectionClass($class);
+        }
+
         $name = $ref->getName();
 
         return $name;
     }
 
     public static function getPropertiesValue($class, $isPublic = true) {
-        $ref = new \ReflectionClass($class);
+        if($class instanceof \ReflectionClass) {
+            $ref = $class;
+        } else {
+            $ref = new \ReflectionClass($class);
+        }
+
         $props = $ref->getProperties();
         $properties = array();
         foreach ($props as $key => $val) {
