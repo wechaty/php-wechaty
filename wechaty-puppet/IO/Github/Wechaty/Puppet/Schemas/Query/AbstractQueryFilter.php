@@ -9,7 +9,7 @@ namespace IO\Github\Wechaty\Puppet\Schemas\Query;
 
 abstract class AbstractQueryFilter {
     public static function getProperties() {
-        $ref = new \ReflectionClass(self::class);
+        $ref = new \ReflectionClass(__CLASS__);
         $props = $ref->getProperties();
         $properties = array();
         foreach ($props as $key => $val) {
@@ -21,8 +21,8 @@ abstract class AbstractQueryFilter {
         return $properties;
     }
 
-    public static function reflection() {
-        $ref = new \ReflectionClass("\\IO\\Github\\Wechaty\\Puppet\\Schemas\\Query\\MessageQueryFilter");
+    public static function reflection($class) {
+        $ref = new \ReflectionClass($class);
 
         $consts = $ref->getConstants(); //返回所有常量名和值
         echo "----------------consts:---------------" . PHP_EOL;
