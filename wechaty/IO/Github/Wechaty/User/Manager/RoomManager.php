@@ -9,6 +9,7 @@ namespace IO\Github\Wechaty\User\Manager;
 
 use IO\Github\Wechaty\Accessory;
 use IO\Github\Wechaty\Exceptions\WechatyException;
+use IO\Github\Wechaty\Puppet\Schemas\Query\RoomQueryFilter;
 use IO\Github\Wechaty\User\Contact;
 use IO\Github\Wechaty\User\Room;
 use IO\Github\Wechaty\Util\Logger;
@@ -48,5 +49,51 @@ class RoomManager extends Accessory {
         }
         $this->_cache->set(self::CACHE_ROOM_PREFIX . $id, $room);
         return $room;
+    }
+
+    function findAll(RoomQueryFilter $query): array {
+        Logger::DEBUG("findAll {}", $query);
+
+        try {
+            $roomIdList = $this->wechaty->getPuppet()->roomSearch($query);
+            $that = $this;
+            $roomList = array_map(function($value) use ($that) {
+                return $that->load($value);
+            }, $roomIdList);
+            try {
+                foreach($roomList as $value) {
+                    $value->ready();
+                }
+                return $roomList;
+            } catch(\Exception $e) {
+                Logger::WARNING("findAll() room.ready() rejection {}", $e->getTrace());
+            }
+        } catch (\Exception $e) {
+            Logger::ERR("findAll() rejected: {}", $e->getTrace());
+        }
+        return array();
+    }
+
+    function find(RoomQueryFilter $query): ?Room {
+        $roomList = $this->findAll($query);
+        if (empty($roomList)) {
+            return null;
+        }
+
+        if (count($roomList) > 1) {
+            Logger::WARNING("find got more then one{} result", count($roomList));
+        }
+
+        foreach($roomList as $value) {
+            $valid = $this->wechaty->getPuppet()->roomValidate($value->getId());
+            if($valid) {
+                Logger::DEBUG("find() confirm room{} with id={} is valid result, return it.", $value, $value->getId());
+                return $value;
+            } else {
+                Logger::DEBUG("find() confirm room{} with id={} is INVALID result, try next", $value, $value->getId());
+            }
+        }
+
+        return null;
     }
 }
