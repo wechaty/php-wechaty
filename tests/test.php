@@ -42,4 +42,12 @@ print_r(\IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter::getPropertie
 $filter = new \IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter();
 $filter->id = 1;
 print_r($filter);
-echo $filter;
+echo $filter . "\n";
+
+$cache = \IO\Github\Wechaty\Puppet\Cache\CacheFactory::getCache();
+$cache->set("aaa", "1");
+$cache->set("aa1", "1");
+$cache->set("bbb", "1");
+$cache->set("ccc", "1");
+print_r($cache->keys("aa"));
+
