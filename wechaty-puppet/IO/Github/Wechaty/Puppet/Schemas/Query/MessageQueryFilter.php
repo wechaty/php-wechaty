@@ -26,7 +26,7 @@ class MessageQueryFilter {
         $properties = array();
         foreach ($props as $key => $val) {
             if($val->isPublic()) {
-                $properties[] = $key;
+                $properties[] = $val->getName();
             }
         }
 
