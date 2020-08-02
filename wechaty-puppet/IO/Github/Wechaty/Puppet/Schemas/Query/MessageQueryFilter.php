@@ -22,9 +22,15 @@ class MessageQueryFilter {
 
     public static function getProperties() {
         $ref = new \ReflectionClass(self::class);
-        $props = $ref->getDefaultProperties();
+        $props = $ref->getProperties();
+        $properties = array();
+        foreach ($props as $key => $val) {
+            if($val->isPublic()) {
+                $properties[] = $key;
+            }
+        }
 
-        return array_keys($props);
+        return $properties;
     }
 
     public static function reflection() {
