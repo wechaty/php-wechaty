@@ -465,7 +465,13 @@ class PuppetHostie extends Puppet {
     }
 
     function roomCreate(array $contactIdList, string $topic): string {
-        // TODO: Implement roomCreate() method.
+        $request = new \Wechaty\Puppet\RoomCreateRequest();
+        $request->setTopic($topic);
+        $request->setContactIds($contactIdList);
+
+        list($response, $status) = $this->_grpcClient->RoomCreate($request)->wait();
+
+        return $response->getId()->getValue();
     }
 
     function roomDel(string $roomId, string $contactId): void {
