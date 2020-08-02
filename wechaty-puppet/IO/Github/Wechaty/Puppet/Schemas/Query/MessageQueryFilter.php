@@ -16,7 +16,7 @@ class MessageQueryFilter extends AbstractQueryFilter {
     public $type = null;
     public $textReg = null;
 
-    public function __toString() {
+    /*public function __toString() {
         return "MessageQueryFilter(fromId=$this->fromId, id=$this->id, roomId=$this->roomId, text=$this->text, toId=$this->toId, type=$this->type, textReg=$this->textReg)";
-    }
+    }*/
 }

@@ -17,4 +17,16 @@ abstract class AbstractQueryFilter {
     public static function reflection($class) {
         ReflectionUtil::reflection($class);
     }
+
+    public function __toString() {
+        $name = ReflectionUtil::getClassName($this);
+        $values = ReflectionUtil::getPropertiesValue($this);
+        $strs = array();
+        foreach($values as $key => $value) {
+            $strs[] = "$key=$value";
+        }
+        $str = implode(",", $strs);
+        $str = "$name($str)";
+        return $str;
+    }
 }
