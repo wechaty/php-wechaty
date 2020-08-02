@@ -164,8 +164,35 @@ abstract class Puppet extends EventEmitter {
         // TODO
     }
 
-    function roomReach(RoomQueryFilter $query): array {
-        // TODO
+    function roomSearch(RoomQueryFilter $query): array {
+        $allRoomList = $this->roomList();
+        $roomPayloads = array_map(function($value) {
+            $roomPayload = $this->roomPayload($value);
+            if($roomPayload) {
+                return $roomPayload;
+            }
+        }, $allRoomList);
+
+        if(!empty($query->id)) {
+            $roomPayloads = array_filter($roomPayloads, function($value) use ($query) {
+                return $value->id == $query->id;
+            });
+        }
+
+        if(!empty($query->topic)) {
+            $roomPayloads = array_filter($roomPayloads, function($value) use ($query) {
+                Logger::DEBUG("t.topic is {} and topic is {}", $value->topic, $query->topic);
+                $equals = $value->topic == $query->topic;
+                Logger::DEBUG("equals is $equals");
+                return $equals;
+            });
+            Logger::DEBUG("roomPayloads is {}", $roomPayloads);
+        }
+        return $roomPayloads;
+    }
+
+    function roomValidate(String $roomId): bool {
+        return true;
     }
 
     protected function _roomInvitationPayloadCache(String $roomInvitationId): ?RoomInvitationPayload {
