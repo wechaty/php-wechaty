@@ -18,4 +18,8 @@ class MessageManager extends Accessory {
     function load(String $id) : Message {
         return new Message($this->wechaty, $id);
     }
+
+    function create(String $id) : Message {
+        return $this->load($id);
+    }
 }
