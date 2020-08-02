@@ -35,6 +35,6 @@ spl_autoload_register("autoload");
 
 require ROOT . '/vendor/autoload.php';
 
-\IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter::reflection("\\IO\\Github\\Wechaty\\Puppet\\Schemas\\Query\\MessageQueryFilter");
+\IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter::reflection(\IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter::class);
 
-print_r(\IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter::getProperties());
+print_r(\IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter::getProperties(\IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter::class));

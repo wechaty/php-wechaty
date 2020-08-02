@@ -8,8 +8,8 @@
 namespace IO\Github\Wechaty\Puppet\Schemas\Query;
 
 abstract class AbstractQueryFilter {
-    public static function getProperties() {
-        $ref = new \ReflectionClass(__CLASS__);
+    public static function getProperties($class) {
+        $ref = new \ReflectionClass($class);
         $props = $ref->getProperties();
         $properties = array();
         foreach ($props as $key => $val) {
