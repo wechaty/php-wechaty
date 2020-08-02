@@ -34,4 +34,30 @@ class FriendshipPayload {
     public $type = null;
     public $stranger = null;
     public $ticket = null;
+
+    public static $COLUMNS = array(
+        "id",
+        "contactId",
+        "hello",
+        "timestamp",
+        "scene",
+        "type",
+        "stranger",
+        "ticket",
+    );
+
+    static function fromJson(String $json) : FriendshipPayload {
+        $data = json_decode($json, true);
+
+        $payload = new FriendshipPayload();
+        foreach(self::$COLUMNS as $value) {
+            if(isset($data[$value])) {
+                $payload->$value = $data[$value];
+            } else {
+                $payload->$value = null;
+            }
+        }
+
+        return $payload;
+    }
 }

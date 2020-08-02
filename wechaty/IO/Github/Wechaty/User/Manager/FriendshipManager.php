@@ -8,6 +8,8 @@
 namespace IO\Github\Wechaty\User\Manager;
 
 use IO\Github\Wechaty\Accessory;
+use IO\Github\Wechaty\Exceptions\WechatyException;
+use IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload;
 use IO\Github\Wechaty\Puppet\Schemas\Query\FriendshipSearchCondition;
 use IO\Github\Wechaty\User\Contact;
 use IO\Github\Wechaty\User\Friendship;
@@ -27,5 +29,25 @@ class FriendshipManager extends Accessory {
         $contact = $this->wechaty->contactManager->load($contactId);
         $contact->ready();
         return $contact;
+    }
+
+    function add(Contact $contact, String $hello) {
+        Logger::DEBUG("FriendshipManager add", array("contact" => $contact, "hello" => $hello));
+        $this->wechaty->getPuppet()->friendshipAdd($contact->getId(), $hello);
+    }
+
+    function del(Contact $contact) {
+        Logger::DEBUG(__CLASS__ . " " . __METHOD__, array("contact" => $contact));
+        throw new WechatyException("to be implemented");
+    }
+
+    function fromJSON(String $payload) : Friendship {
+        $readValue = FriendshipPayload::fromJson($payload);
+        return $this->fromPayload($readValue);
+    }
+
+    function fromPayload(FriendshipPayload $friendshipPayload) : Friendship {
+        $this->wechaty->getPuppet()->friendshipPayload($friendshipPayload->id, $friendshipPayload);
+        return $this->load($friendshipPayload->id);
     }
 }
