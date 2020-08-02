@@ -11,6 +11,7 @@ use IO\Github\Wechaty\Puppet\Cache\CacheFactory;
 use IO\Github\Wechaty\Puppet\EventEmitter\EventEmitter;
 use IO\Github\Wechaty\Puppet\Exceptions\InvalidArgumentException;
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
+use IO\Github\Wechaty\Puppet\Schemas\FriendshipPayload;
 use IO\Github\Wechaty\Puppet\Schemas\ImageType;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
@@ -261,6 +262,12 @@ abstract class Puppet extends EventEmitter {
             return $this->friendshipSearchWeixin($condition->weixin);
         } else {
             throw new InvalidArgumentException("friendshipSearch condition error");
+        }
+    }
+
+    function friendshipPayload(String $friendshipId, FriendshipPayload $newPayload): void {
+        if ($newPayload != null) {
+            $this->_cache->set(self::CACHE_FRIENDSHIP_PAYLOAD_PREFIX . $friendshipId, $newPayload);
         }
     }
 
