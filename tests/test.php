@@ -42,3 +42,4 @@ print_r(\IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter::getPropertie
 $filter = new \IO\Github\Wechaty\Puppet\Schemas\Query\MessageQueryFilter();
 $filter->id = 1;
 print_r($filter);
+echo $filter;
