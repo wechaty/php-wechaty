@@ -8,6 +8,7 @@
 namespace IO\Github\Wechaty\User\Manager;
 
 use IO\Github\Wechaty\Accessory;
+use IO\Github\Wechaty\User\Contact;
 use IO\Github\Wechaty\User\Tag;
 
 class TagManager extends Accessory {
@@ -21,4 +22,13 @@ class TagManager extends Accessory {
         $this->_cache->set(self::CACHE_TAG_PREFIX . $id, $tag);
         return $tag;
     }
+
+    function get(String $id) : Tag {
+        return $this->load($id);
+    }
+
+    function delete(Tag $tag, Contact $target) {
+        $this->wechaty->getPuppet()->tagContactDelete($tag->getId());
+    }
+
 }
