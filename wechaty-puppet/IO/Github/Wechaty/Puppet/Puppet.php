@@ -313,8 +313,11 @@ abstract class Puppet extends EventEmitter {
                 return $value->type == $query->type;
             });
         }
+        $messageIdList = array_map(function($value) {
+            return $value->id;
+        }, $messagePayloadList);
 
-        return $messagePayloadList;
+        return $messageIdList;
     }
 
     function roomPayloadDirty(String $roomId) : void {
