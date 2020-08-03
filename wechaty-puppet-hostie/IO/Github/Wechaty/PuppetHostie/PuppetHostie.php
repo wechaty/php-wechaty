@@ -543,7 +543,6 @@ class PuppetHostie extends Puppet {
         $request->setId($roomId);
 
         list($response, $status) = $this->_grpcClient->RoomPayload($request)->wait();
-        $response = new RoomPayloadResponse();
         $payload = new RoomPayload($response->getId());
         $payload->adminIdList = $this->_repeatFieldToArray($response->getAdminIds());
         $payload->avatar = $response->getAvatar();
@@ -653,11 +652,29 @@ class PuppetHostie extends Puppet {
     }
 
     protected function contactRawPayload(string $contractId): ContactPayload {
-        // TODO: Implement contactRawPayload() method.
+        $request = new \Wechaty\Puppet\ContactPayloadRequest();
+        $request->setId($contractId);
+
+        list($response, $status) = $this->_grpcClient->ContactPayload($request)->wait();
+        $payload = new ContactPayload($response->getId());
+        $payload->address = $response->getAddress();
+        $payload->alias = $response->getAlias();
+        $payload->avatar = $response->getAvatar();
+        $payload->city = $response->getCity();
+        $payload->friend = $response->getFriend();
+        $payload->gender = $response->getGender();
+        $payload->name = $response->getName();
+        $payload->province = $response->getProvince();
+        $payload->signature = $response->getSignature();
+        $payload->star = $response->getStar();
+        $payload->type = $response->getType();
+        $payload->weixin = $response->getWeixin();
+
+        return $payload;
     }
 
     protected function contactRawPayloadParser(ContactPayload $rawPayload): ContactPayload {
-        // TODO: Implement contactRawPayloadParser() method.
+        return $rawPayload;
     }
 
     function tagContactAdd(string $tagId, string $contactId): object {

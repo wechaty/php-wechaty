@@ -7,7 +7,7 @@
  */
 namespace IO\Github\Wechaty\Puppet\Schemas;
 
-class ContactPayload {
+class ContactPayload extends AbstractPayload {
     const CONTACTGENDER_UNKNOWN = 0;
     const CONTACTGENDER_MALE = 1;
     const CONTACTGENDER_FEMALE = 2;
@@ -16,7 +16,6 @@ class ContactPayload {
     const CONTACTTYPE_PERSONAL = 1;
     const CONTACTTYPE_OFFICIAL = 2;
 
-    public $id = null;
     public $gender = null;
     public $type = null;
     public $name = null;
