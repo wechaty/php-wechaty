@@ -59,6 +59,8 @@ abstract class Puppet extends EventEmitter {
 
     abstract public function start();
     abstract public function stop();
+    abstract function setPuppetName();
+    abstract function logout(): void;
 
     abstract function friendshipRawPayload($friendshipId);
     protected abstract function _contactRawPayload(String $contractId) : ContactPayload;

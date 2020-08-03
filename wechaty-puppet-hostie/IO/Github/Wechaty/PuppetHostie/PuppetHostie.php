@@ -103,6 +103,25 @@ class PuppetHostie extends Puppet {
         self::$_STATE = StateEnum::OFF;
     }
 
+    function setPuppetName() {
+        $this->_puppetOptions->name = "\\IO\\Github\\Wechaty\\PuppetHostie\\PuppetHostie";
+    }
+
+    function logout(): void {
+        if ($this->_getId() == null) {
+            throw new PuppetHostieException("logout before login?");
+        }
+
+        try {
+            $request = new \Wechaty\Puppet\LogoutRequest();
+            list($response, $status) = $this->_grpcClient->Logout($request)->wait();
+        } catch (\Exception $e) {
+            Logger::ERR("logout() rejection: %s", $e->getTrace());
+        } finally {
+            $this->emit(EventEnum::LOGOUT, $this->_getId(), "logout");
+        }
+    }
+
     function friendshipRawPayload($friendshipId) {
         $request = new \Wechaty\Puppet\FriendshipPayloadRequest();
         $request->setId($friendshipId);
