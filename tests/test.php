@@ -51,3 +51,16 @@ $cache->set("bbb", "1");
 $cache->set("ccc", "1");
 print_r($cache->keys("aa"));
 
+$array = array(
+    array(
+        "id" => 1,
+        "topic" => "",
+    ),
+    array(
+        "id" => 2,
+        "topic" => "",
+    ),
+);
+print_r(array_map(function($value) {
+    return $value["id"];
+}, $array));

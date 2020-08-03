@@ -188,7 +188,10 @@ abstract class Puppet extends EventEmitter {
             });
             Logger::DEBUG("roomPayloads is {}", $roomPayloads);
         }
-        return $roomPayloads;
+        $roomIdList = array_map(function($value) {
+            return $value->id;
+        }, $roomPayloads);
+        return $roomIdList;
     }
 
     function roomValidate(String $roomId): bool {
