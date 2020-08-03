@@ -627,7 +627,11 @@ class PuppetHostie extends Puppet {
     }
 
     function contactSelfQRCode(): string {
-        // TODO: Implement contactSelfQRCode() method.
+        $request = new \Wechaty\Puppet\ContactSelfQRCodeRequest();
+
+        list($response, $status) = $this->_grpcClient->ContactSelfQRCode($request)->wait();
+
+        return $response->getQrcode();
     }
 
     function contactSelfSignature(string $signature): object {
