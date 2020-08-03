@@ -539,11 +539,23 @@ class PuppetHostie extends Puppet {
     }
 
     function roomRawPayload(string $roomId): RoomPayload {
-        // TODO: Implement roomRawPayload() method.
+        $request = new \Wechaty\Puppet\RoomPayloadRequest();
+        $request->setId($roomId);
+
+        list($response, $status) = $this->_grpcClient->RoomPayload($request)->wait();
+        $response = new RoomPayloadResponse();
+        $payload = new RoomPayload($response->getId());
+        $payload->adminIdList = $this->_repeatFieldToArray($response->getAdminIds());
+        $payload->avatar = $response->getAvatar();
+        $payload->memberIdList = $this->_repeatFieldToArray($response->getMemberIds());
+        $payload->ownerId = $response->getOwnerId();
+        $payload->topic = $response->getTopic();
+
+        return $payload;
     }
 
     function roomRawPayloadParser(RoomPayload $roomPayload): RoomPayload {
-        // TODO: Implement roomRawPayloadParser() method.
+        return $roomPayload;
     }
 
     function getRoomAnnounce(string $roomId): ?string {
