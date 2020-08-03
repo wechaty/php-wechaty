@@ -148,13 +148,35 @@ class Message extends Accessory {
             return array();
         }
 
-        //TODO
-        $rawMentionList = array();
+        $rawMentionList = array_map(function($value) {
+            return $this->multipleAt($value);
+        }, array_filter($atList, function($value) {
+            return stripos($value, "@") > 0 || stripos($value, "@") === 0;
+        }));
 
         $mentionNameList = array();
+        foreach($rawMentionList as $rawMention) {
+            if(is_array($rawMention)) {
+                foreach($rawMention as $value) {
+                    if(!empty($value)) {
+                        $mentionNameList[] = $value;
+                    }
+                }
+            }
+        }
 
         $roomMemberQueryFilter = new RoomMemberQueryFilter();
+        $memberAll = array();
         $flatten = array();
+        foreach($mentionNameList as $mentionName) {
+            $roomMemberQueryFilter->name = $mentionName;
+            $memberAll = $this->room()->memberAll($roomMemberQueryFilter);
+            if(is_array($memberAll)) {
+                foreach($memberAll as $value) {
+                    $flatten[] = $value;
+                }
+            }
+        }
 
         return $flatten;
     }
