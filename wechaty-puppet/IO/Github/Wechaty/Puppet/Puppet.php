@@ -163,7 +163,36 @@ abstract class Puppet extends EventEmitter {
     abstract function tagContactRemove(String $tagId, String $contactId): object;
 
     function roomMemberSearch(String $roomId, RoomMemberQueryFilter $query): array {
-        // TODO
+        $roomMemberList = $this->roomMemberList($roomId);
+        $roomMemberPayloads = array_map(function($value) use ($roomId) {
+            $roomMemberPayload = $this->roomMemberPayload($roomId, $value);
+            if($roomMemberPayload) {
+                return $roomMemberPayload;
+            }
+        }, $roomMemberList);
+        // roomAlias name contactAlias
+
+        if(!empty($query->id)) {
+            $roomMemberPayloads = array_filter($roomMemberPayloads, function($value) use ($query) {
+                return $value->id == $query->id;
+            });
+        }
+        if(!empty($query->name)) {
+            $roomMemberPayloads = array_filter($roomMemberPayloads, function($value) use ($query) {
+                return $value->name == $query->name;
+            });
+        }
+        if(!empty($query->roomAlias)) {
+            $roomMemberPayloads = array_filter($roomMemberPayloads, function($value) use ($query) {
+                return $value->roomAlias == $query->roomAlias;
+            });
+        }
+
+        $roomMemberIdList = array_map(function($value) {
+            return $value->id;
+        }, $roomMemberPayloads);
+
+        return $roomMemberIdList;
     }
 
     function roomSearch(RoomQueryFilter $query): array {

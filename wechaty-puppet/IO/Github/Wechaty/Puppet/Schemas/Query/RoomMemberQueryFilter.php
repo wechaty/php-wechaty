@@ -7,7 +7,8 @@
  */
 namespace IO\Github\Wechaty\Puppet\Schemas\Query;
 
-class RoomMemberQueryFilter {
+class RoomMemberQueryFilter extends AbstractQueryFilter {
+    public $id = null;
     public $name = null;
     public $roomAlias = null;
     public $contactAlias = null;
