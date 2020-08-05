@@ -8,6 +8,7 @@
 
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\MiniProgramPayload;
+use IO\Github\Wechaty\Puppet\Schemas\PuppetOptions;
 use IO\Github\Wechaty\User\ContactSelf;
 use IO\Github\Wechaty\User\MiniProgram;
 use IO\Github\Wechaty\User\UrlLink;
@@ -64,3 +65,8 @@ $array = array(
 print_r(array_map(function($value) {
     return $value["id"];
 }, $array));
+
+$puppetOptions = new PuppetOptions();
+$puppetOptions->token = "token";
+$puppetOptions->endPoint = "endPoint";
+print_r(json_encode($puppetOptions));

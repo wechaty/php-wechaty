@@ -94,9 +94,10 @@ class Wechaty extends EventEmitter {
     /**
      * @param $token
      * @param string $endPoint
+     * @param PuppetOptions $puppetOptions
      * @return Wechaty
      */
-    public static function getInstance($token, $endPoint = "") {
+    public static function getInstance($token, $endPoint = "", PuppetOptions $puppetOptions = null) {
         $key = md5($token . $endPoint);
         if(isset(self::$_INSTANCES[$key]) && !empty(self::$_INSTANCES[$key])) {
             return self::$_INSTANCES[$key];
