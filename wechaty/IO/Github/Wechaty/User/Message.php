@@ -11,6 +11,7 @@ namespace IO\Github\Wechaty\User;
 use IO\Github\Wechaty\Accessory;
 use IO\Github\Wechaty\Exceptions\WechatyException;
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
+use IO\Github\Wechaty\Puppet\Schemas\Date;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\Query\RoomMemberQueryFilter;
 use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
@@ -250,6 +251,20 @@ class Message extends Accessory {
             Logger::WARNING("Can not retrieve the recalled message with id ${originalMessageId}");
         }
         return null;
+    }
+
+    public function date (): Date {
+        if (!$this->_payload) {
+          throw new WechatyException('no payload');
+        }
+
+        $timestamp = $this->_payload->timestamp;
+        return new Date($timestamp);
+    }
+
+    public function age() : int {
+        $ageSeconds = time() - $this->date()->getTimestamp();
+        return $ageSeconds;
     }
 
     function mentionText() : String {
