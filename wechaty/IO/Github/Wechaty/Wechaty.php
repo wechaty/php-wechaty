@@ -98,13 +98,20 @@ class Wechaty extends EventEmitter {
      * @return Wechaty
      */
     public static function getInstance($token, $endPoint = "", PuppetOptions $puppetOptions = null) {
-        $key = md5($token . $endPoint);
+        if(empty($puppetOptions)) {
+            $key = md5($token . $endPoint);
+        } else {
+            $key = md5(json_encode($puppetOptions));
+        }
+
         if(isset(self::$_INSTANCES[$key]) && !empty(self::$_INSTANCES[$key])) {
             return self::$_INSTANCES[$key];
         } else {
-            $puppetOptions = new PuppetOptions();
-            $puppetOptions->token = $token;
-            $puppetOptions->endPoint = $endPoint;
+            if(empty($puppetOptions)) {
+                $puppetOptions = new PuppetOptions();
+                $puppetOptions->token = $token;
+                $puppetOptions->endPoint = $endPoint;
+            }
             $wechatyOptions = new WechatyOptions();
             $wechatyOptions->puppetOptions = $puppetOptions;
             $wechaty = new Wechaty($wechatyOptions);
