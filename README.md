@@ -12,7 +12,7 @@
 
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/Wechaty/wechaty)
 
-Wechaty is a RPA SDK for Wechat **Individual** Account that can help you create a chatbot in 8 lines of PHP
+Wechaty is a Conversational SDK for Chatbot Makers that can help you create a bot in 8 lines of PHP
 
 ## Voice of the Developers
 
