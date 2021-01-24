@@ -9,7 +9,7 @@
   ],
   "homepage": "https://github.com/wechaty/php-wechaty",
   "license": "Apache-2.0",
-  "version": "v0.0.1",
+  "version": "v0.0.3",
   "authors": [
     {
       "name": "Chunsheng Zhang",
