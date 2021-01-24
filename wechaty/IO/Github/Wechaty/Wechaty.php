@@ -99,6 +99,15 @@ class Wechaty extends EventEmitter {
      */
     public static function getInstance($token, $endPoint = "", PuppetOptions $puppetOptions = null) {
         if(empty($puppetOptions)) {
+            $checkToken = getenv("WECHATY_PUPPET_SERVICE_TOKEN");
+            if(empty($checkToken)) {
+                $checkToken = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
+                if($checkToken) {
+                    $msg = "Warning: wechaty puppet is update, WECHATY_PUPPET_HOSTIE_TOKEN was deprecated. see https://wechaty.js.org/2021/01/14/wechaty-puppet-service/\n";
+                    echo $msg;
+                    Logger::WARNING(array($msg));
+                }
+            }
             $key = md5($token . $endPoint);
         } else {
             $key = md5(json_encode($puppetOptions));
