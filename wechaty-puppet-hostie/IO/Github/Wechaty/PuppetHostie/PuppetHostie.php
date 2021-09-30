@@ -775,13 +775,26 @@ class PuppetHostie extends Puppet {
 
         // update
         // \Grpc\ChannelCredentials::createSsl();
-        $metadata = array(
-            'authorization' => 'Wechaty ' . ($this->_puppetOptions ? $this->_puppetOptions->token : ""),
+        $token = array(
+            "token_type" => "Wechaty",
+            "access_token" => $this->_puppetOptions ? $this->_puppetOptions->token : "",
         );
-        Logger::DEBUG($metadata);
+        $updateMetadata =
+            function ($metadata,
+                      $authUri = null,
+                      $client = null) use ($token) {
+                $metadataCopy = $metadata;
+                $metadataCopy["authorization"] =
+                    [sprintf('%s %s',
+                        $token['token_type'],
+                        $token['access_token'])];
+
+                return $metadataCopy;
+            };
+        Logger::DEBUG($updateMetadata);
         $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
             'credentials' => \Grpc\ChannelCredentials::createInsecure(),
-            'update_metadata' => $metadata,
+            'update_metadata' => $updateMetadata,
         ]);
         return $this->_grpcClient;
     }
