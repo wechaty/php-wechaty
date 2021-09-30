@@ -773,6 +773,7 @@ class PuppetHostie extends Puppet {
         }
         $hostname = $discoverHostieIp[0] . ":" . $discoverHostieIp[1];
 
+        // update
         $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
             'credentials' => \Grpc\ChannelCredentials::createInsecure()
         ]);
