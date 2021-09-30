@@ -795,6 +795,7 @@ class PuppetHostie extends Puppet {
             $ret->next();
         }
         echo "service stopped normally\n";
+        Console::log($ret);
         Console::log($ret->getReturn());
     }
 
