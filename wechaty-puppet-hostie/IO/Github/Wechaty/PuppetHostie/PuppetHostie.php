@@ -778,6 +778,7 @@ class PuppetHostie extends Puppet {
         $metadata = array(
             'authorization' => 'Wechaty ' . ($this->_puppetOptions ? $this->_puppetOptions->token : ""),
         );
+        Logger::DEBUG($metadata);
         $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
             'credentials' => \Grpc\ChannelCredentials::createInsecure(),
             'update_metadata' => $metadata,
