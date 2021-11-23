@@ -211,7 +211,7 @@ function main() {
     # 3. If there's additional `npm` arg...
     #
     php)
-      shift
+      composer install
       php "$@" || ret=$?
       ;;
 
