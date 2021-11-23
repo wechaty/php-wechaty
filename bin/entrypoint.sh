@@ -182,7 +182,7 @@ function main() {
 
   wechaty::printEnv
 
-  VERSION=$(PHP-WECHATY_LOG=WARN php-wechaty-version 2>/dev/null || echo '0.0.0(unknown)')
+  VERSION=$(echo '0.0.4' || echo '0.0.0(unknown)')
 
   echo
   echo -n "Starting Docker Container for PHP-Wechaty v$VERSION with "
