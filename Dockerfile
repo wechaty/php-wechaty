@@ -14,10 +14,12 @@ RUN composer config repo.packagist composer https://mirrors.aliyun.com/composer/
 # https://packagist.org/packages/wechaty/php-wechaty
 RUN composer install
 
+RUN chmod +x /php-wechaty/bin/entrypoint.sh
+
 WORKDIR /bot
 
-#ENTRYPOINT  [ "/php-wechaty/bin/entrypoint.sh" ]
-#CMD        [ "" ]
+ENTRYPOINT  [ "/php-wechaty/bin/entrypoint.sh" ]
+CMD        [ "" ]
 
 #
 # https://docs.docker.com/docker-cloud/builds/advanced/
