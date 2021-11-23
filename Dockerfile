@@ -16,8 +16,8 @@ RUN composer install
 
 WORKDIR /bot
 
-ENTRYPOINT  [ "/php-wechaty/bin/entrypoint.sh" ]
-CMD        [ "" ]
+#ENTRYPOINT  [ "/php-wechaty/bin/entrypoint.sh" ]
+#CMD        [ "" ]
 
 #
 # https://docs.docker.com/docker-cloud/builds/advanced/
