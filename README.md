@@ -41,6 +41,26 @@ Wechaty is used in many ChatBot projects by thousands of developers. If you want
 
 Scan now, because other Wechaty PHP developers want to talk with you too! (secret code: _php wechaty_)
 
+## Getting Started
+
+### 1. Docker
+
+[![Docker Pulls](https://img.shields.io/docker/pulls/phpwechaty/php-wechaty)](https://hub.docker.com/r/phpwechaty/php-wechaty/)
+[![Docker Layers](https://images.microbadger.com/badges/image/wechaty/php-wechaty.svg)](https://microbadger.com/#/images/wechaty/php-wechaty)
+
+- PHP Wechaty Starter Repository for Docker - <https://github.com/wechaty/docker-php-wechaty-getting-started>
+
+> PHP Wechaty Docker supports PHP Script.
+
+2.1. Run php script
+
+```shell
+# for php script
+docker run -ti --volume="$(pwd)":/bot --rm phpwechaty/php-wechaty:v1 docker/ding-dong-bot.php
+```
+
+> Learn more about Wechaty Docker at [Wiki:Docker](https://github.com/Wechaty/php-wechaty/wiki/Docker).
+
 ## The World's Shortest PHP ChatBot: 8 lines of Code
 
 ### php
