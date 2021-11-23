@@ -94,7 +94,7 @@ function php-wechaty::diagnose() {
   echo
   echo '### 5. php-wechaty doctor'
   echo
-  php-wechaty-doctor
+  # php-wechaty-doctor
 
   figlet " Submit a ISSUE "
   echo _____________________________________________________________
