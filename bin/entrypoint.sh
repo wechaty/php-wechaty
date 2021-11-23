@@ -212,7 +212,7 @@ function main() {
     #
     php)
       composer install
-      php "$@" || ret=$?
+      "$@" || ret=$?
       ;;
 
     help|version)
