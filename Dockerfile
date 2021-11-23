@@ -2,7 +2,6 @@ FROM yiluxiangbei/centos-php:php74
 LABEL maintainer="Peter Zhang (张春生) <zhangchunsheng423@gmail.com>"
 
 ENV PHP_WECHATY_DOCKER  1
-ENV LC_ALL              C.UTF-8
 
 WORKDIR /php-wechaty
 
