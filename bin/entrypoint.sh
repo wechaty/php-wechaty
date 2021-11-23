@@ -174,7 +174,7 @@ HELP
 
 function main() {
   # issue #84
-  echo -e 'nameserver 114.114.114.114\nnameserver 1.1.1.1\nnameserver 8.8.8.8' | sudo tee -a /etc/resolv.conf > /dev/null
+  echo -e 'nameserver 114.114.114.114\nnameserver 1.1.1.1\nnameserver 8.8.8.8' >> /etc/resolv.conf > /dev/null
 
   wechaty::banner
   figlet Connecting
