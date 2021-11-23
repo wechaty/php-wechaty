@@ -176,11 +176,11 @@ function main() {
   # issue #84
   echo -e 'nameserver 114.114.114.114\nnameserver 1.1.1.1\nnameserver 8.8.8.8' >> /etc/resolv.conf > /dev/null
 
-  wechaty::banner
+  php-wechaty::banner
   figlet Connecting
   figlet ChatBots
 
-  wechaty::printEnv
+  php-wechaty::printEnv
 
   VERSION=$(echo '0.0.4' || echo '0.0.0(unknown)')
 
@@ -205,7 +205,7 @@ function main() {
     # 2. Run a bot
     #
     *.php)
-      wechaty::runBot "$@" || ret=$?
+      php-wechaty::runBot "$@" || ret=$?
       ;;
 
     #
