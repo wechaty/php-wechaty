@@ -42,9 +42,8 @@ TROUBLESHOOTING
 }
 
 function php-wechaty::printEnv () {
-  num=$(env | grep -c 'PHP-WECHATY')
+  num=0.0.4
   echo "PHP-WECHATY Environment Variables: $num"
-  env | grep 'PHP-WECHATY'
 }
 
 function php-wechaty::errorCtrlC () {
