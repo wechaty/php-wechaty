@@ -215,6 +215,12 @@ If you are interested in the translation and want to look at how it works, it wi
 
 WIP...
 
+## docker
+
+```shell script
+docker build -t php-wechaty:v1 . 
+```
+
 ## Requirements
 
 1. PHP 7.4+
