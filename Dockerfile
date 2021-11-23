@@ -32,8 +32,8 @@ LABEL \
   org.label-schema.name="PHP-Wechaty" \
   org.label-schema.description="PHP-Wechat for Bot" \
   org.label-schema.usage="https://github.com/wechaty/php-wechaty/wiki/Docker" \
-  org.label-schema.url="https://www.luomor.com" \
-  org.label-schema.vendor="Luomor" \
+  org.label-schema.url="https://github.com/zhangchunsheng" \
+  org.label-schema.vendor="Yunqiic" \
   org.label-schema.vcs-ref="$SOURCE_COMMIT" \
   org.label-schema.vcs-url="https://github.com/wechaty/php-wechaty" \
   org.label-schema.docker.cmd="docker run -ti --rm yiluxiangbei/php-wechaty <code.js>" \
