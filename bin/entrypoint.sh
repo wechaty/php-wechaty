@@ -129,7 +129,7 @@ function php-wechaty::runBot() {
   local -i ret=0
   case "$botFile" in
     *.php)
-      echo "Executing node $*"
+      echo "Executing php $*"
       php \
         "$@" \
         &
