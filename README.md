@@ -218,7 +218,8 @@ WIP...
 ## docker
 
 ```shell script
-docker build -t php-wechaty:v1 . 
+docker build -t php-wechaty:v1 .
+docker run -ti --volume="$(pwd)":/bot --rm php-wechaty:v1 docker/ding-dong-bot.php
 ```
 
 ## Requirements
