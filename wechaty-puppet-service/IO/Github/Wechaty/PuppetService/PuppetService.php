@@ -806,7 +806,7 @@ class PuppetService extends Puppet {
         } else {
             Logger::DEBUG("start client with tls");
             $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
-                'credentials' => \Grpc\ChannelCredentials::createSsl(WechatyCA::TLS_CA_CERT, WechatyCA::TLS_INSECURE_SERVER_KEY, WechatyCA::TLS_INSECURE_SERVER_CERT),
+                'credentials' => \Grpc\ChannelCredentials::createSsl(WechatyCA::TLS_CA_CERT),
                 'update_metadata' => $updateMetadata,
             ]);
         }
