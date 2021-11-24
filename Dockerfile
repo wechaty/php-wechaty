@@ -6,13 +6,14 @@ ENV PHP_WECHATY_DOCKER  1
 WORKDIR /php-wechaty
 
 COPY docker/composer.json .
-COPY . .
 
 RUN mkdir /var/log/wechaty
 
 RUN composer config repo.packagist composer https://mirrors.aliyun.com/composer/
 # https://packagist.org/packages/wechaty/php-wechaty
 RUN composer install
+
+COPY . .
 
 RUN chmod +x /php-wechaty/bin/entrypoint.sh
 
