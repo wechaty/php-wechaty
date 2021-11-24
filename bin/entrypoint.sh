@@ -42,7 +42,7 @@ TROUBLESHOOTING
 }
 
 function php-wechaty::printEnv () {
-  num=0.0.5
+  num=0.0.6
   echo "PHP-WECHATY Environment Variables: $num"
 }
 
@@ -181,7 +181,7 @@ function main() {
 
   php-wechaty::printEnv
 
-  VERSION=$(echo '0.0.5' || echo '0.0.0(unknown)')
+  VERSION=$(echo '0.0.6' || echo '0.0.0(unknown)')
 
   echo
   echo -n "Starting Docker Container for PHP-Wechaty v$VERSION with "
