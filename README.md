@@ -84,6 +84,8 @@ For Puppet Client:
 | `WECHATY_PUPPET_SERVICE_TLS_SERVER_NAME` | `options.serverName` | Server Name (mast match for SNI) |
 | `WECHATY_PUPPET_SERVICE_NO_TLS_INSECURE_CLIENT` | `options.tls.disable` | Set `true` to disable client TLS |
 
+> Learn more about tls at https://github.com/wechaty/puppet-service
+
 ## The World's Shortest PHP ChatBot: 8 lines of Code
 
 ### php

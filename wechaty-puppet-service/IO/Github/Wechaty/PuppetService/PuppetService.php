@@ -795,10 +795,19 @@ class PuppetService extends Puppet {
         // WECHATY_PUPPET_SERVICE_NO_TLS_INSECURE_CLIENT
         // WECHATY_PUPPET_SERVICE_TLS_CA_CERT
         // WECHATY_PUPPET_SERVICE_TLS_SERVER_NAME
-        $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
-            'credentials' => \Grpc\ChannelCredentials::createInsecure(),
-            'update_metadata' => $updateMetadata,
-        ]);
+        $noTls = getenv("WECHATY_PUPPET_SERVICE_NO_TLS_INSECURE_CLIENT");
+        if($noTls) {
+            $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
+                'credentials' => \Grpc\ChannelCredentials::createInsecure(),
+                'update_metadata' => $updateMetadata,
+            ]);
+        } else {
+            $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
+                'credentials' => \Grpc\ChannelCredentials::createInsecure(),
+                'update_metadata' => $updateMetadata,
+            ]);
+        }
+
         return $this->_grpcClient;
     }
 
