@@ -22,6 +22,7 @@ use IO\Github\Wechaty\Puppet\Schemas\RoomMemberPayload;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 use IO\Github\Wechaty\Puppet\StateEnum;
+use IO\Github\Wechaty\PuppetService\Auth\WechatyCA;
 use IO\Github\Wechaty\PuppetService\Exceptions\PuppetServiceException;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
@@ -803,7 +804,7 @@ class PuppetService extends Puppet {
             ]);
         } else {
             $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
-                'credentials' => \Grpc\ChannelCredentials::createInsecure(),
+                'credentials' => \Grpc\ChannelCredentials::createSsl(WechatyCA::TLS_CA_CERT, WechatyCA::TLS_INSECURE_SERVER_KEY, WechatyCA::TLS_INSECURE_SERVER_CERT),
                 'update_metadata' => $updateMetadata,
             ]);
         }
