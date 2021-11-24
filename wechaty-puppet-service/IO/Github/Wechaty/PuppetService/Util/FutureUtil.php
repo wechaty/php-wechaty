@@ -5,7 +5,7 @@
  * Date: 2020/7/10
  * Time: 5:42 PM
  */
-namespace IO\Github\Wechaty\PuppetHostie\Util;
+namespace IO\Github\Wechaty\PuppetService\Util;
 
 class FutureUtil {
     public static function get() {

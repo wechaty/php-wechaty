@@ -13,7 +13,7 @@ use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\EventEnum;
 use IO\Github\Wechaty\Puppet\Schemas\Query\RoomMemberQueryFilter;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
-use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
+use IO\Github\Wechaty\PuppetService\PuppetService;
 use IO\Github\Wechaty\Util\Logger;
 use IO\Github\Wechaty\Util\QrcodeUtils;
 
@@ -33,7 +33,7 @@ class Room extends Accessory {
      */
     protected ?RoomPayload $_payload = null;
     /**
-     * @var null|PuppetHostie
+     * @var null|PuppetService
      */
     protected $_puppet = null;
 

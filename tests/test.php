@@ -20,7 +20,9 @@ define("DEBUG", 1);
 function autoload($clazz) {
     $file = str_replace('\\', '/', $clazz);
     if(stripos($file, "PuppetHostie") > 0) {
-        require ROOT . "/wechaty-puppet-hostie/$file.php";
+        require ROOT . "/wechaty-puppet-service/$file.php";
+    } elseif(stripos($file, "PuppetService") > 0) {
+        require ROOT . "/wechaty-puppet-service/$file.php";
     } elseif(stripos($file, "PuppetMock") > 0) {
         require ROOT . "/wechaty-puppet-mock/$file.php";
     } elseif(stripos($file, "Puppet") > 0) {

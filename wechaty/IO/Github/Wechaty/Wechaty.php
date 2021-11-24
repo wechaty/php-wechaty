@@ -76,7 +76,7 @@ class Wechaty extends EventEmitter {
     public ?FriendshipManager $friendshipManager = null;
 
     /**
-     * @var null|PuppetHostie\PuppetHostie
+     * @var null|PuppetService\PuppetService
      */
     private $_puppet = null;
 
@@ -155,7 +155,7 @@ class Wechaty extends EventEmitter {
             return;
         }
 
-        $this->_puppet = new PuppetHostie\PuppetHostie($this->_puppetOptions);
+        $this->_puppet = new PuppetService\PuppetService($this->_puppetOptions);
 
         $this->_initPuppetEventBridge($this->_puppet);
         $this->_initPuppetAccessory($this->_puppet);
@@ -212,7 +212,7 @@ class Wechaty extends EventEmitter {
         return $this;
     }
 
-    private function _initPuppetEventBridge(PuppetHostie\PuppetHostie $puppet) {
+    private function _initPuppetEventBridge(PuppetService\PuppetService $puppet) {
         //{"qrcode":"https://login.weixin.qq.com/l/IaysbZa04Q==","status":5}
         $puppet->on(EventEnum::SCAN, function(EventScanPayload $payload) {
             $this->emit(EventEnum::SCAN, $payload->qrcode ?: "", $payload->status, $payload->data ?: "");
@@ -314,7 +314,7 @@ class Wechaty extends EventEmitter {
         });
     }
 
-    private function _initPuppetAccessory(PuppetHostie\PuppetHostie $puppet) {
+    private function _initPuppetAccessory(PuppetService\PuppetService $puppet) {
         $this->contactManager = new ContactManager($this);
         $this->messageManager = new MessageManager($this);
         $this->roomManager = new RoomManager($this);

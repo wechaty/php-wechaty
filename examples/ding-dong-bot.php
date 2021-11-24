@@ -19,7 +19,9 @@ define("DEBUG", 1);
 function autoload($clazz) {
     $file = str_replace('\\', '/', $clazz);
     if(stripos($file, "PuppetHostie") > 0) {
-        require ROOT . "/wechaty-puppet-hostie/$file.php";
+        require ROOT . "/wechaty-puppet-service/$file.php";
+    } elseif(stripos($file, "PuppetService") > 0) {
+        require ROOT . "/wechaty-puppet-service/$file.php";
     } elseif(stripos($file, "PuppetMock") > 0) {
         require ROOT . "/wechaty-puppet-mock/$file.php";
     } elseif(stripos($file, "Puppet") > 0) {
@@ -45,7 +47,7 @@ $username = getenv("WECHAT_MINI_PROGRAM_USERNAME");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->onScan(function($qrcode, $status, $data) {
     //{"qrcode":"http://weixin.qq.com/x/IcPycVXZP4RV8WZ9MXF-","status":2}
-    //[0] => PuppetHostie 22 payload {"qrcode":"","status":3}
+    //[0] => PuppetService 22 payload {"qrcode":"","status":3}
     if($status == 3) {
         echo "SCAN_STATUS_CONFIRMED\n";
     } else {

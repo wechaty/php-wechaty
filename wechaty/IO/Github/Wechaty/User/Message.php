@@ -14,7 +14,7 @@ use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\Date;
 use IO\Github\Wechaty\Puppet\Schemas\MessagePayload;
 use IO\Github\Wechaty\Puppet\Schemas\Query\RoomMemberQueryFilter;
-use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
+use IO\Github\Wechaty\PuppetService\PuppetService;
 use IO\Github\Wechaty\Util\Logger;
 
 class Message extends Accessory {
@@ -26,7 +26,7 @@ class Message extends Accessory {
      */
     protected ?MessagePayload $_payload = null;
     /**
-     * @var null|PuppetHostie
+     * @var null|PuppetService
      */
     protected $_puppet = null;
 

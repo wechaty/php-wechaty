@@ -39,7 +39,8 @@
     "psr-4": {
       "IO\\Github\\Wechaty\\": "wechaty/IO/Github/Wechaty/",
       "IO\\Github\\Wechaty\\Puppet\\": "wechaty-puppet/IO/Github/Wechaty/Puppet/",
-      "IO\\Github\\Wechaty\\PuppetHostie\\": "wechaty-puppet-hostie/IO/Github/Wechaty/PuppetHostie/",
+      "IO\\Github\\Wechaty\\PuppetHostie\\": "wechaty-puppet-service/IO/Github/Wechaty/PuppetService/",
+      "IO\\Github\\Wechaty\\PuppetService\\": "wechaty-puppet-service/IO/Github/Wechaty/PuppetService/",
       "IO\\Github\\Wechaty\\PuppetMock\\": "wechaty-puppet-mock/IO/Github/Wechaty/PuppetMock/"
     }
   },

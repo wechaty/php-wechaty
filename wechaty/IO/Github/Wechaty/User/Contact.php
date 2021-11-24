@@ -11,7 +11,7 @@ use IO\Github\Wechaty\Accessory;
 use IO\Github\Wechaty\Exceptions\WechatyException;
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Schemas\ContactPayload;
-use IO\Github\Wechaty\PuppetHostie\PuppetHostie;
+use IO\Github\Wechaty\PuppetService\PuppetService;
 use IO\Github\Wechaty\Type\Sayable;
 use IO\Github\Wechaty\Util\Logger;
 
@@ -21,7 +21,7 @@ class Contact extends Accessory implements Sayable {
      */
     protected ?ContactPayload $_payload = null;
     /**
-     * @var null|PuppetHostie
+     * @var null|PuppetService
      */
     protected $_puppet = null;
 

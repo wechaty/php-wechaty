@@ -5,7 +5,7 @@
  * Date: 2020/7/10
  * Time: 5:39 PM
  */
-namespace IO\Github\Wechaty\PuppetHostie;
+namespace IO\Github\Wechaty\PuppetService;
 
 use IO\Github\Wechaty\Puppet\FileBox\FileBox;
 use IO\Github\Wechaty\Puppet\Puppet;
@@ -22,7 +22,7 @@ use IO\Github\Wechaty\Puppet\Schemas\RoomMemberPayload;
 use IO\Github\Wechaty\Puppet\Schemas\RoomPayload;
 use IO\Github\Wechaty\Puppet\Schemas\UrlLinkPayload;
 use IO\Github\Wechaty\Puppet\StateEnum;
-use IO\Github\Wechaty\PuppetHostie\Exceptions\PuppetHostieException;
+use IO\Github\Wechaty\PuppetService\Exceptions\PuppetServiceException;
 use IO\Github\Wechaty\Util\Console;
 use IO\Github\Wechaty\Util\Logger;
 use Wechaty\Puppet\ContactPayloadResponse;
@@ -34,7 +34,7 @@ use Wechaty\Puppet\RoomInvitationPayloadResponse;
 use Wechaty\Puppet\RoomMemberPayloadResponse;
 use Wechaty\Puppet\RoomPayloadResponse;
 
-class PuppetHostie extends Puppet {
+class PuppetService extends Puppet {
     private $_channel = null;
     /**
      * @var null|\Wechaty\PuppetClient
@@ -104,12 +104,12 @@ class PuppetHostie extends Puppet {
     }
 
     function setPuppetName() {
-        $this->_puppetOptions->name = "\\IO\\Github\\Wechaty\\PuppetHostie\\PuppetHostie";
+        $this->_puppetOptions->name = "\\IO\\Github\\Wechaty\\PuppetService\\PuppetService";
     }
 
     function logout(): void {
         if ($this->_getId() == null) {
-            throw new PuppetHostieException("logout before login?");
+            throw new PuppetServiceException("logout before login?");
         }
 
         try {
@@ -831,7 +831,7 @@ class PuppetHostie extends Puppet {
             $ret = json_decode($response->getBody(), true);
             if(json_last_error()) {
                 Logger::ERR("_discoverHostieIp json_decode with error " . json_last_error_msg());
-                throw new PuppetHostieException("_discoverHostieIp json_decode with error " . json_last_error_msg());
+                throw new PuppetServiceException("_discoverHostieIp json_decode with error " . json_last_error_msg());
             }
             return array($ret["ip"], $ret["port"]);
         } else {
@@ -846,7 +846,7 @@ class PuppetHostie extends Puppet {
             $type = $event->getType();
             $payload = $event->getPayload();
 
-            Logger::DEBUG("PuppetHostie $type payload $payload");
+            Logger::DEBUG("PuppetService $type payload $payload");
 
             switch ($type) {
                 case EventType::EVENT_TYPE_SCAN:
