@@ -809,7 +809,8 @@ class PuppetService extends Puppet {
             $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
                 'credentials' => \Grpc\ChannelCredentials::createSsl(WechatyCA::TLS_CA_CERT),
                 'update_metadata' => $updateMetadata,
-                'grpc.ssl_target_name_override' => WechatyCA::TLS_INSECURE_SERVER_CERT_COMMON_NAME
+                'grpc.ssl_target_name_override' => WechatyCA::TLS_INSECURE_SERVER_CERT_COMMON_NAME,
+                'grpc.default_authority' => $token['access_token'],
             ]);
         }
 
