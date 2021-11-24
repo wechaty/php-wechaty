@@ -18,7 +18,7 @@
   ],
   "require": {
     "php": "^7.4 || ^8.0",
-    "wechaty/php-wechaty": "^v0.0.4"
+    "wechaty/php-wechaty": "^v0.0.5"
   },
   "require-dev": {
 
