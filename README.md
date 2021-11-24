@@ -1,6 +1,6 @@
 # php-wechaty
 
-![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/wechaty/php-wechaty)
+[![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/wechaty/php-wechaty)](https://packagist.org/packages/wechaty/php-wechaty)
 [![PHP](https://github.com/wechaty/php-wechaty/workflows/PHP/badge.svg)](https://github.com/wechaty/php-wechaty/actions?query=workflow%3APHP)
 
 ![PHP Wechaty](https://wechaty.github.io/php-wechaty/images/php-wechaty.png)
