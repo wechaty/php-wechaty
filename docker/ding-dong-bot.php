@@ -21,7 +21,7 @@ require ROOT . '/vendor/autoload.php';
 // \IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
 
 $token = getenv("WECHATY_PUPPET_HOSTIE_TOKEN");
-$endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
+$endPoint = getenv("WECHATY_PUPPET_SERVICE_ENDPOINT");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
 $wechaty->onScan(function($qrcode, $status, $data) {
     if($status == 3) {

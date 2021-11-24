@@ -41,7 +41,7 @@ require ROOT . '/vendor/autoload.php';
 // \IO\Github\Wechaty\Util\Logger::$_LOGGER_DIR = "/tmp/";
 
 $token = getenv("WECHATY_PUPPET_SERVICE_TOKEN");
-$endPoint = getenv("WECHATY_PUPPET_HOSTIE_ENDPOINT");
+$endPoint = getenv("WECHATY_PUPPET_SERVICE_ENDPOINT");
 $appId = getenv("WECHAT_MINI_PROGRAM_APPID");
 $username = getenv("WECHAT_MINI_PROGRAM_USERNAME");
 $wechaty = \IO\Github\Wechaty\Wechaty::getInstance($token, $endPoint);
