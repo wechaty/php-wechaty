@@ -797,7 +797,7 @@ class PuppetService extends Puppet {
         // WECHATY_PUPPET_SERVICE_TLS_CA_CERT
         // WECHATY_PUPPET_SERVICE_TLS_SERVER_NAME
         $noTls = getenv("WECHATY_PUPPET_SERVICE_NO_TLS_INSECURE_CLIENT");
-        if(empty($noTls) || $noTls === "true" || $noTls === true) {
+        if($noTls === "true" || $noTls === true) {
             Logger::DEBUG("start client with no tls");
             $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
                 'credentials' => \Grpc\ChannelCredentials::createInsecure(),
