@@ -798,23 +798,18 @@ class PuppetService extends Puppet {
         // WECHATY_PUPPET_SERVICE_TLS_CA_CERT
         // WECHATY_PUPPET_SERVICE_TLS_SERVER_NAME
         $noTls = getenv("WECHATY_PUPPET_SERVICE_NO_TLS_INSECURE_CLIENT");
-        try {
-            if($noTls === "true" || $noTls === true) {
-                Logger::DEBUG("start client with no tls");
-                $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
-                    'credentials' => \Grpc\ChannelCredentials::createInsecure(),
-                    'update_metadata' => $updateMetadata,
-                ]);
-            } else {
-                Logger::DEBUG("start client with tls");
-                $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
-                    'credentials' => \Grpc\ChannelCredentials::createSsl(WechatyCA::TLS_CA_CERT),
-                    'update_metadata' => $updateMetadata,
-                ]);
-            }
-        } catch (\Exception $e) {
-            Logger::ERR("start client error");
-            Logger::ERR($e);
+        if($noTls === "true" || $noTls === true) {
+            Logger::DEBUG("start client with no tls");
+            $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
+                'credentials' => \Grpc\ChannelCredentials::createInsecure(),
+                'update_metadata' => $updateMetadata,
+            ]);
+        } else {
+            Logger::DEBUG("start client with tls");
+            $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
+                'credentials' => \Grpc\ChannelCredentials::createSsl(WechatyCA::TLS_CA_CERT),
+                'update_metadata' => $updateMetadata,
+            ]);
         }
 
         return $this->_grpcClient;
