@@ -792,6 +792,9 @@ class PuppetService extends Puppet {
                 return $metadataCopy;
             };
         Logger::DEBUG($updateMetadata);
+        // WECHATY_PUPPET_SERVICE_NO_TLS_INSECURE_CLIENT
+        // WECHATY_PUPPET_SERVICE_TLS_CA_CERT
+        // WECHATY_PUPPET_SERVICE_TLS_SERVER_NAME
         $this->_grpcClient = new \Wechaty\PuppetClient($hostname, [
             'credentials' => \Grpc\ChannelCredentials::createInsecure(),
             'update_metadata' => $updateMetadata,
