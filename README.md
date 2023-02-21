@@ -8,6 +8,10 @@
 [![PHP Wechaty Getting Started](https://img.shields.io/badge/PHP%20Wechaty-Getting%20Started-7de)](https://github.com/wechaty/php-wechaty-getting-started)
 [![Wechaty in PHP](https://img.shields.io/badge/Wechaty-PHP-7de)](https://github.com/wechaty/php-wechaty)
 
+## Read code
+
+<a href="https://gitpod.io/#https://github.com/wechaty/php-wechaty"  target="_blank"><img src="https://gitpod.io/button/open-in-gitpod.svg" /> </a>
+
 ## Connecting Chatbots
 
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/Wechaty/wechaty)
